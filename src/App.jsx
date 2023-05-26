@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      {/* <button onClick={setting}>AA</button> */}
+      <button onClick={setting}>AA</button>
       <Router />
     </>
   )
