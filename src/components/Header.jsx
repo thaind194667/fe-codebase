@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Header() {
 
     const [role, setRole] = useState(localStorage.getItem('role'))
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const setting = (role) => {
         setRole(role);
