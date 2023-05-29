@@ -5,14 +5,14 @@ import Owner from './owner'
 import Login from '@/pages/Login'
 // import Register from '@/pages/Register'
 
-let type = localStorage.getItem("type");
+let type = localStorage.getItem("role");
 
 const Router = () => {
 //   const type = localStorage.getItem('type')
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={
+        <Route path="*" element={
           !type ? <Login></Login> : (type === "user" ? <User/> : type === "admin"? <Admin /> : <Owner/>)
         } />
         {/* <Route path="/register" element={<Register />} /> */}
