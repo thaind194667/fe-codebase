@@ -39,14 +39,52 @@
     
     .page-body-details {
         display: flex;
-        $bodyPadding: 25px;
-        padding: $bodyPadding;
+        flex-direction: column;
+        $bodyPadding: 30px;
+        padding: 0px $bodyPadding;
         border: solid 3px #7e7e7e;
         border-top: none;
         min-height: calc(100% - $bodyPadding * 2 - 10vh);
+        .row {
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+            gap: 8px;
+            justify-items: center;
+            align-items: center;
+        }
         // width: inherit;
         // border: solid 1px;
         // width: calc(100% - $bodyPadding * 2 - 6px);
+        .shop-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            .shop-name {
+                color: #4e843f;
+                font-size: 26px;
+                font-weight: bolder;
+            }
+        }
+
+        .phone-btn {
+            background: #93c47d;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .shop-images {
+            .row {
+                gap: 8px;
+            }
+        }
+
+        img {
+            display: flex;
+            width: fit-content;
+        }
+        
+
     }
 
 }

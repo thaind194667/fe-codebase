@@ -10,7 +10,7 @@ const User = () =>{
         <Routes>
         <Route path="/" element={ <HomeUser />} />
         <Route path="/login" element={ <Navigate to={'/search'} />} />
-        <Route path='/search/*' element={<Search />} />
+        <Route path='/search' element={<Search />} />
         <Route path='/details/:id' element={<Details />} />
         {/* <Route path="*" element={<Notfound></Notfound>}/> */}
       </Routes>

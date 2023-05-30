@@ -1,10 +1,9 @@
 
-export default function SvgIcon(props) {
+export default function SvgIcon({src, width, height, name, type, alt}) {
     
-    const url = `${props.name}.${props.type ? props.type : 'svg'}`
-
+    const url = src ? src : `/${name}.${type ? type : 'svg'}`;
 
     return (
-        <img src={url} alt='icon' style={{width: props.width, height: props.height}}/>
+        <img src={url} alt={alt} style={{display: 'flex', width, height}}/>
     )
 }
