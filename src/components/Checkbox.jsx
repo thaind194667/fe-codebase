@@ -19,8 +19,8 @@ export default function Checkbox( {valueIn, length, setVal, name}) {
                 <div className="inside"> 
                     {!value? '' : 
                         value === 1 ? 
-                            <SvgIcon name='check' length={length}/> : 
-                            <SvgIcon name='not-include' length={length}/>
+                            <SvgIcon name='check' width={length} height={length}/> : 
+                            <SvgIcon name='not-include' width={length} height={length}/>
                     }
                 </div>
             </div>

@@ -11,7 +11,7 @@ const User = () =>{
         <Route path="/" element={ <HomeUser />} />
         <Route path="/login" element={ <Navigate to={'/search'} />} />
         <Route path='/search/*' element={<Search />} />
-        <Route path='/details/*' element={<Details />} />
+        <Route path='/details/:id' element={<Details />} />
         {/* <Route path="*" element={<Notfound></Notfound>}/> */}
       </Routes>
     )

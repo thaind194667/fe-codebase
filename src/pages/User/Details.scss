@@ -1,0 +1,52 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    background-color: #eeeeee;
+    border-collapse: collapse;
+    .page-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 15px;
+        border: solid 3px #7e7e7e;
+        background: #ffffff;
+        .page-title {
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4bb15a;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .user-info {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            font-size: 16px;
+
+            .user-avatar {
+                $avatarRadius: 25px;
+                border: solid 1px;
+                border-radius: 99px;
+                height: $avatarRadius;
+                width: $avatarRadius;
+            }
+        }
+    }
+    
+    .page-body-details {
+        display: flex;
+        $bodyPadding: 25px;
+        padding: $bodyPadding;
+        border: solid 3px #7e7e7e;
+        border-top: none;
+        min-height: calc(100% - $bodyPadding * 2 - 10vh);
+        // width: inherit;
+        // border: solid 1px;
+        // width: calc(100% - $bodyPadding * 2 - 6px);
+    }
+
+}

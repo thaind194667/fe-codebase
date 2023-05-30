@@ -2,7 +2,7 @@ $search-bar-color: #f6b26b;
 $button-color: #6aa84f;
 $pagination-color: #91b4e0;
 
-.page-body {
+.page-body-search {
     display: flex;
     $bodyPadding : 15px;
     padding: $bodyPadding;
@@ -135,7 +135,7 @@ $pagination-color: #91b4e0;
                 display: flex;
                 flex-direction: row;
                 gap: 8px;
-                flex: 1;
+                // flex: 1;
                 border: #dadada 5px solid;
                 margin: 5px;
                 padding: 4px;

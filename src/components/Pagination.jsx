@@ -8,7 +8,7 @@ export default function Pagination({
   currentPage,
   changePage,
 }) {
-  const maxPage = maxItem / itemPerPage;
+  const maxPage = Math.ceil(maxItem / itemPerPage);
 
   const [startIndex, setStart] = useState();
   const [endIndex, setEnd] = useState();
@@ -43,7 +43,7 @@ export default function Pagination({
       }
     }
     setPageList(arr);
-    setStart((currentPage - 1) * itemPerPage);
+    setStart((currentPage - 1) * itemPerPage + 1);
     setEnd(
       currentPage * itemPerPage > maxItem ? maxItem : currentPage * itemPerPage
     );

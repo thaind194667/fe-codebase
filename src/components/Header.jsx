@@ -13,7 +13,7 @@ export default function Header() {
     };
 
     return (
-        <div className="page-header">
+        <div className="header">
             <div className="header-control">
                 <div className="role-show">
                 {role ? (
