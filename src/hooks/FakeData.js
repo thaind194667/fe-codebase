@@ -1,10 +1,21 @@
+/////////// Fake data for using, import into file to use
+/////////   Modify is avaiable
+
+const userList = [];
+for(let i = 0; i < 10; i++) {
+    userList.push({
+        id: i,
+        name: 'User' + i,
+        avatarUrl: 'avatar' + i,
+    })
+}
+
 const serviceList = [
     { name: "マッサージ", value: 0 },
     { name: "ホットストーンマッサージ", value: 0 },
 ];
 
 const shopList = [];
-
 for (let i = 0; i < 49; i++) {
     // let randRate = Math.random() * 5
     // let randReviewCount = Math.round(Math.random() * 50)
@@ -19,4 +30,37 @@ for (let i = 0; i < 49; i++) {
     });
 }
 
-export { shopList, serviceList }
+const commentList = []
+for(let i = 0; i < 10; i++) {
+    commentList.push({
+        name: 'User' + i,
+        avatarUrl: 'avatar' + i,
+        rate: Math.round((Math.random() * 3 + 2)),
+        comment: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    })
+}
+// for()
+
+const shopServiceList = [
+    {   name: "マッサージ", 
+        price: '100000 VND', 
+        times: '15分', 
+        description: 'moo tar', 
+        customersCount: '１人', 
+        note : '' },
+    {   name: "ホットストーンマッサージ", 
+        price: '100000 VND', times: '15分', description: 'moo tar', customersCount: '１人', 
+        note : '' },
+    {   name: "Massage Full Body", 
+        price: '100000 VND', times: '15分', description: 'moo tar', customersCount: '１人', 
+        note : '' },
+]
+
+
+export { 
+    shopList, 
+    serviceList, 
+    shopServiceList, 
+    commentList,
+    userList 
+}

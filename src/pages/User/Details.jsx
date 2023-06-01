@@ -1,8 +1,9 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import './Details.scss'
-import { shopList } from "@/hooks/FakeData";
+import { shopList, shopServiceList, commentList } from "@/hooks/FakeData";
 import { useState, useEffect } from "react";
 import SvgIcon from "@/components/SvgIcon";
+import DetailsService from "./DetailsService";
 
 
 
@@ -11,6 +12,7 @@ export default function Details() {
 
   const { id } = useParams();
 
+  const [shopData, setShopData] = useState({})
   const [pageData, setData] = useState({})
 
   const [imgList, setImgList] = useState([])
@@ -70,18 +72,38 @@ export default function Details() {
         <div className="row shop-images">
           <div className="col" style={{flex: '1', }}>
             <div className="row">
-              <SvgIcon type={"png"} name={"pic"} alt="shop image 1" className="img1" />
-              <SvgIcon type={"png"} name={"pic"} alt="shop image 2" className="img2" />
+              <SvgIcon type={"png"} name={"pic"} alt="shop image 1" className="img1" height={"195px"} style={{flex: '1', }}/>
+              {/* <SvgIcon type={"png"} name={"pic"} alt="shop image 1" className="img1" /> */}
+              <SvgIcon type={"png"} name={"pic"} alt="shop image 2" className="img2" height={"195px"} style={{flex: '1', }}/>
             </div>
             <div className="row">
-              <SvgIcon type={"png"} name={"pic"} alt="shop image 3" className="img3" />
-              <SvgIcon type={"png"} name={"pic"} alt="shop image 4" className="img4" />
+              <SvgIcon type={"png"} name={"pic"} alt="shop image 3" className="img3" height={"195px"} style={{flex: '1', }}/>
+              <SvgIcon type={"png"} name={"pic"} alt="shop image 4" className="img4" height={"195px"} style={{flex: '1', }}/>
+              {/* <SvgIcon type={"png"} name={"pic"} alt="shop image 4" className="img4" /> */}
             </div>
           </div>
 
           <div className="col" style={{flex: '1', }}>
-            <SvgIcon type={"png"} name={"pic"} alt="shop image 5" className="img5" width={"100%"}/>
+            <SvgIcon type={"png"} name={"pic"} alt="shop image 5" className="img5" height={"400px"} />
           </div>
+        </div>
+        <div className="shop-description">
+          {pageData.introduce}
+        </div>
+        <div className="shop-services">
+          {
+            shopServiceList.map(( item, index ) => {
+              return (
+                <DetailsService key={`service${index}`} data={item} role="user">
+
+                </DetailsService>
+              )
+            })
+          }
+        </div>
+
+        <div className="shop-rates">
+
         </div>
       </div>
     </div>
