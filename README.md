@@ -1,4 +1,9 @@
-1. To start front-end:
+1. Start with:
+    npm i
+2. To run front-end:
     npm run dev 
-2. Running host: 
+3. Running host: 
     http://127.0.0.1:5173/
+
+
+Read dataFormat.ts for more infomation about api input and output

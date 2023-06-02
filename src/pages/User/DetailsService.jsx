@@ -37,7 +37,7 @@ export default function DetailsService({ data, role, schedule, edit }) {
                         <tbody>
                             <tr>
                                 <td style={{color: 'red'}}>
-                                    {data.times}
+                                    {data.duration}
                                 </td>
                                 <td>
                                     {data.customersCount}
