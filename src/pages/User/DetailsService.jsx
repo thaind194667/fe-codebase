@@ -1,67 +1,64 @@
 import './DetailsService.scss'
 
-const colStyle = `
-    display: flex;
-    flex-direction: column;
-`
+export default function DetailsService({ data, role, schedule, edit }) {
 
-export default function DetailsService({data, role}) {
-    
+    const serviceSchedule = () => {
+        schedule();
+    }
+
+    const serviceEdit = () => {
+        edit();
+    }
+
     return (
         <div className="serviceCard" >
-            <div className="col" style={{flex: '2'}}>
-                <div className="service-name">
-                    {data.name}
-                </div>
-                
-                <div className="service-description">
-                    {data.description}
+            <div className="service-info">
+                <div className="col" style={{ flex: '2' }}>
+                    <div className="service-name">
+                        {data.name}
+                    </div>
+
+                    <div className="service-description">
+                        {data.description}
+                    </div>
+
+                    <div className="service-note">
+                        {data.note}
+                    </div>
                 </div>
 
-                <div className="service-note">
-                    {data.note}
+                <div className="col" style={{ flex: '1' }}>
+                    <table>
+                        <thead>
+                            <th></th>
+                            <th></th>
+                            <th>価格</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style={{color: 'red'}}>
+                                    {data.times}
+                                </td>
+                                <td>
+                                    {data.customersCount}
+                                </td>
+                                <td>
+                                    {data.price}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <div className="col" style={{flex: '1'}}>
-                <table>
-                    <thead>
-                        <th></th>
-                        <th></th>
-                        <th>価格</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                {data.times}
-                            </td>
-                            <td>
-                                {data.customersCount}
-                            </td>
-                            <td>
-                                {data.price}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                {/* <div className="row">
-                    <div>
-                        価格
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="service-time">
-                        
-                    </div>
-                    <div className="service-customersCount">
-                        {data.customersCount}
-                    </div>
-                    <div className="service-price">
-                        
-                    </div>
-                </div> */}
+            <div >
+                <button 
+                    className='service-btn' 
+                    onClick={role === 'owner' ? serviceEdit : serviceSchedule}
+                >
+                {   role === 'owner' ? '編集' : '今予約する'    }
+                </button>
             </div>
-            
         </div>
     )
 }

@@ -65,7 +65,7 @@ export default function Details() {
           </div>
 
           <div className="shop-phone">
-            <button className="phone-btn" > Denwa </button>
+            <button className="phone-btn" > 電話する </button>
           </div>
           
         </div>
@@ -91,19 +91,22 @@ export default function Details() {
           {pageData.introduce}
         </div>
         <div className="shop-services">
+          <div style={{fontSize: '20px', fontWeight: '500'}}> Service List  </div>
           {
             shopServiceList.map(( item, index ) => {
               return (
-                <DetailsService key={`service${index}`} data={item} role="user">
-
-                </DetailsService>
+                <DetailsService 
+                  key={`service${index}`} 
+                  data={item} 
+                  role="user" 
+                />
               )
             })
           }
         </div>
 
-        <div className="shop-rates">
-
+        <div className="shop-reviews">
+          
         </div>
       </div>
     </div>

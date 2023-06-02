@@ -40,22 +40,20 @@
     .page-body-details {
         display: flex;
         flex-direction: column;
+        gap: 12px;
         $bodyPadding: 30px;
         padding: 0px $bodyPadding;
+        padding-top: 10px;
         border: solid 3px #7e7e7e;
         border-top: none;
         min-height: calc(100% - $bodyPadding * 2 - 10vh);
-        .row {
-            display: flex;
-            flex-direction: row;
-            padding: 5px;
-            // gap: 8px;
-            justify-items: center;
-            align-items: center;
-        }
-        // width: inherit;
-        // border: solid 1px;
-        // width: calc(100% - $bodyPadding * 2 - 6px);
+        // .row {
+        //     display: flex;
+        //     flex-direction: row;
+        //     padding: 5px;
+        //     justify-items: center;
+        //     align-items: center;
+        // }
         .shop-info {
             display: flex;
             flex-direction: column;
@@ -67,39 +65,55 @@
             }
         }
 
-        .phone-btn {
-            background: #93c47d;
-            font-size: 20px;
-            font-weight: bold;
-        }
+        .shop-phone {
+            display: flex;
+            align-items: center;
 
+            .phone-btn {
+                background: #93c47d;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 5px 15px;
+                color: black;
+                box-shadow: black 2px 3px;
+            }
+        }
+        
         .shop-images {
-            // padding: 40px;
+            display: flex;
+            gap: 20px;
             .row {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
                 flex: 1;
-                padding: 0;
-                // gap: 8px;
+                padding: 0px;
             }
             .col {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                gap: 15px;
                 // align-items: center;
                 flex: 1;
             }
             img {
                 display: flex;
                 width: 100%;
-                padding: 5px;
+                // padding: 5px;
             }
         }
+
         .shop-services {
             display: flex;
             flex-direction: column;
+            gap: 35px;
         }
 
-        
-        
+        .shop-reviews {
+            display: flex;
+            flex-direction: row;
+        }
 
     }
 

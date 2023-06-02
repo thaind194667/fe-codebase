@@ -1,5 +1,62 @@
 .serviceCard {
     display: flex;
     flex-direction: row;
-    border: solid 3px;
+    width: 100%;
+    max-width: 100%;
+    gap: 12px;
+    // border: solid 3px;
+
+    .service-info {
+        
+        display: flex;
+        flex-direction: row;
+        border: solid 3px;
+        flex: 1;
+        padding: 15px;
+        background-color: white;
+
+        .service-name {
+            margin-bottom: 5px;
+            font-size: 22px;
+            font-weight: bold;
+        }   
+
+        .service-description {
+            margin-bottom: 5px;
+            line-break: loose;
+            word-break: break-all;
+            
+        }
+
+        .service-note {
+            color: red;
+        }
+    }
+
+    .service-btn {
+        background: black;
+        border: solid 2px black;
+        font-size: 20px;
+        padding: 5px 12px;
+
+        &:hover {
+            border: solid 2px gray;
+            opacity: 0.8;
+
+        }
+    }
 }
+
+table {
+    th{
+        padding: 12px;
+        padding-top: 0px;
+    }
+
+    td {
+        text-align: center;
+        padding: 12px;
+        // padding-top: 20px;
+    }
+}
+
