@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Pagination.scss";
-import SvgIcon from "./SvgIcon";
+import SvgIcon from "@/components/SvgIcon";
 
 export default function Pagination({
   maxItem,
@@ -58,7 +58,7 @@ export default function Pagination({
               disabled={currentPage === 1}
               onClick={() => changePage(currentPage - 1)}
             >
-              <SvgIcon name="left-arrow" width={14} height={14} />
+              <SvgIcon name={`left-arrow${currentPage === 1 ? '-disabled' : ''}`} width={14} height={14} />
 
             </button>
             {pageList[0] !== 1 ? (
@@ -66,15 +66,15 @@ export default function Pagination({
             ) : (
               ""
             )}
-            {startNav ? <div>...</div> : ""}
+            {startNav ? <div className="threeDot">...</div> : ""}
             {pageList.map((page) => {
               return (
-                <button key={`page${page}`} onClick={() => changePage(page)}>
-                  {page === currentPage ? <b>{page}</b> : page}
+                <button key={`page${page}`} onClick={() => changePage(page)} className={page === currentPage ? 'current' : ''} >
+                  { page}
                 </button>
               );
             })}
-            {endNav ? <div>...</div> : ""}
+            {endNav ? <div className="threeDot">...</div> : ""}
             {pageList[pageList.length - 1] !== maxPage ? (
               <button onClick={() => changePage(maxPage)}>{maxPage}</button>
             ) : (
@@ -84,11 +84,11 @@ export default function Pagination({
               disabled={currentPage === maxPage}
               onClick={() => changePage(currentPage + 1)}
             >
-              <SvgIcon name="right-arrow" width={14} height={14} />
+              <SvgIcon name={`right-arrow${currentPage === maxPage ? '-disabled' : ''}`} width={14} height={14} />
             </button>
           </div>
-          <div>
-            {startIndex} - {endIndex} を表示
+          <div className="showInfo">
+            {startIndex} - {endIndex} を表示している
           </div>
         </div>
       ) : (

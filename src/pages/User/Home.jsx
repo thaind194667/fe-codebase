@@ -1,6 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
-import Header from "@/components/Header"
+import Header from "@/layouts/Header"
+import Slider from "@/components/Slider";
 
 export default function HomeUser() {
 
@@ -16,6 +17,16 @@ export default function HomeUser() {
         
             <button onClick={() => navigate('/details/0')}>Detail of 0</button>
       </div>
+{/* 
+      <Slider
+        className="slider"
+        // onChange={setRateVal}
+        value={[0, 5]}
+        min={0}
+        max={5}
+        type="double"
+        color="black"
+      /> */}
     </>
   );
 }

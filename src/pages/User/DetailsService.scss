@@ -1,49 +1,40 @@
-.serviceCard {
+.service-info {
     display: flex;
     flex-direction: row;
     width: 100%;
     max-width: 100%;
     gap: 12px;
-    // border: solid 3px;
+    background: #FFFFFF;
+    border: 1px solid #C5C5C5;
 
-    .service-info {
-        
-        display: flex;
-        flex-direction: row;
-        border: solid 3px;
+    padding: 15px;
+
+    .service-name {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        width: 25vw;
+        min-width: fit-content;
+        margin-bottom: 15px;
+        margin-left: -25px;
+        background: #FF9900;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 35px;
+        color: #FFFFFF;
+        padding: 12px;
+    }   
+
+    .service-description {
         flex: 1;
-        padding: 15px;
-        background-color: white;
-
-        .service-name {
-            margin-bottom: 5px;
-            font-size: 22px;
-            font-weight: bold;
-        }   
-
-        .service-description {
-            margin-bottom: 5px;
-            line-break: loose;
-            word-break: break-all;
-            
-        }
-
-        .service-note {
-            color: red;
-        }
+        margin-bottom: 5px;
+        line-break: loose;
+        word-break: break-all;
+        
     }
 
-    .service-btn {
-        background: black;
-        border: solid 2px black;
-        font-size: 20px;
-        padding: 5px 12px;
-
-        &:hover {
-            border: solid 2px gray;
-            opacity: 0.8;
-
-        }
+    .service-note {
+        color: red;
     }
 }
 
@@ -56,7 +47,6 @@ table {
     td {
         text-align: center;
         padding: 12px;
-        // padding-top: 20px;
     }
 }
 

@@ -1,85 +1,87 @@
 .page {
     display: flex;
     flex-direction: column;
-    background-color: #eeeeee;
+    // 
+    background: #FFFFFF;
     border-collapse: collapse;
-    .page-header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 15px;
-        border: solid 3px #7e7e7e;
-        background: #ffffff;
-        .page-title {
-            padding: 0;
-            margin: 0;
+    $bodyPadding: 6%;
+
+    .page-nav {
+        margin: 40px 0;
+        padding: 0px $bodyPadding;
+        gap: 20px;
+        .nav-item {
+            display: flex;
             flex: 1;
-            font-size: 24px;
-            font-weight: bold;
-            color: #4bb15a;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 29px;
+            color: #888888;
+            background: rgba(217, 217, 217, 0.59);
+            border-radius: 5px;
+
             &:hover {
                 cursor: pointer;
+                opacity: 0.9;
             }
-        }
-        .user-info {
-            display: flex;
-            flex-direction: row;
-            gap: 8px;
-            font-size: 16px;
-
-            .user-avatar {
-                $avatarRadius: 25px;
-                border: solid 1px;
-                border-radius: 99px;
-                height: $avatarRadius;
-                width: $avatarRadius;
+            &.cur-nav {
+                background: rgba(85, 153, 1, 0.28);
+                color: #559901;
             }
         }
     }
     
     .page-body-details {
+        background: #FFFFFF;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        $bodyPadding: 30px;
+        gap: 30px;
         padding: 0px $bodyPadding;
         padding-top: 10px;
-        border: solid 3px #7e7e7e;
+        // border: solid 3px #7e7e7e;
         border-top: none;
         min-height: calc(100% - $bodyPadding * 2 - 10vh);
-        // .row {
-        //     display: flex;
-        //     flex-direction: row;
-        //     padding: 5px;
-        //     justify-items: center;
-        //     align-items: center;
-        // }
-        .shop-info {
+
+        .parlor-info {
             display: flex;
             flex-direction: column;
             flex: 1;
-            .shop-name {
-                color: #4e843f;
-                font-size: 26px;
-                font-weight: bolder;
+            gap: 15px;
+            .parlor-name {
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 48px;
+                color: #0D0D0D;
+            }
+            .parlor-address {
+                gap: 5px;
+                margin-left: 5px;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 24px;
+                text-decoration-line: underline;
+                color: #559901;
             }
         }
 
-        .shop-phone {
+        .parlor-phone {
             display: flex;
             align-items: center;
 
             .phone-btn {
-                background: #93c47d;
-                font-size: 20px;
-                font-weight: bold;
-                padding: 5px 15px;
-                color: black;
-                box-shadow: black 2px 3px;
+                width: 22vw;
+                padding: 20px;
+                font-weight: 600;
+                font-size: 28px;
+                line-height: 30px;
+                color: #FEFEFE;
             }
         }
         
-        .shop-images {
+        .parlor-images {
             display: flex;
             gap: 20px;
             .row {
@@ -102,15 +104,57 @@
                 width: 100%;
                 // padding: 5px;
             }
+
+            .more-img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 1;
+                height: 100%;
+                background: rgba(100, 100, 100, 0.58);
+                font-style: normal;
+                font-weight: 800;
+                font-size: 48px;
+                line-height: 58px;
+                color: #FFFFFF;
+            }
         }
 
-        .shop-services {
-            display: flex;
-            flex-direction: column;
-            gap: 35px;
+        .parlor-description {
+            background: #FFFFFF;
+            border: 1px solid #B4B4B4;
+            border-radius: 5px;
+            padding: 20px;
+            .title {
+                font-weight: 600;
+                font-size: 32px;
+                line-height: 35px;
+                color: #559901;
+                margin-bottom: 20px;
+            }
+            .description {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+            }
         }
 
-        .shop-reviews {
+        .parlor-services {
+            gap: 10px;
+            .title {
+                font-style: normal;
+                font-weight: 700;
+                font-size: 35px;
+                line-height: 40px;
+                color: #0D0D0D;
+            }
+            .service-list {
+                gap: 25px;
+            }
+        }
+
+        .parlor-reviews {
             display: flex;
             flex-direction: row;
         }

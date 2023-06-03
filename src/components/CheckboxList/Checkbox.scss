@@ -1,0 +1,33 @@
+
+.checkbox {
+    gap: 8px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .checkbox-inside {
+        width: 20px;
+        height: 20px;
+        border: solid 2px;
+        border-radius: 3px;
+        &.checked {
+            background-color: #38AF00;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border: solid 2px;
+        }
+    }
+    
+    .checkbox-value {
+        flex: 1;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000000;
+    }
+}
+

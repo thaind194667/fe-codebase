@@ -9,18 +9,17 @@ export default function Checkbox( {valueIn, length, setVal, name}) {
     const changeValue = () => {
         let i = value;
         i++;
-        if(i > 1) i = -1;
+        if(i > 1) i = 0;
         setValue(i);
         setVal(name, i);
     }
     return (
         <>
-            <div className="checkbox" style={{width: length, height: length}} onClick={changeValue}>
-                <div className="inside"> 
+            <div className="checkbox" style={{width: `${length}px`, height: `${length}px`}} onClick={changeValue}>
+                <div className={`inside ${value ? 'checked' : ''}`} > 
                     {!value? '' : 
-                        value === 1 ? 
-                            <SvgIcon name='check' width={length} height={length}/> : 
-                            <SvgIcon name='not-include' width={length} height={length}/>
+                            <SvgIcon name='check' width={`${length}px`} height={`${length}px`}/>
+                            // <SvgIcon name='not-include' width={length} height={length}/>
                     }
                 </div>
             </div>

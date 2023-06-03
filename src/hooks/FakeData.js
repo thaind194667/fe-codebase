@@ -11,22 +11,27 @@ for(let i = 0; i < 10; i++) {
 }
 
 const serviceList = [
-    { name: "マッサージ", value: 0 },
-    { name: "ホットストーンマッサージ", value: 0 },
+    { name: "マッサージ", check: false },
+    { name: "ホットストーンマッサージ", check: false },
+    { name: "ディープティッシュマッサージ", check: false, },
+    { name: "タイマッサージ", check: false},
+    { name: "温石マッサージ", check: false},
+    { name: "温石とタイコンボ", check: false},
+    { name: "温石とタイコンボ1", check: false},
 ];
 
-const shopList = [];
+const parlorList = [];
 for (let i = 0; i < 49; i++) {
     // let randRate = Math.random() * 5
     // let randReviewCount = Math.round(Math.random() * 50)
-    shopList.push({
+    parlorList.push({
         id: i,
         imgUrl: "",
-        name: `shop${i}`,
-        address: `address${i}`,
+        name: `SF SPA HANOI${i}`,
+        address: `Phuong Mai, Kim Lien, Dong Da, Ha Noi${i * 10}`,
         rate: Math.round((Math.random() * 3 + 2) * 10) / 10,
-        introduce: `This is shop${i} at address${i}`,
-        reviewCount: Math.round(Math.random() * 50),
+        introduce: `20 年以上の経験から、SF スパは顧客への対応方法をよく知っています。高度な訓練を受けたプロフェッショナルなチームを擁し、顧客の健康と快適さに常に気を配っています。オールド スクエアの中心部に位置する SF スパは、混雑した都市や忙しい日常生活から逃れるのに最適な場所です。`,
+        reviewCount: Math.round(Math.random() * 40 + 20),
     });
 }
 
@@ -41,21 +46,21 @@ for(let i = 0; i < 10; i++) {
 }
 // for()
 
-const shopServiceList = [
+const parlorServiceList = [
     {   name: "マッサージ", 
-        price: '100000 VND', 
+        price: 100000, 
         duration: '15分', 
         description: 'moo taraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 
         customersCount: '１人', 
         note : 'aaa' },
     {   name: "ホットストーンマッサージ", 
-        price: '100000 VND', 
+        price: 120000, 
         duration: '20分', 
         description: 'moo tar', 
         customersCount: '１人', 
         note : 'bbb' },
     {   name: "Massage Full Body", 
-        price: '100000 VND', 
+        price: 300000, 
         duration: '30分', 
         description: 'moo tar', 
         customersCount: '１人', 
@@ -64,9 +69,9 @@ const shopServiceList = [
 
 
 export { 
-    shopList, 
+    parlorList, 
     serviceList, 
-    shopServiceList, 
+    parlorServiceList, 
     commentList,
     userList 
 }
