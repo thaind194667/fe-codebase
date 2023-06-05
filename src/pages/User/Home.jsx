@@ -15,7 +15,7 @@ export default function HomeUser() {
         
             <button onClick={() => navigate('/search')}>Search</button>
         
-            <button onClick={() => navigate('/details/0')}>Detail of 0</button>
+            <button onClick={() => navigate('/detail/0')}>Detail of 0</button>
       </div>
 {/* 
       <Slider

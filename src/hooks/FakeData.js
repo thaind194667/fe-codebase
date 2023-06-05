@@ -47,21 +47,66 @@ for(let i = 0; i < 10; i++) {
 // for()
 
 const parlorServiceList = [
-    {   name: "マッサージ", 
-        price: 100000, 
-        duration: '15分', 
+    {   
+        id: 1,
+        name: "マッサージ", 
+        servicePrice: [
+            {
+                price: 100000, 
+                duration: '15分', 
+            },
+            {
+                price: 120000, 
+                duration: '30分', 
+            },
+            {
+                price: 140000, 
+                duration: '45分', 
+            },
+            
+        ],
         description: 'moo taraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 
         customersCount: '１人', 
         note : 'aaa' },
-    {   name: "ホットストーンマッサージ", 
-        price: 120000, 
-        duration: '20分', 
+    {   
+        id: 2,
+        name: "ホットストーンマッサージ", 
+        servicePrice: [
+            {
+                price: 100000, 
+                duration: '15分', 
+            },
+            {
+                price: 120000, 
+                duration: '30分', 
+            },
+            {
+                price: 140000, 
+                duration: '45分', 
+            },
+            
+        ],
         description: 'moo tar', 
         customersCount: '１人', 
         note : 'bbb' },
-    {   name: "Massage Full Body", 
-        price: 300000, 
-        duration: '30分', 
+    {   
+        id: 3,
+        name: "Massage Full Body", 
+        servicePrice: [
+            {
+                price: 100000, 
+                duration: '15分', 
+            },
+            {
+                price: 1200000, 
+                duration: '30分', 
+            },
+            {
+                price: 140000, 
+                duration: '45分', 
+            },
+            
+        ],
         description: 'moo tar', 
         customersCount: '１人', 
         note : 'cccc' },

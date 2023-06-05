@@ -6,9 +6,10 @@ import Pagination from "@/layouts/Pagination";
 import ReactSlider from "react-slider";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { parlorList, serviceList } from "@/hooks/FakeData";
+// import { parlorList, serviceList } from "@/hooks/FakeData";
 import Header from "@/layouts/Header";
-// import Slider from "@/components/Slider";
+import { apiURL, publicURL } from "@/hooks/hooks";
+import axios from 'axios';
 
 const minRate = 0;
 const maxRate = 50;
@@ -18,6 +19,7 @@ const maxPrice = Math.ceil(305000 / 10000) * 10000;
 const gap = 10000;
 
 export default function Search() {
+  
   const navigate = useNavigate();
 
   const [searchRes, setRes] = useState([]);
@@ -26,7 +28,6 @@ export default function Search() {
   const [name, setName] = useState("");
 
   const [service, setService] = useState([]);
-  // let service = serviceList;
   const [checkCount, setCheckCount] = useState(0);
   const [serviceName, setServiceName] = useState("");
   const [searchServiceList, setSearchServiceList] = useState([]);
@@ -36,30 +37,33 @@ export default function Search() {
 
   const maxPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
-  const maxPage = parlorList.length / maxPerPage;
 
-  const confirmSearch = () => {
-    console.log(service);
+  const postSearch = async () => {
     let nameVal = document.getElementById("name/address").value;
-    if (!nameVal) {
-      setRes(parlorList);
-      return;
+    let arr  = [];
+    for(let  i = 0; i < searchServiceList.length; i++) {
+      if(searchServiceList[i].check) arr.push(searchServiceList[i].name);
+    }
+    console.log(arr);
+    const apiParams = {
+      input: nameVal, 
+      minRate: rateVal[0] / 10, 
+      maxRate: rateVal[1] / 10,
+      serviceList: [...arr],
     }
     setName(nameVal);
-    let data = parlorList.filter(
-      (e) => e.name.includes(nameVal) || e.address.includes(nameVal)
-    );
-    console.log(data);
-    setRes(data);
-    setCurrentPage(1);
-    // waitForRes()
-  };
+    axios.post(`${apiURL}/massage-facilities/filter`, apiParams)
+    .then((result) => {
+      console.log(result.data);
+      setRes(result.data.data);
+      setCurrentPage(1);
+    })
+    .catch((err) => console.error(err))
+  }
 
-  // const saveName = (e) => {
-  //   let nameVal = e.target.value;
-  //   setName(nameVal);
-  //   console.log(name);
-  // }
+  const confirmSearch = () => {
+    postSearch();
+  };
 
   const clearNameInput = () => {
     document.getElementById("name/address").value = ''
@@ -70,28 +74,38 @@ export default function Search() {
     setServiceName(val);
   };
 
-  const getServiceList = async () => {
-    console.log(serviceList);
-    // service = serviceList;
-    // console.log(service);
-    setService(serviceList);
-    setSearchServiceList(serviceList);
-  };
+  // const getServiceList = async () => {
+  //   console.log(serviceList);
+  // };
 
   const getSearchResult = async () => {
-    setRes(parlorList);
-    // setShowList(parlorList);
-    console.log(parlorList);
-    setCurrentPage(1);
+
+    axios.get(`${apiURL}/massage-facilities/`)
+    .then((result) => {
+      console.log(result.data);
+      setRes(result.data.result);
+      setCurrentPage(1);
+      const serviceListArr = result.data.serviceList.map((item) => {
+        return {
+          name: item,
+          check: false,
+        }
+      })
+      setService(serviceListArr);
+      setSearchServiceList(serviceListArr);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+
   };
 
-  const fetchBoth = async () => {
+  const fetchData = async () => {
     await getSearchResult();
-    await getServiceList();
+    // await getServiceList();
   };
 
   const saveService = (index) => {
-    // console.log(index, searchServiceList[index], service);
     let i = service.findIndex((e) => e.name === searchServiceList[index].name);
     // console.log(i);
     let data = [...service];
@@ -112,11 +126,10 @@ export default function Search() {
   };
 
   useEffect(() => {
-    fetchBoth();
+    fetchData();
   }, []);
 
   useEffect(() => {
-    // if(!searchRes.length) return;
     let arr = [];
     var minIndex = (currentPage - 1) * maxPerPage;
     var maxIndex = currentPage * maxPerPage;
@@ -281,7 +294,7 @@ export default function Search() {
                 return (
                   <div key={index} className="result-item row">
                     <div className="item-picture">
-                      <SvgIcon width="100%" type={"png"} name={"pic"} />
+                      <SvgIcon width="100%" src={`${publicURL}${item.imageURL}`} />
                     </div>
                     <div className="item-description row">
                       <div className="col" style={{ gap: "12px", flex: "2" }}>
@@ -292,14 +305,14 @@ export default function Search() {
                           <SvgIcon name="map_marker" />
                           {item.address}
                         </div>
-                        <div className="item-introduce">{item.introduce}</div>
+                        <div className="item-introduce">{item.description}</div>
                       </div>
                       <div className="col" style={{ gap: "30px" }}>
                         <div className="item-rate col" style={{ gap: "10px" }}>
                           <div className="row" style={{ gap: "12px" }}>
                             <div className="item-review col">
                               <div className="review-text">
-                                {item.rate > 4 ? (
+                                {item.rating > 4 ? (
                                   <b>素晴しい</b>
                                 ) : (
                                   <b>Normal</b>
@@ -310,7 +323,7 @@ export default function Search() {
                               </div>
                             </div>
                             <div className="item-star">
-                              <div>{item.rate}</div>
+                              <div>{item.rating}</div>
                             </div>
                           </div>
                         </div>
@@ -318,7 +331,7 @@ export default function Search() {
                           <button
                             className="item-details-link orange"
                             onClick={() =>
-                              navigate(`/details/${item.id}`, { id: item.id })
+                              navigate(`/detail/${item.id}`, { id: item.id })
                             }
                           >
                             詳細を表示

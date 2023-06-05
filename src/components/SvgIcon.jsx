@@ -1,9 +1,11 @@
 
-export default function SvgIcon({src, width, height, name, type, alt}) {
+export default function SvgIcon({src, width, height, name, type, alt, className}) {
     
     const url = src ? src : `/${name}.${type ? type : 'svg'}`;
 
     return (
-        <img src={url} alt={alt} style={{display: 'flex', width, height}}/>
+        <div className={className}>
+            <img  src={url} alt={alt} style={{display: 'flex', width, height}}/>
+        </div>
     )
 }

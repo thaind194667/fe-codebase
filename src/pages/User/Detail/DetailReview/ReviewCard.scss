@@ -1,0 +1,68 @@
+.review-info {
+    $cardWidth: 22.5vw;
+    flex: 0 0 $cardWidth;
+    padding: 30px;
+    border: 1px solid #B4B4B4;
+    gap: 18px;
+    border-radius: 8px;
+
+    &.add {
+        width: $cardWidth;
+        background: #F4F4F4;
+        border: solid 1px #F4F4F4;
+    }
+    .user-info {
+        gap: 8px;
+        .user-avatar {
+            background-color:bisque;
+            $avatarRadius : 60px;
+            width: $avatarRadius;
+            height: $avatarRadius;
+            border-radius: 99px;
+        }
+        .user-name {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 25px;
+            color: #0D0D0D;
+        }
+
+    }
+    .user-rating {
+        margin-bottom: 10px;
+        .addstar {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .user-comment {
+        width: 100%;
+        .comment-field {
+            resize: none;
+            width: 100%;
+            height: 38vh;
+            border: none;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #0D0D0D;
+            &.add {
+                background-color: white;
+                // border: solid 1px;
+            }
+
+            &.normal {
+                background: none;
+            }
+        }
+    }
+    .submit-rating {
+        padding: 20px;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 25px;
+
+        color: #0D0D0D;
+    }
+}

@@ -1,0 +1,11 @@
+
+.review-list {
+    max-width: 100%;
+    gap: 30px;
+
+    .review-list-info {
+        min-width: 50vw;
+        overflow-x: scroll;
+        gap: 30px;
+    }
+}

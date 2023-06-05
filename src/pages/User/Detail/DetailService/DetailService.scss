@@ -1,0 +1,89 @@
+.service-info {
+    display: flex;
+    flex-direction: row;
+    // width: 100%;
+    max-width: 100%;
+    gap: 12px;
+    background: #FFFFFF;
+    border: 1px solid #C5C5C5;
+
+    padding: 15px;
+
+    .service-name {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        width: 25vw;
+        min-width: fit-content;
+        margin-bottom: 15px;
+        margin-left: -25px;
+        background: #FF9900;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 35px;
+        color: #FFFFFF;
+        padding: 12px;
+    }   
+
+    .service-description {
+        flex: 1;
+        margin-bottom: 5px;
+        line-break: loose;
+        word-break: break-all;
+        
+    }
+
+    .service-note {
+        color: red;
+    }
+
+    .priceDuration {
+        background: #F4F4F4;
+        justify-content: center;
+        justify-self: center;
+        padding: 20px;
+        .price-table {
+            margin-bottom: 15px;
+            th{
+                padding: 12px;
+                padding-top: 0px;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 29px;
+                color: #FF9900;
+            }
+        
+            td {
+                text-align: center;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                color: #000000;
+
+                &.duration {
+                    padding: 15px;
+                    text-align: left;
+                }
+                &.customer-count {
+                    padding: 12px;
+                }
+                &.price {
+                    padding: 12px 0px;
+                    color: #559901;
+                    text-align: right;
+                    // text-decoration: underline;
+                }
+            }
+        }
+
+        .schedule-service {
+            padding: 12px;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 33px;
+        }
+    }
+}
+
+
+

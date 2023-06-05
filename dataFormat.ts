@@ -12,13 +12,29 @@ type searchBarInfo = {
 }
 
 
+////--- get all massage facility info
+/// input
+/// output
+type allFacilityInfo = {   
+    result : [  /// array of object, các thông tin của quán dựa trên kết quả tìm kiếm
+        {
+            id: Number,
+            name: String, 
+            address: String,
+            description: String,
+            imgUrl: String,
+            rating: Number,
+            reviewCount: Number,
+        }
+    ],
+}
+
+
 ////--- get search result (get)
 /// input
 type input1 = {
     input: String,
-    serviceList : [
-        {name: String, value: Number}
-    ],
+    serviceList : [string],
     minPrice: Number,
     maxPrice: Number,
     minRate: Number,
@@ -31,7 +47,6 @@ type searchResult = {
             id: Number,
             name: String, 
             address: String,
-            price: Number,
             description: String,
             imgUrl: String,
             rating: Number,
@@ -72,7 +87,7 @@ type ShopDetails = {    /// thông tin của quán
     ]
 }
 
-
+/////////////////////////////// not yet
 ////--- create new comment (post)
 /// input:
 type input2 = {
@@ -89,6 +104,7 @@ type result2 = {
 }
 
 
+/////////////////////////////// not yet
 ////--- delete comment (delete)
 /// input:
 type input3 = {

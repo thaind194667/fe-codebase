@@ -1,10 +1,13 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import './Details.scss'
+import { useNavigate, useParams } from "react-router-dom";
+import './Detail.scss'
 import { parlorList, parlorServiceList, commentList } from "@/hooks/FakeData";
 import { useState, useEffect } from "react";
 import SvgIcon from "@/components/SvgIcon";
-import DetailsService from "./DetailsService";
+import DetailService from "./DetailService";
+import DetailReview from "./DetailReview";
 import Header from "@/layouts/Header";
+import axios from "axios";
+import {apiURL, publicURL} from "@/hooks/hooks";
 
 export default function Details() {
   const navigate = useNavigate();
@@ -16,33 +19,44 @@ export default function Details() {
 
   const [imgList, setImgList] = useState([])
 
+  const [serviceList, setServiceList] = useState([])
+  const [ratingList, setRatingList] = useState([])
+
   const getDetails = async () => {
-    setData(parlorList[id]);
+    axios.get(`${apiURL}/massage-facilities/detail/${id}`)
+    .then((res) => {
+      console.log(res.data[0]);
+      setData(res.data[0])
+    })
+    // setData(parlorList[id]);
   }
   
-  const getImgList = async () => {
-    let arr = []
-    for(let i = 0 ; i < 5 ; i++) {
-      arr.push('pic')
-    }
-  }
+  // const getImgList = async () => {
+  //   let arr = []
+  //   for(let i = 0 ; i < 5 ; i++) {
+  //     arr.push('pic')
+  //   }
+  // }
 
-  const fetchData = async () => {
-    await getDetails();
-    getImgList();
-  }
+  // const fetchData = async () => {
+  //   await getDetails();
+  //   // getImgList();
+  // }
 
   useEffect(() => {
     // console.log(parlorList);
     // console.log(id);
-    fetchData()
+    getDetails()
   }, [])
 
   useEffect(() => {
-    console.log(pageData);
+    // console.log(pageData);
+    setServiceList(pageData.serviceList);
+    setRatingList(pageData.ratingList);
   }, [pageData])
 
   return (
+    pageData ? 
     <div className="page">
       <Header />
 
@@ -70,81 +84,107 @@ export default function Details() {
           </div>
           
         </div>
+        {
+          pageData.imgList ? 
         <div className="parlor-images col">
           <div className="row ">
             <div className="col" style={{flex: '1', }}>
                 <SvgIcon 
-                  type={"png"} 
-                  name={"pic"} 
+                  src={`${publicURL}${pageData.imgList[1]}`}
                   alt="parlor image 1" 
-                  className="img1" 
+                  className="parlor-img" 
                   style={{flex: '1', }}/>
                 
                 <SvgIcon 
-                  type={"png"} 
-                  name={"pic"} 
+                  src={`${publicURL}${pageData.imgList[2]}`}
                   alt="parlor image 2" 
-                  className="img2" 
+                  className="parlor-img" 
                   style={{flex: '1', }}/>
             </div>
 
             <div className="col" style={{flex: '2', }}>
-              <SvgIcon type={"png"} 
-                name={"pic"} alt="parlor image 3" 
-                className="img3" />
+              <SvgIcon 
+                src={`${publicURL}${pageData.imgMain}`}
+                alt="main img" 
+                className="main-img" />
             </div>
           </div>
           <div className="row" style={{gap: '10px', flex: '1'}}>
             <div style={{flex: '1'}}>
-              <SvgIcon type={"png"} 
-                name={"pic"} alt="parlor image 4"
-                className="img4" />
+              <SvgIcon 
+                src={`${publicURL}${pageData.imgList[3]}`}
+                alt="parlor image 4"
+                className="parlor-img" />
             </div>
             <div style={{flex: '1'}}>
-              <SvgIcon type={"png"} 
+              {
+                pageData.imgList[4] ?
+                  <SvgIcon type={"png"} 
+                  name={"pic"} alt="parlor image 5"
+                  className="parlor-img" /> : <></>
+              }
+              
+            </div>
+            <div style={{flex: '1'}}>
+            {
+              pageData.imgList[5] ?
+                <SvgIcon type={"png"} 
                 name={"pic"} alt="parlor image 5"
-                className="img5" />
+                className="parlor-img" /> : <></>
+            }
             </div>
-            <div style={{flex: '1'}}>
-              <SvgIcon type={"png"} 
-                name={"pic"} alt="parlor image 6"
-                className="img6" />
-            </div>
-            <div style={{display: 'flex', flex: '1', backgroundImage: 'url("/pic.png")', backgroundSize: 'cover', backgroundPosition: 'center', }}>
-              <div className="more-img">＋20写真</div>
+            <div className="more-img-container" style={ pageData.imgList[6] ? {
+                  backgroundImage: `url(`+`${publicURL}${pageData.imgMain}`+`)`, 
+                  backgroundSize: 'cover', 
+                  backgroundPosition: 'center', 
+              } : {}
+              
+              }>
+              {
+                pageData.imgList[6] ? 
+                <div className="more-img">＋{pageData.imgList.length - 6}写真</div>
+                : <></>
+              }
               {/* <SvgIcon type={"png"} 
                 name={"pic"} alt="parlor image 6"
-                className="img6" /> */}
+                className="parlor-img6" /> */}
             </div>
           </div>
-        </div>
+        </div> : <></>
+
+        }
         
         <div className="parlor-description">
           <div className="title">概要</div>
-          <div className="description"> {pageData.introduce} </div>
+          <div className="description"> {pageData.description} </div>
           
         </div>
         <div className="parlor-services col">
           <div className="title"> 提供サービス  </div>
           <div className="service-list col">
             {
-              parlorServiceList.map( 
+              serviceList ? 
+              serviceList.map( 
                 ( item, index 
-                )=> <DetailsService 
+                )=> <DetailService 
                     key={`service${index}`} 
                     data={item} 
                     role="user" 
                   />
-              )
+              ) :<></>
             }
           </div>
         </div>
 
-        <div className="parlor-reviews">
+        <div className="parlor-reviews col">
+          <div className="title"> ユーザーの評価  </div>
+          {ratingList ? <DetailReview data={ratingList} /> : <></>}
           
         </div>
       </div>
     </div>
+    :
+    <div>Loading...</div>
     // <div className="returnHome">
     //     <p>Details page here</p>
     //   <button onClick={() => navigate("/")}>Home</button>

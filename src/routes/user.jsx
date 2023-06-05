@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 // import * as Notfound from '@/Pages/Error'
 import Search from '@/pages/User/Search'
 import HomeUser from '@/pages/User/Home'
-import Details from '@/pages/User/Details'
+import Detail from '@/pages/User/Detail'
 
 const User = () =>{
     return (
@@ -11,7 +11,7 @@ const User = () =>{
         <Route path="/" element={ <HomeUser />} />
         <Route path="/login" element={ <Navigate to={'/search'} />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/details/:id' element={<Details />} />
+        <Route path='/detail/:id' element={<Detail />} />
         {/* <Route path="*" element={<Notfound></Notfound>}/> */}
       </Routes>
     )
