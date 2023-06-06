@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ReviewCard.scss";
 import SvgIcon from "@/components/SvgIcon.jsx";
+import { apiURL, publicURL } from "@/hooks/hooks";
 
 export default function ReviewCard({ data, status, submitReview }) {
     // console.log(data);
@@ -23,7 +24,7 @@ export default function ReviewCard({ data, status, submitReview }) {
     return (
         <div className={`review-info col ${status}`}>
             <div className="user-info row">
-                <div className="user-avatar"> </div>
+                <div className="user-avatar"><img  src={data.avatarImageUrl ? `${publicURL}${data.avatarImageUrl}` : '/avatar-default.jpg'}></img></div>
 
                 <div className="user-name">{data.username}</div>
             </div>

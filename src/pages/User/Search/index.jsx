@@ -14,7 +14,7 @@ import axios from 'axios';
 const minRate = 0;
 const maxRate = 50;
 
-let minPrice;
+let minPrice ;
 let maxPrice = Math.ceil(1000000 / 10000) * 10000;
 const gap = 10000;
 
@@ -145,7 +145,7 @@ export default function Search() {
       if (i === searchRes.length) break;
       arr.push(searchRes[i]);
     }
-    setShowList(arr);
+    setShowList(arr.sort((a,b)=>b.rating-a.rating));
   }, [searchRes, currentPage]);
 
   useEffect(() => {
