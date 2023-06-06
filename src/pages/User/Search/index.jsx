@@ -229,7 +229,7 @@ export default function Search() {
                     type="text"
                     name="name/address"
                     id="name/address"
-                    placeholder="ハノイ、ダナン"
+                    placeholder="サービスを検索"
                   />
                   {/* <Checkbox item={{check: checkAll,}} setChecked={()=> setCheckAll(!checkAll) } /> */}
                   <button onClick={() => setServiceName("")}>クリア</button>
