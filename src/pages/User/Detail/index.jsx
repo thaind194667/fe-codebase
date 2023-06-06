@@ -109,12 +109,14 @@ export default function Details() {
                 className="main-img" />
             </div>
           </div>
-          <div className="row" style={{gap: '10px', flex: '1'}}>
+          {/* <div className="row" style={{gap: '10px', flex: '1'}}>
             <div style={{flex: '1'}}>
-              <SvgIcon 
-                src={`${publicURL}${pageData.imgList[3]}`}
-                alt="parlor image 4"
-                className="parlor-img" />
+              {
+                pageData.imgList[3] ?
+                  <SvgIcon type={"png"} 
+                  name={"pic"} alt="parlor image 4"
+                  className="parlor-img" /> : <></>
+              }
             </div>
             <div style={{flex: '1'}}>
               {
@@ -145,11 +147,8 @@ export default function Details() {
                 <div className="more-img">＋{pageData.imgList.length - 6}写真</div>
                 : <></>
               }
-              {/* <SvgIcon type={"png"} 
-                name={"pic"} alt="parlor image 6"
-                className="parlor-img6" /> */}
             </div>
-          </div>
+          </div> */}
         </div> : <></>
 
         }

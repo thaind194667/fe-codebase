@@ -1,6 +1,6 @@
 import "./Search.scss";
 // import Checkbox from "@/components/Checkbox";
-import CheckboxList from "@/components/CheckboxList";
+import Checkbox from "@/components/Checkbox";
 import SvgIcon from "@/components/SvgIcon";
 import Pagination from "@/layouts/Pagination";
 import ReactSlider from "react-slider";
@@ -14,8 +14,8 @@ import axios from 'axios';
 const minRate = 0;
 const maxRate = 50;
 
-const minPrice = 100000;
-const maxPrice = Math.ceil(305000 / 10000) * 10000;
+let minPrice;
+let maxPrice = Math.ceil(1000000 / 10000) * 10000;
 const gap = 10000;
 
 export default function Search() {
@@ -33,29 +33,33 @@ export default function Search() {
   const [searchServiceList, setSearchServiceList] = useState([]);
 
   const [rateVal, setRateVal] = useState([minRate, maxRate]);
-  const [priceVal, setPrice] = useState([minPrice, maxPrice]);
+  const [priceVal, setPrice] = useState([0, 0]);
 
   const maxPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [checkAll, setCheckAll] = useState(false);
+
   const postSearch = async () => {
-    let nameVal = document.getElementById("name/address").value;
-    let arr  = [];
-    for(let  i = 0; i < searchServiceList.length; i++) {
-      if(searchServiceList[i].check) arr.push(searchServiceList[i].name);
-    }
-    console.log(arr);
     const apiParams = {
-      input: nameVal, 
       minRate: rateVal[0] / 10, 
       maxRate: rateVal[1] / 10,
-      serviceList: [...arr],
+      minPrice: priceVal[0],
+      maxPrice: priceVal[1],
     }
+    let nameVal = document.getElementById("name/address").value;
+    if(nameVal) apiParams.input = nameVal
     setName(nameVal);
+    let arr  = [];
+    for(let  i = 0; i < searchServiceList.length; i++) 
+      if(searchServiceList[i].check) arr.push(searchServiceList[i].name);
+    if(arr.length) apiParams.serviceList = arr;
+    console.log(apiParams);
+    
     axios.post(`${apiURL}/massage-facilities/filter`, apiParams)
     .then((result) => {
-      console.log(result.data);
-      setRes(result.data.data);
+      console.log(result);
+      setRes(result.data.result);
       setCurrentPage(1);
     })
     .catch((err) => console.error(err))
@@ -87,12 +91,15 @@ export default function Search() {
       setCurrentPage(1);
       const serviceListArr = result.data.serviceList.map((item) => {
         return {
-          name: item,
+          name: item.serviceName,
           check: false,
         }
       })
       setService(serviceListArr);
-      setSearchServiceList(serviceListArr);
+      minPrice = Math.floor(result.data.minPrice / 10000) * 10000;
+      maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
+      setPrice([minPrice, maxPrice]);
+      // setSearchServiceList(serviceListArr);
     })
     .catch((error) => {
       console.error(error);
@@ -112,11 +119,11 @@ export default function Search() {
     data[i].check = !data[i].check;
 
     let newList = [...searchServiceList];
+    // newList[index].check = !newList[index].check;
     // console.log(newList[index].check);
     // console.log(newList);
     setService(data);
-    setSearchServiceList(newList);
-    setCheckCount(service.filter((e) => e.check).length);
+    // setSearchServiceList(newList);
 
     // console.log(data);
   };
@@ -130,6 +137,7 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
+    // if(!searchRes) return;
     let arr = [];
     var minIndex = (currentPage - 1) * maxPerPage;
     var maxIndex = currentPage * maxPerPage;
@@ -145,13 +153,37 @@ export default function Search() {
   }, [searchRes]);
 
   useEffect(() => {
+    console.log(priceVal);
+  }, [priceVal])
+
+  useEffect(() => {
     if (!serviceName) {
       setSearchServiceList(service);
       return;
     }
     let data = service.filter((e) => e.name.includes(serviceName));
     setSearchServiceList(data);
-  }, [serviceName]);
+  }, [serviceName, service]);
+
+  useEffect(() => {
+    setCheckCount(service.filter((e) => e.check).length);
+  },[service])
+
+  // useEffect(() => {
+  //   console.log(checkAll);
+  //   let arr = searchServiceList
+  //   for(let i = 0; i < arr.length; i++) {
+  //     arr[i].check = checkAll;
+  //   }
+  //   console.log(arr);
+  //   setSearchServiceList(arr);
+  //   // setCheckCount(service.filter((e) => e.check).length);
+  // },[checkAll]);
+
+  // useEffect(() => {
+  //   if(checkCount === searchServiceList.length) setCheckAll(true);
+  //   else setCheckAll(false);
+  // },[checkCount])
 
   return (
     <>
@@ -199,13 +231,14 @@ export default function Search() {
                     id="name/address"
                     placeholder="ハノイ、ダナン"
                   />
+                  {/* <Checkbox item={{check: checkAll,}} setChecked={()=> setCheckAll(!checkAll) } /> */}
                   <button onClick={() => setServiceName("")}>クリア</button>
                 </div>
                 <div className="checkbox-list col">
                   {searchServiceList.length
                     ? searchServiceList.map((item, index) => {
                         return (
-                          <CheckboxList
+                          <Checkbox
                             key={`checkboxItem${index}`}
                             item={item}
                             setVal={saveService}
@@ -231,16 +264,20 @@ export default function Search() {
                 </div>
               </div>
               <div>
-                <ReactSlider
-                  className="slider"
-                  onChange={setRateVal}
-                  value={rateVal}
-                  min={minRate}
-                  max={maxRate}
-                  pearling={true}
-                  // type="double"
-                  // color="black"
-                />
+                {
+                  priceVal ? 
+                  <ReactSlider
+                    className="slider"
+                    onChange={setRateVal}
+                    value={rateVal}
+                    min={minRate}
+                    max={maxRate}
+                    pearling={true}
+                    // type="double"
+                    // color="black"
+                  />
+                  : <></>
+                }
               </div>
             </div>
             <div className="price-search">
@@ -284,7 +321,9 @@ export default function Search() {
             <b>
               {" "}
               {name ? `${name}：` : ""}
-              {searchRes.length} マッサージ部屋が一致しました
+              {/* {searchRes} */}
+              {searchRes ? `${searchRes.length}マッサージ部屋が一致しました` : 'Nothing can be found'}
+              {/* {searchRes.length}  */}
             </b>
           </div>
 
@@ -349,7 +388,7 @@ export default function Search() {
 
           <Pagination
             itemPerPage={maxPerPage}
-            maxItem={searchRes.length}
+            maxItem={searchRes ? searchRes.length : 0}
             currentPage={currentPage}
             changePage={changePage}
           />
