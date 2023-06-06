@@ -161,7 +161,7 @@ export default function Search() {
       setSearchServiceList(service);
       return;
     }
-    let data = service.filter((e) => e.name.includes(serviceName));
+    let data = service.filter((e) => e.name.toLowerCase().includes(serviceName.toLowerCase()));
     setSearchServiceList(data);
   }, [serviceName, service]);
 
