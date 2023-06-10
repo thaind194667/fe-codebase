@@ -12,7 +12,6 @@ import Login from '@/pages/Login'
 // import Register from '@/pages/Register'
 
 let type = localStorage.getItem("role");
-
 const useNavigateParams = () => {
   const navigate = useNavigate();
   const curUrl = useLocation().pathname;
@@ -35,6 +34,7 @@ const Router = () => {
           !type ? <Login></Login> : (type === "user" ? <User /> : type === "admin" ? <Admin /> : <Owner />)
         } />
         {/* <Route path="/register" element={<Register />} /> */}
+        {<Route path="/login" element={<Login />} />}
       </Routes>
     </BrowserRouter>
   )

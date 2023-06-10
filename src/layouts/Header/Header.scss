@@ -12,7 +12,7 @@
 
     .header-title {
         display: flex;
-        flex : 1;
+        flex: 1;
         // font-family: 'Inter';
         font-style: normal;
         font-weight: 800;
@@ -30,6 +30,7 @@
         gap: 15px;
         align-items: center;
         justify-content: center;
+
         .user-avatar {
             $length : 50px;
             width: $length;
@@ -37,6 +38,7 @@
             border-radius: 99px;
 
         }
+
         .info-btn {
             // font-family: 'Inter';
             padding: 8px 30px;
@@ -44,4 +46,134 @@
             font-weight: 600;
         }
     }
+}
+
+.login-form {
+    // position: absolute;
+    width: 35%;
+    height: auto;
+    margin: 50px auto;
+    border: 2px solid grey;
+    border-radius: 15px;
+    text-align: center;
+    padding-bottom: 50px;
+
+    .login-title {
+        text-align: center;
+    }
+
+    form {
+        width: 70%;
+        margin: auto;
+    }
+
+    .input-field {
+
+        width: 100%;
+
+        .form-lable {
+            margin: 10px 0 6px 0;
+            text-align: left;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 19px;
+            display: block;
+        }
+
+        .form-input {
+            margin-bottom: 5px;
+            font-size: 14px;
+            padding: 5px;
+            text-align: left;
+            display: block;
+            border: 2px solid #B4B4B4;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .spec {
+            width: 100%;
+            padding: 5px;
+            line-height: 14px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #B4B4B4;
+            border-radius: 8px;
+
+            input {
+                width: 90%;
+                outline: none;
+                border: hidden;
+            }
+
+            span {
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            &:focus-within {
+                border: 2px solid black;
+
+            }
+        }
+    }
+
+    .link {
+        display: block;
+        text-align: left;
+        font-weight: 600;
+        color: #D78100;
+        text-decoration: underline;
+        margin-bottom: 10px;
+        margin-top: 8px;
+    }
+
+    .submit-btn {
+        width: 86%;
+        height: 41px;
+        font-weight: 700;
+        font-size: 16px;
+        text-align: center;
+        background: #559901;
+        border-radius: 8px;
+        color: #FFFFFF;
+        margin: 0 auto;
+    }
+
+    .line {
+        margin-top: 20px;
+        border-top: 2px solid #B4B4B4;
+    }
+
+    .login-sub-text {
+        margin-top: 20px;
+        text-align: left;
+        font-size: 14px;
+        color: #535353;
+    }
+
+    .latest {
+        margin-top: 10px;
+        width: 100%;
+
+        .register-btn {
+            width: 100%;
+            height: 30px;
+            background-color: #0A0A0A;
+            font-weight: 550;
+            font-size: 16px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 8px 21%;
+
+            &:hover {
+                background-color: #535353;
+            }
+        }
+    }
+
 }
