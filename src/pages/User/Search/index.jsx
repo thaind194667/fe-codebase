@@ -14,9 +14,9 @@ import axios from 'axios';
 const minRate = 0;
 const maxRate = 50;
 
-let minPrice ;
+let minPrice = 0;
 let maxPrice = Math.ceil(1000000 / 10000) * 10000;
-const gap = 10000;
+const gap = 5000;
 
 export default function Search() {
   
@@ -39,6 +39,8 @@ export default function Search() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [checkAll, setCheckAll] = useState(false);
+
+  const [loading, setLoading] = useState(true);
 
   const postSearch = async () => {
     const apiParams = {
@@ -96,7 +98,7 @@ export default function Search() {
         }
       })
       setService(serviceListArr);
-      minPrice = Math.floor(result.data.minPrice / 10000) * 10000;
+      minPrice = 0;
       maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
       setPrice([minPrice, maxPrice]);
       // setSearchServiceList(serviceListArr);
@@ -147,9 +149,17 @@ export default function Search() {
     }
     setShowList(arr.sort((a,b)=>b.rating-a.rating));
   }, [searchRes, currentPage]);
-
+  
   useEffect(() => {
-    setCurrentPage(1);
+    // console.log(loading);
+    if(searchRes.length) {
+      setCurrentPage(1);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500)
+    }
+    console.log(searchRes);
   }, [searchRes]);
 
   useEffect(() => {
@@ -169,6 +179,14 @@ export default function Search() {
     setCheckCount(service.filter((e) => e.check).length);
   },[service])
 
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        document.getElementById("name/address").value = name;
+      }, 500)
+    }
+    // console.log(loading);
+  }, [loading])
   // useEffect(() => {
   //   console.log(checkAll);
   //   let arr = searchServiceList
@@ -186,6 +204,7 @@ export default function Search() {
   // },[checkCount])
 
   return (
+    loading === true ? <div>Loading</div> :
     <>
       <Header />
       <div className="page-body-search">
@@ -205,6 +224,7 @@ export default function Search() {
                   name="name/address"
                   id="name/address"
                   placeholder="ハノイ、ダナン"
+                  // value={name}
                 />
                 <button onClick={clearNameInput}>クリア</button>
               </div>

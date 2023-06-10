@@ -10,7 +10,8 @@ export default function HomeUser() {
   return (
     <>
     <Header></Header>
-      <div>This is massage homepage</div>
+      <div>This is user's massage homepage</div>
+      <div> &emsp; If you want to change role, <b>Inspect</b> then choose <b>Application</b>, then delete value in <b>local storage</b>. Then reaload the page</div>
       <div>
         
             <button onClick={() => navigate('/search')}>Search</button>

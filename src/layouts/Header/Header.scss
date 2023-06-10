@@ -26,24 +26,176 @@
         }
     }
 
-    .user-info {
+    .non-user-action {
         gap: 15px;
         align-items: center;
         justify-content: center;
-
-        .user-avatar {
-            $length : 50px;
-            width: $length;
-            height: $length;
-            border-radius: 99px;
-
-        }
-
         .info-btn {
-            // font-family: 'Inter';
             padding: 8px 30px;
             font-size: 24px;
             font-weight: 600;
+        }
+    }
+
+    .user-info {
+        gap: 40px;
+        align-items: center;
+        justify-content: center;
+
+        .notification-btn {
+            position: relative;
+            $notiRadius: 70px;
+            width: $notiRadius;
+            height: $notiRadius;
+            align-items: center;
+            justify-content: center;
+            // padding: 10px;
+            background: #FDFDFD;
+            border-radius: 32px;
+            &:hover {
+                cursor: pointer;
+            }
+            .notification-number {
+                position: absolute;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                background: #38AF00;
+                $downPos : 3px;
+                width: 28px;
+                height: 28px;
+                bottom: $downPos;
+                right: $downPos;
+                z-index: 1;
+                font-weight: 600;
+                font-size: 16px;
+                // line-height: 19px;
+                color: #FFFFFF;
+                border-radius: 99px;
+                
+            }
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 80px;
+            right: 0px;
+            width: 35vw;
+            max-height: 150px;
+            overflow-y: scroll;
+            border: solid 1px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 55px 9px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            padding: 10px 0;
+            .notification-item {
+                &:not(.first) {
+                    border-top: solid 1px;
+                }
+                font-size: 16px;
+                padding: 20px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #ffffff;
+                border-radius: 8px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 9px;
+                background: #559901;
+                border: 5.5px solid transparent;
+                background-clip: content-box;
+                width: 184px;
+            }
+        }
+        
+        .user-control {
+            align-items: center;
+            background: #0D0D0D;
+            color: white;
+            border-radius: 32px;
+            padding: 5px;
+            gap: 15px;
+            &:hover {
+                cursor: pointer;
+            }
+            .user-avatar {
+                background-color: white;
+                $length : 60px;
+                width: $length;
+                height: $length;
+                border-radius: 99px;
+            }
+            .user-name {
+                // margin-right: 5px;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                gap: 20px;
+                padding: 5px;
+                padding-right: 10px;
+                
+            }
+            .dropdown-btn {
+                margin-right: 10px;
+            }
+        }
+        .user-dropdown-panel {
+            position: absolute;
+            top: 80px;
+            right: 0px;
+            width: fit-content;
+            padding: 11px;
+            z-index : 1;
+            background: white;
+            box-shadow: 0px 4px 55px 9px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            border: solid 1px;
+            hr {
+                width: 100%;
+                height: 2px;
+                background: #C2C2C2;
+            }
+            .user-dropdown-item {
+                word-break: keep-all;
+                padding: 0 20px 0 4px;
+                display: flex;
+                height: 50px;
+                align-items: center;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 20px;
+                color: black;
+
+                &:hover {
+                    background: rgba(217, 217, 217, 0.59);
+                    border-radius: 8px;
+                    cursor: pointer;
+                }
+            }
+
+            .logout-btn {
+                padding: 15px;
+                background: #559901;
+                border-radius: 8px;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+
+                color: #FFFFFF;
+            }
+        }
+
+    }
+
+    .admin-info {
+        align-items: center;
+        .admin-btn {
+            padding: 15px 20px;
+            border-radius: 32px;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 25px;
         }
     }
 }
