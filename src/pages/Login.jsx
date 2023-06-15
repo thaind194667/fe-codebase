@@ -81,7 +81,7 @@ export default function Login() {
                         <label htmlFor="pass-input" className="form-lable">パスワード</label>
                         <div className="spec">
                             <input type={type} id="pass-input" className="spec-input" name="password" pattern=".{6,18}" placeholder="********" required
-                                value={pwd} onChange={(e) => setPwd(e.target.value)}
+                                title="Password from 6 to 18 characters" value={pwd} onChange={(e) => setPwd(e.target.value)}
                             />
                             <span onClick={visiblePassword}><Icon icon={icon} size={18} /></span>
                         </div>
