@@ -10,6 +10,7 @@ import Admin from './admin'
 import Owner from './owner'
 import Login from '@/pages/Login'
 import HomePage from '@/pages/HomePage'
+
 // import Register from '@/pages/Register'
 
 let type = localStorage.getItem("role");
