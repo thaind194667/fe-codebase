@@ -7,7 +7,7 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { useState } from "react"
 import { apiURL, publicURL } from "@/hooks/hooks";
 import axios from 'axios';
-import Login_popup from "./Popup/login_popup"
+import Login_popup from "./Popup/Login_popup"
 import { Navigate, useNavigate } from "react-router-dom";
 
 
