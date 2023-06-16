@@ -1,15 +1,13 @@
 
 .checkbox {
     gap: 8px;
-    align-items: end;
+    align-items: start;
 
     &:hover {
         cursor: pointer;
     }
 
     .checkbox-inside {
-        width: 20px;
-        height: 20px;
         border: solid 2px;
         border-radius: 3px;
         &.checked {

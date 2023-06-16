@@ -1,14 +1,11 @@
 :root {
-  // font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  // font-family: Meiryo;
-  font-family:  Meiryo;
+  font-family: 'Noto Sans JP', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 }
 
 * {
-  // font-family: 'Inter';
-  font-family:  Meiryo;
+  font-family: 'Noto Sans JP', sans-serif;
 
 }
 
@@ -44,7 +41,6 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
   height: 100vh;
@@ -60,22 +56,38 @@ h1 {
 
 button {
   border-radius: 5px;
-  border: none;
+  border: solid 1px;
   white-space: nowrap;
 
   &.white {
     background-color: #F9F9F9;;
-    color: #0D0D0D;;
+    color: #0D0D0D;
+    
+    &:hover {
+      color:#F9F9F9;
+      background-color:#0D0D0D;
+      border: solid 1px;
+    }
   }
 
   &.black {
     background-color: #0D0D0D;;
     color: #FFFFFF;
+    &:hover {
+      color:#0D0D0D;
+      background-color: #FFFFFF;
+      border: solid 1px;
+    }
   }
 
   &.orange {
     background-color: #FF9900;
     color: #FFFFFF;
+    &:hover {
+      color: #FF9900;
+      background-color: #FFFFFF;
+      border: solid 1px;
+    }
   }
 
   &:hover {
@@ -85,8 +97,12 @@ button {
 
   &:disabled {
     &:hover { 
-        cursor:auto;
+      cursor:auto;
     }
+  }
+
+  &.clear-input-btn {
+    background: none;
   }
 }
 

@@ -1,0 +1,111 @@
+.page-body-shop-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .body-title {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 35px;
+        color: #0D0D0D;
+        margin: 30px;
+    }
+
+    .body-form {
+        width: 50%;
+        gap: 20px;
+        // border: solid 1px;
+        .shop-info-form {
+            gap: 12px;
+        }
+
+        .shop-gallery-form {
+            gap: 5px;
+            .form-notice {
+                font-weight: 400;
+                font-size: 16px;
+                text-decoration-line: underline;
+                color: #559901;
+                margin-bottom: 10px;
+            }
+        }
+
+        .input-field {
+            flex: 1;
+            gap: 4px;
+        }
+
+        .form-title {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 19px;
+            color: #000000;
+            .required-field {
+                color: #FF0000;
+            }
+        }
+
+        .form-btn {
+            align-items: center;
+            gap: 12px;
+            padding: 15px 65px 15px 20px;
+            font-weight: 600;
+            font-size: 20px;
+            border-radius: 8px;
+            position: relative;
+
+            &:hover {
+                .icon-plus {
+                    display: none!important;
+                }
+            }
+
+            .icon-plus {
+                z-index: 1;
+            }
+
+            .icon-plus, .icon-plus-hover {
+                position: absolute;
+                margin-right: 12px;
+            }
+        }
+
+        .form-input {
+
+            input[type="text"] {
+                width: 90%;
+                background: #FFFFFF;
+                border: 2px solid #B4B4B4;
+                border-radius: 8px; 
+                font-size: 16px;
+                line-height: 25px;
+                padding: 8px;
+                font-size: 16px;
+                font-weight: 600;
+    
+                &::placeholder {
+                    font-size: 16px;
+                    color: #A4A4A4;
+                }
+            }
+
+            textarea {
+                width: 95%;
+                height: 200px;
+                padding: 12px;
+                background: #FFFFFF;
+                border: 2px solid #B4B4B4;
+                border-radius: 8px; 
+                resize: none;
+                max-height: 300px;
+                font-weight: 600;
+                font-size: 16px;
+                &::placeholder {
+                    color: #A4A4A4;
+                }
+            }
+        }
+
+    }
+}

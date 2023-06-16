@@ -1,12 +1,10 @@
 import "./Search.scss";
-// import Checkbox from "@/components/Checkbox";
 import Checkbox from "@/components/Checkbox";
 import SvgIcon from "@/components/SvgIcon";
 import Pagination from "@/layouts/Pagination";
 import ReactSlider from "react-slider";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { parlorList, serviceList } from "@/hooks/FakeData";
 import Header from "@/layouts/Header";
 import { apiURL, publicURL } from "@/hooks/hooks";
 import axios from 'axios';
@@ -38,7 +36,7 @@ export default function Search() {
   const maxPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [checkAll, setCheckAll] = useState(false);
+  // const [checkAll, setCheckAll] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
@@ -80,9 +78,6 @@ export default function Search() {
     setServiceName(val);
   };
 
-  // const getServiceList = async () => {
-  //   console.log(serviceList);
-  // };
 
   const getSearchResult = async () => {
 
@@ -101,7 +96,6 @@ export default function Search() {
       minPrice = 0;
       maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
       setPrice([minPrice, maxPrice]);
-      // setSearchServiceList(serviceListArr);
     })
     .catch((error) => {
       console.error(error);
@@ -111,23 +105,15 @@ export default function Search() {
 
   const fetchData = async () => {
     await getSearchResult();
-    // await getServiceList();
   };
 
   const saveService = (index) => {
     let i = service.findIndex((e) => e.name === searchServiceList[index].name);
-    // console.log(i);
     let data = [...service];
     data[i].check = !data[i].check;
 
     let newList = [...searchServiceList];
-    // newList[index].check = !newList[index].check;
-    // console.log(newList[index].check);
-    // console.log(newList);
     setService(data);
-    // setSearchServiceList(newList);
-
-    // console.log(data);
   };
 
   const changePage = (index) => {
@@ -139,7 +125,6 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    // if(!searchRes) return;
     let arr = [];
     var minIndex = (currentPage - 1) * maxPerPage;
     var maxIndex = currentPage * maxPerPage;
@@ -151,7 +136,6 @@ export default function Search() {
   }, [searchRes, currentPage]);
   
   useEffect(() => {
-    // console.log(loading);
     if(searchRes.length) {
       setCurrentPage(1);
       setLoading(true);
@@ -185,23 +169,7 @@ export default function Search() {
         document.getElementById("name/address").value = name;
       }, 500)
     }
-    // console.log(loading);
   }, [loading])
-  // useEffect(() => {
-  //   console.log(checkAll);
-  //   let arr = searchServiceList
-  //   for(let i = 0; i < arr.length; i++) {
-  //     arr[i].check = checkAll;
-  //   }
-  //   console.log(arr);
-  //   setSearchServiceList(arr);
-  //   // setCheckCount(service.filter((e) => e.check).length);
-  // },[checkAll]);
-
-  // useEffect(() => {
-  //   if(checkCount === searchServiceList.length) setCheckAll(true);
-  //   else setCheckAll(false);
-  // },[checkCount])
 
   return (
     loading === true ? <div>Loading</div> :
@@ -226,7 +194,7 @@ export default function Search() {
                   placeholder="ハノイ、ダナン"
                   // value={name}
                 />
-                <button onClick={clearNameInput}>クリア</button>
+                <button className="clear-input-btn" onClick={clearNameInput}>クリア</button>
               </div>
             </div>
             <div className="service-search col">
@@ -251,8 +219,7 @@ export default function Search() {
                     id="name/address"
                     placeholder="サービスを検索"
                   />
-                  {/* <Checkbox item={{check: checkAll,}} setChecked={()=> setCheckAll(!checkAll) } /> */}
-                  <button onClick={() => setServiceName("")}>クリア</button>
+                  <button className="clear-input-btn" onClick={() => setServiceName("")}>クリア</button>
                 </div>
                 <div className="checkbox-list col">
                   {searchServiceList.length
@@ -263,6 +230,7 @@ export default function Search() {
                             item={item}
                             setVal={saveService}
                             index={index}
+                            length={17}
                           />
                         );
                       })
@@ -293,8 +261,6 @@ export default function Search() {
                     min={minRate}
                     max={maxRate}
                     pearling={true}
-                    // type="double"
-                    // color="black"
                   />
                   : <></>
                 }
@@ -310,7 +276,6 @@ export default function Search() {
                   {priceVal[0] === priceVal[1]
                     ? `${priceVal[0]}`
                     : `${priceVal[0]} - ${priceVal[1]}`}
-                  {/* <SvgIcon name="search-star" /> */}
                   {` VND`}
                 </div>
               </div>
@@ -319,12 +284,10 @@ export default function Search() {
                   className="slider"
                   onChange={setPrice}
                   value={priceVal}
-                  min={minPrice}
-                  max={maxPrice}
+                  min={minPrice.toFixed(1)}
+                  max={maxPrice.toFixed(1)}
                   step={gap}
                   pearling={true}
-                  // type="double"
-                  // color="black"
                 />
               </div>
             </div>
@@ -341,9 +304,7 @@ export default function Search() {
             <b>
               {" "}
               {name ? `${name}：` : ""}
-              {/* {searchRes} */}
               {searchRes ? `${searchRes.length}マッサージ部屋が一致しました` : 'Nothing can be found'}
-              {/* {searchRes.length}  */}
             </b>
           </div>
 
@@ -355,8 +316,8 @@ export default function Search() {
                     <div className="item-picture">
                       <SvgIcon width="100%" src={`${publicURL}${item.imageURL}`} />
                     </div>
-                    <div className="item-description row">
-                      <div className="col" style={{ gap: "12px", flex: "2" }}>
+                    <div className="item-information row">
+                      <div className="col item-col1" style={{ gap: "12px", flex: "2" }}>
                         <div className="item-name">
                           <b>{item.name}</b>
                         </div>
@@ -382,7 +343,7 @@ export default function Search() {
                               </div>
                             </div>
                             <div className="item-star">
-                              <div>{item.rating}</div>
+                              <div>{item.rating.toFixed(1)}</div>
                             </div>
                           </div>
                         </div>

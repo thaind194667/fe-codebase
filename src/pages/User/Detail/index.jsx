@@ -1,15 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
 import './Detail.scss'
 import { parlorList, parlorServiceList, commentList } from "@/hooks/FakeData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SvgIcon from "@/components/SvgIcon";
 import DetailService from "./DetailService";
 import DetailReview from "./DetailReview";
 import Header from "@/layouts/Header";
 import axios from "axios";
-import {apiURL, publicURL} from "@/hooks/hooks";
+import {apiURL, publicURL, scrollToSection} from "@/hooks/hooks";
 
 export default function Details() {
+
+  const section1 = useRef(null)
+  const section2 = useRef(null)
+  const section3 = useRef(null)
+  const section4 = useRef(null)
+  
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -61,14 +67,14 @@ export default function Details() {
       <Header />
 
       <div className="page-nav row">
-        <div className="nav-item cur-nav">詳細情報</div>
-        <div className="nav-item">画像ギャラリー</div>
-        <div className="nav-item">提供サービス</div>
-        <div className="nav-item">お客様のレビュー</div>
+        <div className="nav-item cur-nav" onClick={() => scrollToSection(section1)}>詳細情報</div>
+        <div className="nav-item" onClick={() => scrollToSection(section2)}>画像ギャラリー</div>
+        <div className="nav-item" onClick={() => scrollToSection(section3)}>提供サービス</div>
+        <div className="nav-item" onClick={() => scrollToSection(section4)}>お客様のレビュー</div>
       </div>
 
       <div className="page-body-details col">
-        <div className="row">
+        <div className="row" ref={section1}>
           <div className="parlor-info">
             <div className="parlor-name">
               {pageData.name}
@@ -86,7 +92,7 @@ export default function Details() {
         </div>
         {
           pageData.imgList ? 
-        <div className="parlor-images col">
+        <div className="parlor-images col" ref={section2}>
           <div className="row ">
             <div className="col" style={{flex: '1', }}>
                 <SvgIcon 
@@ -158,7 +164,7 @@ export default function Details() {
           <div className="description"> {pageData.description} </div>
           
         </div>
-        <div className="parlor-services col">
+        <div className="parlor-services col" ref={section3}>
           <div className="title"> 提供サービス  </div>
           <div className="service-list col">
             {
@@ -175,7 +181,7 @@ export default function Details() {
           </div>
         </div>
 
-        <div className="parlor-reviews col">
+        <div className="parlor-reviews col" ref={section4}>
           <div className="title"> ユーザーの評価  </div>
           {ratingList ? <DetailReview data={ratingList} /> : <></>}
           

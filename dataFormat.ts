@@ -115,3 +115,68 @@ type result3 = {
     code: Number,
     msg: String,    /// chuỗi thông báo kết quả
 }
+
+
+
+///////-- create new massage shop (post)
+/// input
+type input4 = {
+    name: String,
+    description: String,
+    location: String,
+    phoneNumber: String,
+    emailAddess: String, 
+    serviceList: [    /// mảng object
+        {
+            serviceName: String,
+            serviceDescription: String,
+            imageURL: String, 
+            priceList: [
+                {
+                    price: Number,
+                    durationTime: Number,
+                }
+            ]
+        }   
+    ],
+    imageLibrary: [ String ],  /// mảng string lưu image url
+    staffList: [  
+        {
+            name: String,
+            DOB: String,
+            gender: Number,
+            jlpt: Number,
+            certificateImage: String,
+            image: String,
+            hometown: String,
+        }
+    ]
+}
+/// output : cho ra message báo thành công hay thất bại j j đó
+
+
+///////-- get request list (get) (admin)
+/// output
+type output5 = [  /// mảng object
+    {
+        requestID: Number,
+        username: String,  /// username của user thực hiện request
+        facilityID: String,
+        createdDate: String,
+        requestStatus: Number,
+    }
+]
+
+
+///////-- accept shop create request (post) (admin)
+/// => set isActive	thành true
+type input6 = {
+    requestID: Number,
+}
+
+///////-- deny shop create request (post) (admin)
+/// => set isActive	thành false
+type input7 = {
+    requestID: Number,
+}
+

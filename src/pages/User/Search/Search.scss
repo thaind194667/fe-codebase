@@ -24,7 +24,7 @@ $pagination-color: #91b4e0;
                 text-decoration: none;
                 outline: none;
                 border: none;
-                font-weight: 500;
+                font-weight: 600;
                 font-size: 16px;
                 line-height: 19px;
             }
@@ -33,7 +33,6 @@ $pagination-color: #91b4e0;
         .search-title {
             gap: 14px;
             align-items: flex-end;
-            font-style: normal;
             font-weight: 600;
             font-size: 24px;
             line-height: 29px;
@@ -50,12 +49,10 @@ $pagination-color: #91b4e0;
                 gap: 13px;
 
                 .title {
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 18px;
+                    font-weight: 800;
+                    font-size: 19px;
                     line-height: 22px;
                     color: #000000;
-                    // flex: 1;
                 }
                 
             }
@@ -65,19 +62,17 @@ $pagination-color: #91b4e0;
 
                 .title {
                     flex: 1;
-                    // font-style: normal;
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 18px;
                     line-height: 22px;
 
                     color: #000000;
                 }
                 .check-count {
-                    font-style: normal;
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 16px;
                     line-height: 19px;
-                    color: #727272;
+                    color: #555555;
                 }
 
                 .checkbox-list {
@@ -106,10 +101,13 @@ $pagination-color: #91b4e0;
             .rate-search {
                 .title {
                     margin-bottom: 7px;
+                    font-weight: 600;
+                    font-size: 17px;
+                    line-height: 20px;
+                    color: #000000;
                 }
 
                 .slider {
-                    // top: 2px;
                     height: 2px;
                     background:  #D9D9D9;
                     margin-bottom: 20px;
@@ -122,7 +120,6 @@ $pagination-color: #91b4e0;
                         border: none;
                         border-radius: 8px;
                         background: black;
-                        // border: solid 1px;
                         margin-top: -3px;
                         background: #FF9900;
                     }
@@ -139,9 +136,12 @@ $pagination-color: #91b4e0;
             .price-search {
                 .title {
                     margin-bottom: 7px;
+                    font-weight: 600;
+                    font-size: 17px;
+                    line-height: 20px;
+                    color: #000000;
                 }
                 .slider {
-                    // top: 2px;
                     height: 2px;
                     background:  #D9D9D9;
                     margin-bottom: 30px;
@@ -154,7 +154,6 @@ $pagination-color: #91b4e0;
                         border: none;
                         border-radius: 8px;
                         background: black;
-                        // border: solid 1px;
                         margin-top: -3px;
                         background: #38AF00;
                     }
@@ -204,40 +203,52 @@ $pagination-color: #91b4e0;
             gap: 25px;
 
             .result-item {
+                height: 220px;
                 box-sizing: border-box;
                 gap: 16px;
                 background: #fefefe;
                 border: 1px solid #b4b4b4;
                 padding: 8px;
-
+                
                 .item-picture {
                     display: flex;
                     width: 300px;
                     max-height: 200px;
                 }
-
-                .item-description {
+                
+                .item-information {
                     flex: 1;
                     gap: 15px;
-
-                    .item-name {
-                        font-size: 24px;
-                        color: #d78100;
+                    
+                    
+                    .item-col1 {
+                        width: 365px;
+                        height: 190px;
+                        .item-name {
+                            font-size: 24px;
+                            color: #d78100;
+                        }
+                        
+                        .item-address {
+                            min-height: 45px;
+                            align-items: center;
+                            padding-left: 6px;
+                            margin-bottom: 8px;
+                            gap: 7px;
+                            color: #38af00;
+                            font-weight: bold;
+                            text-decoration: underline;
+                        }
+                        
+                        .item-introduce {
+                            padding-left: 6px;
+                            margin-bottom: 6px;
+                            overflow:hidden;
+                            word-break: break-all;
+                            text-overflow: clip;
+                        }
                     }
-
-                    .item-address {
-                        padding-left: 6px;
-                        margin-bottom: 8px;
-                        gap: 7px;
-                        color: #38af00;
-                        font-weight: bold;
-                        text-decoration: underline;
-                    }
-
-                    .item-introduce {
-                        padding-left: 6px;
-                        margin-bottom: 6px;
-                    }
+                    
 
                     .item-rate {
                         padding: 8px;
@@ -260,14 +271,15 @@ $pagination-color: #91b4e0;
                             align-items: end;
 
                             .review-count {
-                                font-weight: 500;
-                                font-size: 14px;
-                                line-height: 17px;
-                                color: #727272;
+                                // background-color: #ffe6e6;
+                                margin-top: 5px;
+                                font-weight: 800;
+                                font-size: 16px;
+                                line-height: 19px;
+                                color: #4d4d4d;
                             }
 
                             .review-text {
-                                font-style: normal;
                                 font-weight: 600;
                                 font-size: 24px;
                                 line-height: 29px;
@@ -278,7 +290,6 @@ $pagination-color: #91b4e0;
                     .item-details-link {
                         width: 14vw;
                         padding: 10px;
-                        font-style: normal;
                         font-weight: 600;
                         font-size: 24px;
                         line-height: 29px;

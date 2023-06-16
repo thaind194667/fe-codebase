@@ -2,7 +2,7 @@ import "./Checkbox.scss";
 import SvgIcon from "../SvgIcon";
 import {  useState } from "react";
 
-export default function CheckboxList({ item, setVal, index, setChecked }) {
+export default function CheckboxList({ item, setVal, index, setChecked, length }) {
 
     const [check, setCheck] = useState(item.check);
 
@@ -18,10 +18,11 @@ export default function CheckboxList({ item, setVal, index, setChecked }) {
         >
             <div
                 className={`checkbox-inside ${item.check ? "checked" : ""}`}
+                style={{width: `${length}px`, height: `${length}px`,}}
             >
                 {
                     item.check ? (
-                        <SvgIcon name="check" width={`18px`} height={`18px`} />
+                        <SvgIcon name="check" width={`${length}px`} height={`${length}px`} />
                     ) : (
                         ""
                     )

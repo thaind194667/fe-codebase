@@ -36,6 +36,11 @@ export default function Login() {
         }
 
     }
+    const waitForResponse = async () => {
+        await API
+        localStorage.setItem(respone)
+        window.location.reload();
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,9 +69,6 @@ export default function Login() {
             console.log(err);
         }
     }
-
-
-
 
     return (
         <>
