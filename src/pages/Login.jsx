@@ -8,6 +8,8 @@ import { useState } from "react"
 import { apiURL, publicURL } from "@/hooks/hooks";
 import axios from 'axios';
 import Login_popup from "./Popup/login_popup"
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export default function Login() {
     const [type, setType] = useState("password");
@@ -20,7 +22,7 @@ export default function Login() {
     const [popup, setPopup] = useState(false);
     const [displayPopup, setDisplayPopup] = useState(false);
     const [txtPopup, setTxtPopup] = useState('');
-
+    const navigate = useNavigate();
 
 
     const visiblePassword = () => {
@@ -46,7 +48,7 @@ export default function Login() {
             let response = await axios.post(`${apiURL}/login`, apiParams)
             if (response.data.userID >= 0) {
                 localStorage.setItem('role', response.data.userType);
-                
+                navigate("/");
                 //window.location.reload();
                 
             }

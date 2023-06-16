@@ -36,7 +36,7 @@ const Router = () => {
           !type ? <HomePage /> : 
             type === "user" ?   <User /> : 
             type === "admin" ?  <Admin /> : 
-                                <Owner />
+                               <Owner />
         } />
         {/* <Route path="/register" element={<Register />} /> */}
         {<Route path="/login" element={<Login />} />}

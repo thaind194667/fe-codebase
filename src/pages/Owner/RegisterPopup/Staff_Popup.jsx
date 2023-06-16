@@ -20,7 +20,7 @@ const Staff_Popup = (props) => {
 
   return (props.display) ? (
     <>
-      <div className="popup-overlay">
+      <div className="popup-overlay1">
         <div className="popup">
           <div className="content">
             <span className="ti-close" onClick={closePopup}>
