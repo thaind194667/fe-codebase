@@ -1,0 +1,200 @@
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #AAAAA4 !important;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 1;
+    overflow: scroll;
+
+
+    .popup {
+        margin: 10px auto;
+        padding: 10px;
+        background: #fff;
+        border-radius: 8px;
+        width: 50%;
+        position: relative;
+        transition: all 1s ease-in-out;
+
+
+        .content {
+            text-align: center;
+
+            .ti-close {
+                position: absolute;
+                right: 10px;
+                top: 3px;
+                :hover{
+                    cursor: pointer;
+                }
+            }
+
+            .popup-title {
+                font-size: 24px;
+                font-weight: 600;
+                border-bottom: 2px solid #CFCFCF;
+                margin-bottom: 20px;
+            }
+
+            .popup-form {
+                padding-top: 10px;
+                padding-left: 6px;
+                padding-bottom: 5px;
+                width: 90%;
+                height: auto;
+                border: 1px solid #CFCFCF;
+                margin: 0 auto;
+
+                .icon-img {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50px;
+                    border: 1px solid #8F8F8F;
+                    text-align: center;
+                    align-items: center;
+                    background: #8F8F8F;
+                    
+                    :hover{
+                        cursor: pointer;
+                    }
+                }
+
+                .pdt-10 {
+                    padding-top: 10px;
+                }
+
+                .avatar-col {
+                    width: 30%;
+                    margin-top: 10px;
+                    margin-right: 30px;
+
+                    .col-title {
+                        text-align: left;
+                        font-weight: 600;
+                        font-size: 18px;
+
+                        span {
+                            color: red;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .avatar {
+                        height: 151px;
+                        //padding: 20px 20px;
+                        background: rgba(225, 225, 225, 0.4);
+                        border-radius: 8px;
+                    }
+                }
+
+                .form-col {
+                    margin-top: 10px;
+                    width: 100%;
+
+                    .w-200 {
+                        width: 200px;
+                    }
+
+                    .w-80 {
+                        width: 80px
+                    }
+
+                    .mgr-30 {
+                        margin-right: 30px;
+                    }
+
+                    .form-input {
+                        width: 100%;
+                        text-align: left;
+                        margin-bottom: 10px;
+
+                        .form-title {
+                            font-weight: 600;
+                            font-size: 18px;
+
+                            span {
+                                color: red;
+                                font-weight: bold;
+                            }
+                        }
+
+                        .img-input {
+                            width: 95%;
+                            padding: 7px 7px;
+                            background: rgba(225, 225, 225, 0.4);
+                            border-radius: 8px;
+                            height: 200px;
+
+                        }
+
+                        .txt-input {
+                            width: 95%;
+                            font-size: 16px;
+                            padding: 5px 5px;
+                            border: 2px solid #B4B4B4;
+                            border-radius: 8px;
+
+                            .txt-placeholder {
+                                color: #AAAAA4;
+                            }
+
+
+                        }
+
+                        .form-radio {
+                            label {
+                                font-weight: 500;
+                                margin-right: 10px;
+                            }
+
+                            input[type='radio'] {
+                                height: 14px;
+                                width: 14px;
+                                vertical-align: middle;
+                                accent-color: #559901;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .btn {
+                width: 98%;
+                margin: 10px auto;
+
+                .space-between {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .btn-add {
+                        background-color: #559901;
+                        padding: 18px 34px;
+                        color: #fff;
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+
+                    .btn-cancel {
+                        background-color: #E2442E;
+                        padding: 18px 18px;
+                        color: #fff;
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+        }
+    }
+}
