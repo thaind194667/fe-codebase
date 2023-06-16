@@ -13,6 +13,7 @@ export default function Login() {
     const [type, setType] = useState("password");
     const [icon, setIcon] = useState(eyeOff);
     const [userID, setUserID] = useState(0);
+    const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [pwd, setPwd] = useState('');
     const [role, setRole] = useState('');
@@ -37,28 +38,28 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const apiParams = {
-            userName: userName,
+            email: email,
             password: pwd,
         }
 
-        // try {
-        //     let response = await axios.post(`${apiURL}/login`, apiParams)
-        //     if(response.data.userID >= 0){
-        //         console.log(response.data)
-        //     }
-        //     else{
+        try {
+            let response = await axios.post(`${apiURL}/login`, apiParams)
+            if (response.data.userID >= 0) {
+                localStorage.setItem('role', response.data.userType);
+                
+                //window.location.reload();
+                
+            }
+            else {
+                setDisplayPopup(true);
+                setTxtPopup('ログイン')
+            }
+            setUserName('');
+            setPwd('');
 
-        //     }
-        //     setUserName('');
-        //     setPwd('');
-
-        // }
-        // catch (err) {
-        //     console.log(err);
-        // }
-        if(userID === 0){
-            setDisplayPopup(true);
-            setTxtPopup('ログイン')
+        }
+        catch (err) {
+            console.log(err);
         }
     }
 
@@ -74,7 +75,7 @@ export default function Login() {
                     <div className="input-field">
                         <label htmlFor="mail-input" className="form-lable">メールアドレス</label>
                         <input type="email" id="mail-input" className="form-input" name="mail" placeholder="メールを入力してください" required
-                            value={userName} onChange={(e) => setUserName(e.target.value)}
+                            value={email} onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="input-field">
@@ -95,7 +96,7 @@ export default function Login() {
                     </div>
                 </form>
             </div>
-              <Login_popup display={displayPopup} setDisplay = {setDisplayPopup} txtPopup = {txtPopup}/>
+            <Login_popup display={displayPopup} setDisplay={setDisplayPopup} txtPopup={txtPopup} />
         </>
     )
 }

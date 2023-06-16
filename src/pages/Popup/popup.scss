@@ -8,39 +8,40 @@
     transition: opacity 500ms;
     visibility: visible;
     opacity: 1;
-}
 
-.popup {
-    margin: 100px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    width: 30%;
-    position: relative;
-    transition: all 1s ease-in-out;
+    .popup {
+        margin: 200px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 30%;
+        position: relative;
+        transition: all 1s ease-in-out;
 
 
-    .content {
-        text-align: center;
+        .content {
+            text-align: center;
 
-        .text-content {
-            font-size: 24px;
-            font-weight: 600;
-            .logo {
+            .text-content {
+                font-size: 24px;
+                font-weight: 600;
 
-                height: 28px;
-                width: 28px;
+                .logo {
+
+                    height: 28px;
+                    width: 28px;
+                }
             }
-        }
 
 
-        .btn-ok {
-            margin: 5px auto;
-            font-size: 20px;
-            background-color: #06D85F;
-            color: #fff;
-            padding: 0 8px;
-            display: block;
+            .btn-ok {
+                margin: 5px auto;
+                font-size: 20px;
+                background-color: #06D85F;
+                color: #fff;
+                padding: 0 8px;
+                display: block;
+            }
         }
     }
 }
