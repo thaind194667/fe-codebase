@@ -36,11 +36,6 @@ export default function Login() {
         }
 
     }
-    const waitForResponse = async () => {
-        await API
-        localStorage.setItem(respone)
-        window.location.reload();
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,15 +46,17 @@ export default function Login() {
 
         try {
             let response = await axios.post(`${apiURL}/login`, apiParams)
-            if (response.data.userID >= 0) {
-                localStorage.setItem('role', response.data.userType);
-                // navigate("/");
-                window.location.reload();
-                
-            }
-            else {
+            if (response.data.userID < 0) {
                 setDisplayPopup(true);
                 setTxtPopup('ログイン')
+            }
+            else {
+                console.log(response.data)
+                localStorage.setItem('role', response.data.userType)
+                localStorage.setItem('accessToken',response.data.accessToken);
+                localStorage.setItem('type_token', response.data.type_token);
+                
+                window.location.reload();
             }
             setUserName('');
             setPwd('');
