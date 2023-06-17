@@ -14,6 +14,7 @@ import HomePage from '@/pages/HomePage'
 // import Register from '@/pages/Register'
 
 let type = localStorage.getItem("role");
+
 // const useNavigateParams = () => {
 //   const navigate = useNavigate();
 //   const curUrl = useLocation().pathname;

@@ -9,7 +9,7 @@ const User = () =>{
     return (
         <Routes>
         <Route path="/" element={ <HomeUser />} />
-        
+        <Route path="/login" element={ <Navigate to={'/'} />} />
         <Route path='/search' element={<Search />} />
         <Route path='/detail/:id' element={<Detail />} />
         {/* <Route path="*" element={<Notfound></Notfound>}/> */}
