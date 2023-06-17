@@ -1,10 +1,37 @@
 import Header from "@/layouts/Header"
+import axios from 'axios'
+import {apiURL} from '@/hooks/hooks'
+
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 
 export default function HomePage() {
 
     const setRole = (role) => {
         localStorage.setItem('role', role);
         window.location.reload();
+    }
+
+    const handleSendImg = () => {
+        const fileList = document.getElementById('files').files;
+        const apiParams = new FormData();
+        apiParams.append('name', 'abc');
+        apiParams.append('fileList', fileList);
+        // {
+        //     name: 'abc', 
+        //     fileList : document.getElementById('files').files
+        // };
+
+        console.log(fileList);
+        axios.post(`${apiURL}/massage-facilities/store`, apiParams,
+            {
+                headers: {
+                "content-type": "multipart/form-data",
+                },
+            }
+        )
+        .then((res) => {
+            console.log(res);
+        })
     }
 
     return (
@@ -35,6 +62,10 @@ export default function HomePage() {
                     <button className="black home-btn" onClick={() => setRole('admin')}> Click to become admin </button>  : <></>
                 }
             </div>
+
+            <input type="file" name="file" id="files" multiple/>
+
+            <button onClick={handleSendImg}>Send</button>
             
         </>
     )
