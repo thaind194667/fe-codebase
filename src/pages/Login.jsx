@@ -37,6 +37,20 @@ export default function Login() {
 
     }
 
+    // const sendToken = async () => {
+    //     const headers = {
+    //         accept: 'application/json',
+    //         Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+    //     }
+
+    //     //set token in axios header
+    //     axios.get(`${apiURL}/user`, {
+    //         headers: headers
+    //     })
+    //     .then((res) => { console.log(res)})
+    //     .catch((err) => { })
+    // }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const apiParams = {
@@ -53,9 +67,9 @@ export default function Login() {
             else {
                 console.log(response.data)
                 localStorage.setItem('role', response.data.userType)
-                localStorage.setItem('accessToken',response.data.accessToken);
+                localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('type_token', response.data.type_token);
-                
+
                 window.location.reload();
             }
             setUserName('');
