@@ -6,7 +6,7 @@ import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 
-const Staff_Popup = (props) => {
+const Staff_Popup = ({display, setDisplay}) => {
 
   const [birthday, setBirthDay] = useState('');
   const [avatar, setAvatar] = useState();
@@ -48,16 +48,16 @@ const Staff_Popup = (props) => {
 
 
   const closePopup = () => {
-    props.setDisplay(false);
+    setDisplay(false);
   }
 
   const handle = () => {
-    props.setDisplay(false);
+    setDisplay(false);
   }
 
 
 
-  return (props.display) ? (
+  return (display) ? (
     <>
       <div className="staff-popup-overlay">
         <div className="popup">
@@ -179,8 +179,8 @@ const Staff_Popup = (props) => {
             </div>
             <div className="btn">
               <div className="space-between">
-                <button type='button' onClick={handle} className='btn-add'>保存する</button>
-                <button type='button' onClick={closePopup} className='btn-cancel' >キャンセル</button>
+                <button type='button' onClick={handle} className='green btn-add'>保存する</button>
+                <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
               </div>
             </div>
           </div>

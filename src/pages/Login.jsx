@@ -53,8 +53,8 @@ export default function Login() {
             let response = await axios.post(`${apiURL}/login`, apiParams)
             if (response.data.userID >= 0) {
                 localStorage.setItem('role', response.data.userType);
-                navigate("/");
-                //window.location.reload();
+                // navigate("/");
+                window.location.reload();
                 
             }
             else {

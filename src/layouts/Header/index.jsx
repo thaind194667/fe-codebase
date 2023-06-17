@@ -82,9 +82,15 @@ export default function Header() {
                                 <div className="user-dropdown-item">
                                     プロファイル
                                 </div>
-                                <div className="user-dropdown-item">
-                                    マッサージ部屋をリクエスト
-                                </div>
+                                {
+                                    localStorage.getItem('role') === 'user' ?
+                                    <div className="user-dropdown-item">
+                                        マッサージ部屋をリクエスト
+                                    </div> : 
+                                    <div className="user-dropdown-item">
+                                        私のマッサージ部屋
+                                    </div> 
+                                }
                                 <hr />
                                 <button className='logout-btn' onClick={logout}>ログアウト</button>
                             </div> 

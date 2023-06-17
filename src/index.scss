@@ -90,6 +90,25 @@ button {
     }
   }
 
+  &.green {
+    background: #559901;
+    color: #FFFFFF;
+    &:hover {
+      background:#FFFFFF;
+      color: #559901;
+      border: solid 1px;
+    }
+  }
+  &.red {
+    background: #E2442E;
+    color: #FFFFFF;
+    &:hover {
+      background:#FFFFFF;
+      color: #E2442E;
+      border: solid 1px;
+    }
+  }
+
   &:hover {
     cursor: pointer;
     opacity: 0.9;

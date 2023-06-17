@@ -38,8 +38,10 @@ const Router = () => {
             type === "admin" ?  <Admin /> : 
                                <Owner />
         } />
-        {/* <Route path="/register" element={<Register />} /> */}
-        {<Route path="/login" element={<Login />} />}
+        {
+          !type ?
+            <Route path="/login" element={<Login />} /> : <></>
+        }
       </Routes>
     </BrowserRouter>
   )

@@ -4,6 +4,9 @@
 }
 
 .staff-popup-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -13,7 +16,8 @@
     transition: opacity 500ms;
     visibility: visible;
     opacity: 1;
-    overflow: scroll;
+    z-index: 1000;
+    // overflow: scroll;
 
 
     .popup {
@@ -21,7 +25,7 @@
         padding: 10px;
         background: #fff;
         border-radius: 8px;
-        width: 50%;
+        width: 60vw;
         position: relative;
         transition: all 1s ease-in-out;
 
@@ -47,12 +51,13 @@
             }
 
             .popup-form {
-                padding-top: 10px;
-                padding-left: 6px;
-                padding-bottom: 5px;
-                width: 90%;
+                padding: 10px 10% ;
+                // padding-top: 10px;
+                // padding-left: 6px;
+                // padding-bottom: 5px;
+                width: 80%;
                 height: auto;
-                border: 1px solid #CFCFCF;
+                // border: 1px solid #CFCFCF;
                 margin: 0 auto;
 
                 .icon-img {
@@ -216,7 +221,7 @@
                         .txt-input {
                             width: 95%;
                             font-size: 16px;
-                            padding: 5px 5px;
+                            padding: 8px;
                             border: 2px solid #B4B4B4;
                             border-radius: 8px;
 
@@ -246,28 +251,34 @@
             }
 
             .btn {
-                width: 98%;
-                margin: 10px auto;
+                padding: 20px;
+                // width: 100%;
 
                 .space-between {
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
 
+                    button {
+                        width: 160px;
+                    }
+
                     .btn-add {
-                        background-color: #559901;
+                        // background-color: #559901;
                         padding: 18px 34px;
-                        color: #fff;
+                        // color: #fff;
                         font-weight: 600;
                         font-size: 18px;
+                        border-radius: 8px;
                     }
 
                     .btn-cancel {
-                        background-color: #E2442E;
+                        // background-color: #E2442E;
                         padding: 18px 18px;
-                        color: #fff;
+                        // color: #fff;
                         font-weight: 600;
                         font-size: 18px;
+                        border-radius: 8px;
                     }
                 }
             }
