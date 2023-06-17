@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./staffpopup.scss"
 import { DatePicker } from 'antd';
 import { Icon } from 'react-icons-kit'
@@ -9,6 +9,43 @@ import { close } from 'react-icons-kit/fa/close'
 const Staff_Popup = (props) => {
 
   const [birthday, setBirthDay] = useState('');
+  const [avatar, setAvatar] = useState();
+  const [jlptImage, setJlptImage] = useState();
+
+
+  useEffect(() => {
+    return () => {
+      avatar && URL.revokeObjectURL(avatar.url);
+    }
+  }, [avatar])
+
+  useEffect(() => {
+    return () => {
+      jlptImage && URL.revokeObjectURL(jlptImage.url);
+    }
+  }, [jlptImage])
+
+
+  const handleUpLoadImg = (e) => {
+    const file = e.target.files[0];
+    file.url = (URL.createObjectURL(file));
+    setAvatar(file);
+  }
+
+  const handleUpLoadJLPTImg = (e) => {
+    const file = e.target.files[0];
+    file.url = (URL.createObjectURL(file));
+    setJlptImage(file);
+  }
+
+  const upLoadAvatarInput = () => {
+    document.querySelector(".avatar-input").click()
+  }
+
+  const upLoadJlptImageInput = () => {
+    document.querySelector(".jlpt-input").click()
+  }
+
 
   const closePopup = () => {
     props.setDisplay(false);
@@ -18,9 +55,11 @@ const Staff_Popup = (props) => {
     props.setDisplay(false);
   }
 
+
+
   return (props.display) ? (
     <>
-      <div className="popup-overlay1">
+      <div className="staff-popup-overlay">
         <div className="popup">
           <div className="content">
             <span className="ti-close" onClick={closePopup}>
@@ -35,10 +74,18 @@ const Staff_Popup = (props) => {
                   <div className='col-title'>
                     アバター <span>*</span>
                   </div>
+                  <input type="file" className='avatar-input' onChange={handleUpLoadImg} hidden />
                   <div className='avatar center-item'>
-                    <span className='icon-img'>
-                      <Icon icon={image} />
-                    </span>
+                    {avatar ?
+                      <div className='img-upload'>
+                        <img src={avatar.url} onClick={upLoadAvatarInput} alt={"アバター"} />
+                        <span className='tool-text'>変える</span>
+                      </div>
+                      :
+                      <span className='icon-img' onClick={upLoadAvatarInput}>
+                        <Icon icon={image} />
+                      </span>
+                    }
                   </div>
                 </div>
                 <div className=' form-col col'>
@@ -112,10 +159,18 @@ const Staff_Popup = (props) => {
                     <div className='form-title'>
                       証明書のイメージ <span>*</span>
                     </div>
+                    <input type="file" className='jlpt-input' onChange={handleUpLoadJLPTImg} hidden />
                     <div className='img-input center-item'>
-                      <div className='icon-img'>
-                        <Icon icon={image} />
-                      </div>
+                      {jlptImage ?
+                        <div className='img-upload'>
+                          <img src={jlptImage.url} onClick={upLoadJlptImageInput} alt={"アバター"} />
+                          <span className='tool-text'>変える</span>
+                        </div>
+                        :
+                        <span className='icon-img' onClick={upLoadJlptImageInput}>
+                          <Icon icon={image} />
+                        </span>
+                      }
                     </div>
 
                   </div>
