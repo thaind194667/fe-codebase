@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import axios from 'axios'
 import './index.scss'
 
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
