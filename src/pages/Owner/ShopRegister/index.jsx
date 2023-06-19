@@ -33,7 +33,9 @@ export default function ShopRegister() {
     });
 
     const [staffList, setStaffList] = useState([]);
-    const [imgList, setImgList] = useState([]);
+    const [imgList, setImgList] = useState({
+        files : FileList, url: []
+    });
     const [serviceList, setServiceList] = useState([]);
 
     const [openImgPopup, setOpenImg] = useState(false);
@@ -55,8 +57,8 @@ export default function ShopRegister() {
     }
 
     useEffect(() => {
-        if(!imgList.length)
-            imgList.push("add");
+        if(!imgList['url'].length)
+            imgList['url'].push("add");
     }, [])
 
     // useEffect(() => {
@@ -93,8 +95,8 @@ export default function ShopRegister() {
 
     const postData = () => {
         console.log(imgList);
-        const arr = [...imgList];
-        arr.pop();
+        const arr = {...imgList};
+        arr['url'].pop();
         const apiParams = {
             // token: localStorage.getItem('accessToken'),
             name: shopData.name,
@@ -102,7 +104,7 @@ export default function ShopRegister() {
             location: shopData.address,
             phoneNumber: shopData.phone,
             emailAddress: shopData.email,
-            imageLibrary: arr,
+            imageLibrary: arr['files'],
             // staffList,
             // serviceList,
         }
@@ -276,7 +278,7 @@ export default function ShopRegister() {
                             <></>}
 
                         <div className="form-notice">
-                            {imgList.length - 1}枚の写真が選択されています
+                            {imgList['url'].length - 1}枚の写真が選択されています
                         </div>
 
                         <div>
