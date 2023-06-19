@@ -52,8 +52,8 @@ export default function Pagination({
   return (
     <>
       {maxItem ? (
-        <div className="pagination">
-          <div className="btn-list">
+        <div className="pagination row">
+          <div className="btn-list row">
             <button
               disabled={currentPage === 1}
               onClick={() => changePage(currentPage - 1)}

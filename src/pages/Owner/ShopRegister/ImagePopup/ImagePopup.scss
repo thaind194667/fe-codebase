@@ -18,8 +18,8 @@
                 justify-content: center;
                 align-items: center;
                 font-weight: 600;
-                font-size: 24px;
-                line-height: 29px;
+                font-size: 25px;
+                line-height: 28px;
             }
             .popup-close-btn {
                 display: flex;
@@ -37,8 +37,65 @@
             gap: 10px;
             .img-list-choose {
                 width: 100%;
-                height: 100%;
-                border: solid 1px;
+                height: 580px;
+                overflow: scroll;
+                .img-row {
+                    height: 200px;
+                    min-height: 200px;
+                    padding: 0 6px;
+                    .img-item {
+                        flex : 1;
+                        position: relative;
+                        padding: 6px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:hover {
+                            .img-handle-btn {
+                                display: flex;
+                            }
+                        }
+                        .add-img {
+                            width: 100%;
+                            height: 100%;
+                            justify-content: center;
+                            align-items: center;
+                            border: solid 0.5px rgba(102, 102, 102, 0.63);
+                            border-radius: 8px;
+                            background: rgba(213, 213, 213, 0.26);
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                        .main-img {
+                            position: absolute;
+                            top: 5px;
+                            left: 5px;
+                            padding: 4px;
+                            background-color: rgba(255, 255, 255, 1);
+                            font-weight: 800;
+                            font-size: 14px;
+                        }
+                        .img-handle-btn {
+                            display: none;
+                            // background-color: gray;
+                            position: absolute;
+                            right: 5px;
+                            top: 5px;
+                            gap: 5px;
+                            .img-btn {
+                                &:hover {cursor: pointer;}
+                            }
+                        }
+                        img.image-item {
+                            width:100%;
+                            height:100%;
+                            border-radius: 8px;
+                            border: solid 0.5px rgba(102, 102, 102, 0.63);
+                            // object-fit: fill;
+                        }
+                    }
+                }
             }
         }
 
@@ -46,8 +103,8 @@
             button {
                 $margin: 100px;
                 font-weight: 600;
-                font-size: 20px;
-                line-height: 24px;
+                font-size: 24px;
+                line-height: 28px;
                 border-radius: 8px;
                 padding: 10px 30px;
                 &.popup-save-confirm {

@@ -1,7 +1,4 @@
 .page {
-    display: flex;
-    flex-direction: column;
-    // 
     background: #FFFFFF;
     border-collapse: collapse;
     $bodyPadding: 8%;
@@ -36,8 +33,6 @@
     
     .page-body-details {
         background: #FFFFFF;
-        display: flex;
-        flex-direction: column;
         gap: 30px;
         padding: 0px $bodyPadding;
         padding-top: 10px;
@@ -46,8 +41,6 @@
         min-height: calc(100% - $bodyPadding * 2 - 10vh);
 
         .parlor-info {
-            display: flex;
-            flex-direction: column;
             flex: 1;
             gap: 15px;
             .parlor-name {
@@ -84,18 +77,13 @@
             display: flex;
             gap: 20px;
             .row {
-                display: flex;
-                flex-direction: row;
                 gap: 15px;
                 flex: 1;
                 padding: 0px;
             }
             .col {
-                display: flex;
-                flex-direction: column;
                 justify-content: center;
                 gap: 15px;
-                // align-items: center;
                 flex: 1;
             }
             .main-img {

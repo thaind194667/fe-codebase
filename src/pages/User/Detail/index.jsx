@@ -63,7 +63,7 @@ export default function Details() {
 
   return (
     pageData ? 
-    <div className="page">
+    <div className="page col">
       <Header />
 
       <div className="page-nav row">
@@ -75,7 +75,7 @@ export default function Details() {
 
       <div className="page-body-details col">
         <div className="row" ref={section1}>
-          <div className="parlor-info">
+          <div className="parlor-info col">
             <div className="parlor-name">
               {pageData.name}
             </div>
@@ -110,7 +110,7 @@ export default function Details() {
 
             <div className="col" style={{flex: '2', }}>
               <SvgIcon 
-                src={`${publicURL}${pageData.imgMain}`}
+                src={`${publicURL}${pageData.image_url}`}
                 alt="main img" 
                 className="main-img" />
             </div>

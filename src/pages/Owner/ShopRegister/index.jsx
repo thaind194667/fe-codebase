@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import Checkbox from '@/components/Checkbox'
 import ImagePopup from './ImagePopup'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import {apiURL, headersWithToken} from '@/hooks/hooks'
 
 const defaultErrorState = {
     name: false,
@@ -30,14 +32,8 @@ export default function ShopRegister() {
         description: '',
     });
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
-    const [description, setDescription] = useState('');
-
     const [staffList, setStaffList] = useState([]);
-    const [imgList, setImgList] = useState([1, 2, 3, 4, 5, 6, 7, 'add']);
+    const [imgList, setImgList] = useState([]);
     const [serviceList, setServiceList] = useState([]);
 
     const [openImgPopup, setOpenImg] = useState(false);
@@ -59,25 +55,32 @@ export default function ShopRegister() {
     }
 
     useEffect(() => {
-        if(openImgPopup) 
-            document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'hidden'
-        else
-            document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'auto'
-    }, [openImgPopup])
+        if(!imgList.length)
+            imgList.push("add");
+    }, [])
+
+    // useEffect(() => {
+    //     if(openImgPopup) 
+    //         document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'hidden'
+    //     else
+    //         document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'auto'
+    // }, [openImgPopup])
+
+    // useEffect(() => {
+    //     console.log(shopData);
+    // }, [shopData])
 
     useEffect(() => {
-        console.log(name);
-    }, [name])
+        setError(   (prev) => ( { ...prev, imgList: false, } )  )
+    }, [imgList])
 
     useEffect(() => {
-        console.log(shopData);
-    }, [shopData])
+        setError(   (prev) => ( { ...prev, staffList: false, } )  )
+    }, [staffList])
 
-    // useState(() => {
-    //     if(JSON.stringify(error) === JSON.stringify(defaultErrorState)) {
-    //         alert("もう一度確認してすべてのフィールドに入力してください")
-    //     }
-    // }, [error])
+    useEffect(() => {
+        setError(   (prev) => ( { ...prev, serviceList: false, } )  )
+    }, [serviceList])
 
     const setDataValue = (value, field) => {
         setData((prev) => ({
@@ -89,66 +92,80 @@ export default function ShopRegister() {
     }
 
     const postData = () => {
-
+        console.log(imgList);
+        const arr = [...imgList];
+        arr.pop();
+        const apiParams = {
+            // token: localStorage.getItem('accessToken'),
+            name: shopData.name,
+            description: shopData.description,
+            location: shopData.address,
+            phoneNumber: shopData.phone,
+            emailAddress: shopData.email,
+            imageLibrary: arr,
+            // staffList,
+            // serviceList,
+        }
+        console.log(apiParams);
+        axios.post(`${apiURL}/massage-facilities/store`, apiParams, {
+            headers: headersWithToken,
+        })
+        .then((res) => {
+            alert(res);
+        })
+        alert("Done");
     }
-
 
     const checkData = () => {
         let errorCount = 0;
-        // defaultErrorState.forEach((key) => {
-            
-        // })
-        // for((item, index) in defaultErrorState) {
-
+        // setError(defaultErrorState);
+        // if(!confirm) {
+        //     setError(   (prev) => ( { ...prev, confirm: true, } )  )
+        //     errorCount++;
         // }
-        setError(defaultErrorState);
-        if(!confirm) {
-            setError(   (prev) => ( { ...prev, confirm: true, } )  )
-            errorCount++;
-        }
-        if(!shopData.name) {
-            setError(   (prev) => ( { ...prev, name: true, } )  )
-            errorCount++;
-        }
-        if(!shopData.email) {
-            setError(   (prev) => ( { ...prev, email: true, } )  )
-            errorCount++;
-        }
-        if(!shopData.address) {
-            setError(   (prev) => ( { ...prev, address: true, } )  )
-            errorCount++;
-        }
-        if(!shopData.phone) {
-            setError(   (prev) => ( { ...prev, phone: true, } )  )
-            errorCount++;
-        }
-        if(!shopData.description) {
-            setError(   (prev) => ( { ...prev, description: true, } )  )
-            errorCount++;
-        }
-        if(!staffList.length) {
-            setError(   (prev) => ( { ...prev, staffList: true, } )  )
-            errorCount++;
-        }
-        if(!imgList.length) {
-            setError(   (prev) => ( { ...prev, imgList: true, } )  )
-            errorCount++;
-        }
-        if(!serviceList.length) {
-            setError(   (prev) => ( { ...prev, serviceList: true, } )  )
-            errorCount++;
-        }
+        // for(const key in shopData)  {
+        //     // console.log(key, shopData[key]);
+        //     if(!shopData[key]) {
+        //         setError(   (prev) => ( { ...prev, [key]: true, } )  );
+        //         errorCount++;
+        //     }
+        // }
+        // // if(!staffList.length) {
+        // //     setError(   (prev) => ( { ...prev, staffList: true, } )  )
+        // //     errorCount++;
+        // // }
+        // if(imgList.length === 1) {
+        //     setError(   (prev) => ( { ...prev, imgList: true, } )  )
+        //     errorCount++;
+        // }
+        // if(!serviceList.length) {
+        //     setError(   (prev) => ( { ...prev, serviceList: true, } )  )
+        //     errorCount++;
+        // }
         if(errorCount) {
             alert("もう一度確認してすべてのフィールドに入力してください");
             return;
         }
-        else alert("Done");
+        else 
+            // alert('a');
+            postData();
     }
 
     const imgListHandle = (data) => {
-
+        setImgList(data);
+        console.log(data);
+        setOpenImg(false);
     }
 
+    const staffListHandle = (data) => {
+        setStaffList(data);
+        setOpenStaff(false);
+    }
+
+    const serviceListHandle = (data) => {
+        setServiceList(data);
+        setOpenService(false);
+    }
 
     return (
         <>
@@ -218,7 +235,7 @@ export default function ShopRegister() {
                                         placeholder='電話番号を入力してください'
                                         value={shopData.phone} 
                                         onChange={(e) => setDataValue(e.target.value, 'phone')}/>
-                                        {error.phone ? 
+                                    {error.phone ? 
                                         <span className='error'>電話番号は必須です！</span> : 
                                         <></>}
                                 </div>
@@ -259,7 +276,7 @@ export default function ShopRegister() {
                             <></>}
 
                         <div className="form-notice">
-                            {imgList.length}枚の写真が選択されています
+                            {imgList.length - 1}枚の写真が選択されています
                         </div>
 
                         <div>

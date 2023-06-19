@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ReviewCard.scss";
-import SvgIcon from "@/components/SvgIcon.jsx";
+import SvgIcon from "@/components/SvgIcon";
 import { apiURL, publicURL } from "@/hooks/hooks";
 
 export default function ReviewCard({ data, status, submitReview }) {

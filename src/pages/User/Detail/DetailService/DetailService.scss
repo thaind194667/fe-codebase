@@ -1,7 +1,4 @@
 .service-info {
-    display: flex;
-    flex-direction: row;
-    // width: 100%;
     max-width: 100%;
     gap: 12px;
     background: #FFFFFF;
@@ -10,9 +7,6 @@
     padding: 15px;
 
     .service-name {
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
         width: 25vw;
         min-width: fit-content;
         margin-bottom: 15px;
