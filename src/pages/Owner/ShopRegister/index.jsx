@@ -1,8 +1,52 @@
 import './ShopRegister.scss'
 import Header from '@/layouts/Header'
 import SvgIcon from '@/components/SvgIcon'
+import { useState, useEffect } from 'react'
+import Checkbox from '@/components/Checkbox'
+import ImagePopup from './ImagePopup'
+import { useNavigate } from 'react-router-dom'
+
+const defaultErrorState = {
+    name: false,
+    email: false,
+    address: false,
+    phone: false,
+    description: false,
+    staffList: false,
+    imgList: false,
+    serviceList: false,
+    confirm: false,
+}
 
 export default function ShopRegister() {
+
+    const navigate = useNavigate();
+
+    const [shopData, setData] = useState({
+        name: '',
+        email: '',
+        address: '',
+        phone: '',
+        description: '',
+    });
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [description, setDescription] = useState('');
+
+    const [staffList, setStaffList] = useState([]);
+    const [imgList, setImgList] = useState([1, 2, 3, 4, 5, 6, 7, 'add']);
+    const [serviceList, setServiceList] = useState([]);
+
+    const [openImgPopup, setOpenImg] = useState(false);
+    const [openStaffPopup, setOpenStaff] = useState(false);
+    const [openServicePopup, setOpenService] = useState(false);
+
+    const [confirm, setConfirm] = useState(false);
+
+    const [error, setError] = useState(defaultErrorState);
 
     const setTextareaHeight = (e) => {
         const textarea = document.getElementById("shop-info-description");
@@ -12,6 +56,97 @@ export default function ShopRegister() {
             textarea.style.height = '300px';
         else 
             textarea.style.height = `${scHeight}px`;
+    }
+
+    useEffect(() => {
+        if(openImgPopup) 
+            document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'hidden'
+        else
+            document.getElementsByClassName('page-body-shop-register')[0].style.overflow = 'auto'
+    }, [openImgPopup])
+
+    useEffect(() => {
+        console.log(name);
+    }, [name])
+
+    useEffect(() => {
+        console.log(shopData);
+    }, [shopData])
+
+    // useState(() => {
+    //     if(JSON.stringify(error) === JSON.stringify(defaultErrorState)) {
+    //         alert("もう一度確認してすべてのフィールドに入力してください")
+    //     }
+    // }, [error])
+
+    const setDataValue = (value, field) => {
+        setData((prev) => ({
+            ...prev,
+            [field]: value,
+            })
+        );
+        setError(   (prev) => ( { ...prev, [field]: false, } )  );
+    }
+
+    const postData = () => {
+
+    }
+
+
+    const checkData = () => {
+        let errorCount = 0;
+        // defaultErrorState.forEach((key) => {
+            
+        // })
+        // for((item, index) in defaultErrorState) {
+
+        // }
+        setError(defaultErrorState);
+        if(!confirm) {
+            setError(   (prev) => ( { ...prev, confirm: true, } )  )
+            errorCount++;
+        }
+        if(!shopData.name) {
+            setError(   (prev) => ( { ...prev, name: true, } )  )
+            errorCount++;
+        }
+        if(!shopData.email) {
+            setError(   (prev) => ( { ...prev, email: true, } )  )
+            errorCount++;
+        }
+        if(!shopData.address) {
+            setError(   (prev) => ( { ...prev, address: true, } )  )
+            errorCount++;
+        }
+        if(!shopData.phone) {
+            setError(   (prev) => ( { ...prev, phone: true, } )  )
+            errorCount++;
+        }
+        if(!shopData.description) {
+            setError(   (prev) => ( { ...prev, description: true, } )  )
+            errorCount++;
+        }
+        if(!staffList.length) {
+            setError(   (prev) => ( { ...prev, staffList: true, } )  )
+            errorCount++;
+        }
+        if(!imgList.length) {
+            setError(   (prev) => ( { ...prev, imgList: true, } )  )
+            errorCount++;
+        }
+        if(!serviceList.length) {
+            setError(   (prev) => ( { ...prev, serviceList: true, } )  )
+            errorCount++;
+        }
+        if(errorCount) {
+            alert("もう一度確認してすべてのフィールドに入力してください");
+            return;
+        }
+        else alert("Done");
+    }
+
+    const imgListHandle = (data) => {
+
     }
 
 
@@ -30,8 +165,14 @@ export default function ShopRegister() {
                                 <div className="form-title">
                                     名前 <span className='required-field'>*</span>
                                 </div>
-                                <div className="form-input">
-                                    <input type="text" placeholder='名前を入力してください'/>
+                                <div className="form-input col">
+                                    <input type="text" required
+                                        placeholder='名前を入力してください' 
+                                        value={shopData.name} 
+                                        onChange={(e) => setDataValue(e.target.value, 'name')}/>
+                                    {error.name ? 
+                                        <span className='error'>名前は必須です！</span> : 
+                                        <></>}
                                 </div>
                             </div>
 
@@ -39,8 +180,15 @@ export default function ShopRegister() {
                                 <div className="form-title">
                                     イーメール <span className='required-field'>*</span>
                                 </div>
-                                <div className="form-input">
-                                    <input type="text" placeholder='イーメールを入力してください'/>
+                                <div className="form-input col">
+                                    <input type="text" 
+                                        placeholder='イーメールを入力してください'
+                                        value={shopData.email} 
+                                        onChange={(e) => setDataValue(e.target.value, 'email')}
+                                        />
+                                    {error.email ? 
+                                        <span className='error'>イーメールは必須です！</span> : 
+                                        <></>}
                                 </div>
                             </div>
                         </div>
@@ -50,8 +198,14 @@ export default function ShopRegister() {
                                 <div className="form-title">
                                     アドレス <span className='required-field'>*</span>
                                 </div>
-                                <div className="form-input">
-                                    <input type="text" placeholder='アドレスを入力してください'/>
+                                <div className="form-input col">
+                                    <input type="text" 
+                                        placeholder='アドレスを入力してください'
+                                        value={shopData.address} 
+                                        onChange={(e) => setDataValue(e.target.value, 'address')}/>
+                                    {error.address ? 
+                                        <span className='error'>アドレスは必須です！</span> : 
+                                        <></>}
                                 </div>
                             </div>
 
@@ -59,8 +213,14 @@ export default function ShopRegister() {
                                 <div className="form-title">
                                     電話番号 <span className='required-field'>*</span>
                                 </div>
-                                <div className="form-input">
-                                    <input type="text" placeholder='電話番号を入力してください'/>
+                                <div className="form-input col">
+                                    <input type="text" 
+                                        placeholder='電話番号を入力してください'
+                                        value={shopData.phone} 
+                                        onChange={(e) => setDataValue(e.target.value, 'phone')}/>
+                                        {error.phone ? 
+                                        <span className='error'>電話番号は必須です！</span> : 
+                                        <></>}
                                 </div>
                             </div>
                         </div>
@@ -70,15 +230,20 @@ export default function ShopRegister() {
                                 <div className="form-title">
                                     説明 <span className='required-field'>*</span>
                                 </div>
-                                <div className="form-input">
+                                <div className="form-input col">
                                     <textarea 
                                     name="description" 
                                     id="shop-info-description" 
                                     placeholder='説明を入力してください'
                                     onKeyUp={setTextareaHeight}
+                                    value={shopData.description} 
+                                    onChange={(e) => setDataValue(e.target.value, 'description')}
                                     >
 
                                     </textarea>
+                                    {error.description ? 
+                                        <span className='error'>説明は必須です！</span> : 
+                                        <></>}
                                     {/* <input type="text" placeholder='説明を入力してください'/> */}
                                 </div>
                             </div>
@@ -89,9 +254,33 @@ export default function ShopRegister() {
                         <div className="form-title">
                             画像ギャラリー <span className='required-field'>*</span>
                         </div>
+                        {error.imgList ? 
+                            <span className='error'>画像ギャラリーは少なくとも1つが含まれています！</span> : 
+                            <></>}
 
                         <div className="form-notice">
-                            3枚の写真が選択されています
+                            {imgList.length}枚の写真が選択されています
+                        </div>
+
+                        <div>
+                            <button className='black form-btn row' onClick={() => setOpenImg(true)}>
+                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus"/>
+                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover"/>
+                                <div style={{marginLeft: '36px'}}>追加</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="shop-staff-form col">
+                        <div className="form-title">
+                            スタッフ <span className='required-field'>*</span>
+                        </div>
+                        {error.staffList ? 
+                            <span className='error'>スタッフは少なくとも１人が含まれています！</span> : 
+                            <></>}
+
+                        <div className="staff-list">
+
                         </div>
 
                         <div>
@@ -103,11 +292,64 @@ export default function ShopRegister() {
                         </div>
                     </div>
 
-                    <div className="shop-staff-form">
-                        
+                    <div className="shop-service-form col">
+                        <div className="form-title">
+                            提供サービス <span className='required-field'>*</span>
+                        </div>
+                        {error.serviceList ? 
+                            <span className='error'>提供サービスは少なくとも1つが含まれています！</span> : 
+                            <></>}
+
+                        <div className="service-list">
+
+                        </div>
+
+                        <div>
+                            <button className='black form-btn row'>
+                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus"/>
+                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover"/>
+                                <div style={{marginLeft: '36px'}}>追加</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="col" >
+                        <div className=' confirm-field row' onClick={() => {
+                            setConfirm(!confirm);
+                            setError(   (prev) => ( { ...prev, confirm: false, } )  )
+                        } }>
+                            <Checkbox 
+                                item={{
+                                    check: confirm,
+                                }}
+                                length={20}/>
+                            上記の情報が真実であることを保証します
+                        </div>
+                        {error.confirm ? 
+                            <span className='error'>保証は必須です！</span> : 
+                            <></>}
+                    </div>
+
+                    <div className="btn-field row">
+                        <button 
+                            className="green request-confirm"
+                            onClick={checkData}
+                        >
+                            リクエスト
+                        </button>
+                        <div style={{flex: '1'}}></div>
+                        <button 
+                            className="red cancel-confirm"
+                            onClick={() => navigate('/')}
+                        >
+                            キャンセル
+                        </button>
                     </div>
                 </div>
             </div>
+            { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
+            { openStaffPopup ? 'staff' : '0'}
+            { openServicePopup ? 'service' : '0'}
         </>
     )
 }

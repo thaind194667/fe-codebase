@@ -1,7 +1,9 @@
 import './Header.scss'
 import SvgIcon from '@/components/SvgIcon'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import {apiURL, publicURL} from '@/hooks/hooks'
+import axios from 'axios';
 
 const notiList = [
     "Notification1",
@@ -20,6 +22,33 @@ export default function Header() {
     const [openUserTab, setOpenUser] = useState(false);
     const [openNoti, setOpenNoti] = useState(false);
 
+    const [userInfo, setUserInfo] = useState({});
+
+    const getUserData = () => {
+        // axios.get();
+        const headers = {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+        }
+
+        //set token in axios header
+        axios.get(`${apiURL}/user`, {
+            headers: headers
+        })
+        .then((res) => { 
+            setUserInfo({
+                username: res.data.userName,
+                avatar: res.data.userAvatar,
+            })
+            console.log(res)
+        })
+        .catch((err) => { })
+    }
+
+    useEffect(() => {
+        getUserData();
+    }, [])
+
     const logout = () => {
         localStorage.removeItem('role');
         navigate('/')
@@ -30,7 +59,6 @@ export default function Header() {
     //     setOpenUser(false);
     //     setOpenNoti(true);
     // }
-    // const open
 
     return (
         <div className="page-header row">
@@ -70,10 +98,10 @@ export default function Header() {
                                 if(openNoti) setOpenNoti(false)
                                 setOpenUser(!openUserTab)
                             }}>
-                            <div className="user-avatar">
+                            <div className="user-avatar" style={{backgroundImage: `url(${publicURL}${userInfo.avatar})`}}>
                             </div>
                             <div className="user-name row" >
-                                Duc Anh
+                                {userInfo.username}
                                 <SvgIcon name={openUserTab ? 'header-pullup' : 'header-pulldown'} />
                             </div>
                         </div>
@@ -92,7 +120,7 @@ export default function Header() {
                                     </div> 
                                 }
                                 <hr />
-                                <button className='logout-btn' onClick={logout}>ログアウト</button>
+                                <button className='green logout-btn' onClick={logout}>ログアウト</button>
                             </div> 
                             : <></>}
                         { openNoti ? 
