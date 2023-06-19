@@ -6,24 +6,31 @@ import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 
-const Staff_Popup = ({display, setDisplay}) => {
+const Staff_Popup = ({data, display, setDisplay}) => {
 
-  const [birthday, setBirthDay] = useState('');
-  const [avatar, setAvatar] = useState();
-  const [jlptImage, setJlptImage] = useState();
+  const DefaultStaffSex = 1
+  const DefaulJLPT = 2
+
+  const [staffName, setStaffName] = useState('')
+  const [staffSex, setStaffSex] = useState(DefaultStaffSex)
+  const [birthday, setBirthDay] = useState('')
+  const [jlpt, setJlpt] = useState(DefaulJLPT)
+  const [hometown, setHometown] = useState('')
+  const [avatar, setAvatar] = useState()
+  const [jlptImage, setJlptImage] = useState()
 
 
-  useEffect(() => {
-    return () => {
-      avatar && URL.revokeObjectURL(avatar.url);
-    }
-  }, [avatar])
+  // useEffect(() => {
+  //   return () => {
+  //     avatar && URL.revokeObjectURL(avatar.url);
+  //   }
+  // }, [avatar])
 
-  useEffect(() => {
-    return () => {
-      jlptImage && URL.revokeObjectURL(jlptImage.url);
-    }
-  }, [jlptImage])
+  // useEffect(() => {
+  //   return () => {
+  //     jlptImage && URL.revokeObjectURL(jlptImage.url);
+  //   }
+  // }, [jlptImage])
 
 
   const handleUpLoadImg = (e) => {
@@ -48,10 +55,24 @@ const Staff_Popup = ({display, setDisplay}) => {
 
 
   const closePopup = () => {
+    setAvatar()
+    setJlptImage()
     setDisplay(false);
   }
 
-  const handle = () => {
+  const handleSubmit = () => {
+    const staffInfor = {
+      name : staffName,
+      DOB: birthday,
+      gender: staffSex,
+      jlpt: jlpt,
+      hometown: hometown,
+      image: avatar,
+      certificateImage: jlptImage
+    }
+    data.push(staffInfor)
+    setAvatar()
+    setJlptImage()
     setDisplay(false);
   }
 
@@ -93,7 +114,8 @@ const Staff_Popup = ({display, setDisplay}) => {
                     <div className='form-title'>
                       名前
                     </div>
-                    <input type='text' className='txt-input' placeholder='メールを入力してください' />
+                    <input type='text'  id = 'staff_name' className='txt-input' 
+                    placeholder='メールを入力してください' onChange={(e)=>setStaffName(e.target.value )}/>
                   </div>
                   <div className='row'>
                     <div className='w-200'>
@@ -102,9 +124,9 @@ const Staff_Popup = ({display, setDisplay}) => {
                           性別 <span>*</span>
                         </div>
                         <div className='form-radio'>
-                          <input type='radio' id='man' name='sex' value='man' defaultChecked />
+                          <input type='radio' id='man' name='sex' value={1} onChange={(e)=>setStaffSex(e.target.value)} defaultChecked />
                           <label htmlFor='man'>男性</label>
-                          <input type='radio' id='womman' name='sex' value='womman' />
+                          <input type='radio' id='womman' name='sex' value={0} onChange={(e)=>setStaffSex(e.target.value)} />
                           <label htmlFor='womman'>女性</label>
                         </div>
                       </div>
@@ -134,12 +156,12 @@ const Staff_Popup = ({display, setDisplay}) => {
                         <div className='form-title'>
                           JLPT
                         </div>
-                        <select className='txt-input' defaultValue={'N2'} required>
-                          <option value='N1'>N1</option>
-                          <option value='N2'>N2</option>
-                          <option value='N3'>N3</option>
-                          <option value='N4'>N4</option>
-                          <option value='N5'>N5</option>
+                        <select className='txt-input' defaultValue={2} onChange={(e)=>setJlpt(e.target.value)} required>
+                          <option value={1}>N1</option>
+                          <option value={2}>N2</option>
+                          <option value={3}>N3</option>
+                          <option value={4}>N4</option>
+                          <option value={5}>N5</option>
                         </select>
                       </div>
                     </div>
@@ -147,7 +169,8 @@ const Staff_Popup = ({display, setDisplay}) => {
                       <div className='form-title'>
                         ホームタウン
                       </div>
-                      <input type='text' className='txt-input' placeholder='ベトナム、ハイフォン市' />
+                      <input type='text' id='input-hometown' className='txt-input' 
+                      placeholder='ベトナム、ハイフォン市' onChange={(e)=>(setHometown(e.target.value))}/>
                     </div>
                   </div>
                 </div>
@@ -179,7 +202,7 @@ const Staff_Popup = ({display, setDisplay}) => {
             </div>
             <div className="btn">
               <div className="space-between">
-                <button type='button' onClick={handle} className='green btn-add'>保存する</button>
+                <button type='button' onClick={handleSubmit} className='green btn-add'>保存する</button>
                 <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
               </div>
             </div>
