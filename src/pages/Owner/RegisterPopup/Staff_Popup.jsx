@@ -6,7 +6,7 @@ import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 
-const Staff_Popup = ({data, display, setDisplay}) => {
+const Staff_Popup = ({data, display, setDisplay, confirmPopup}) => {
 
   const DefaultStaffSex = 1
   const DefaulJLPT = 2
@@ -70,10 +70,11 @@ const Staff_Popup = ({data, display, setDisplay}) => {
       image: avatar,
       certificateImage: jlptImage
     }
-    data.push(staffInfor)
+    confirmPopup(staffInfor);
+    // data.push(staffInfor)
     setAvatar()
     setJlptImage()
-    setDisplay(false);
+    // setDisplay(false);
   }
 
 

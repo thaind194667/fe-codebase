@@ -79,6 +79,7 @@ export default function ShopRegister() {
 
     useEffect(() => {
         setError(   (prev) => ( { ...prev, staffList: false, } )  )
+        console.log(staffList);
     }, [staffList])
 
     useEffect(() => {
@@ -162,7 +163,9 @@ export default function ShopRegister() {
     }
 
     const staffListHandle = (data) => {
-        setStaffList(data);
+        let arr = [...staffList];
+        arr.push(data);
+        setStaffList(arr);
         setOpenStaff(false);
     }
 
@@ -377,7 +380,7 @@ export default function ShopRegister() {
                 </div>
             </div>
             { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
-            { openStaffPopup ? <Staff_Popup data={staffList} display={openStaffPopup} setDisplay={setOpenStaff} /> : <></>}
+            { openStaffPopup ? <Staff_Popup data={staffList} confirmPopup={staffListHandle} display={openStaffPopup} setDisplay={setOpenStaff} /> : <></>}
             { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
 
         </>

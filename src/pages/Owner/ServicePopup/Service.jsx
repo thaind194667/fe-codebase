@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import "./Service_.scss"
+// import "./Service_.scss"
 import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
