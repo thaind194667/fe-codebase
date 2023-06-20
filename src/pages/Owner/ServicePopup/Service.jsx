@@ -18,7 +18,7 @@ function Service({display, setDisplay}) {
         setDisplay(false);
     }
     const upLoadJlptImageInput = () => {
-        document.querySelector(".jlpt-input").click()
+        document.querySelector(".Img-input").click()
     }
 
     const handle = () => {
@@ -27,34 +27,34 @@ function Service({display, setDisplay}) {
 
     
     return (
-        <div className='staff-popup-overlay'>
-            <div className='popup'>
-                <div className='content'>
+        <div className='Service-popup-overlay'>
+            <div className='Popup'>
+                <div className='Popup-content'>
                     <span className="ti-close" onClick={closePopup}>
                         <Icon icon={close} size={18} />
                     </span>
                     <div className="popup-title">
                         サービスの追加
                     </div>
-                    <div className='popup-form'>
+                    <div className='Popup-form'>
                         <div className='row'>
-                            <div className='col' style={{flex: '1'}}>
+                            <div className='col form-col' style={{flex: '1'}}>
                                 <div className='col-title'>
                                     名前<span>*</span>
                                 </div>
-                                <input type='text' className='txt-input' placeholder='名前を入力してください' />
+                                <input type='text' className='Input-text' placeholder='名前を入力してください' />
                                 
                                 <div className='col-title'>
                                     説明<span>*</span>
                                 </div>
-                                <input type='text' className='txt-input' placeholder='説明を入力してください' style={{height: '271px'}} />
+                                <input type='text' className='Input-text big-input' placeholder='説明を入力してください' style={{minHeight: '274px'}} />
 
                                 
                             </div>
-                            <div className='col' style={{flex: '1'}}>
+                            <div className='col form-col' style={{flex: '1'}}>
                                 <div className='col-title'>
                                     イメージ<span>*</span>
-                                    <input type="file" className='jlpt-input' onChange={handleUpLoadJLPTImg} hidden />
+                                    <input type="file" className='Img-input' onChange={handleUpLoadJLPTImg} hidden />
                                 </div>
                                 
                                 <div className='img-input center-item'>
