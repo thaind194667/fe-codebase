@@ -5,6 +5,7 @@ import { Icon } from 'react-icons-kit'
 import { calendar } from 'react-icons-kit/fa/calendar'
 import { user } from 'react-icons-kit/fa/user'
 import { home } from 'react-icons-kit/fa/home'
+import {publicURL} from '@/hooks/hooks'
 
 const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
 
@@ -15,7 +16,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
             <div className='staff-card-element col'>
                 <div className='staff-card-avatar' 
                     style={{ 
-                        backgroundImage: `url(${data.image.url})` 
+                        backgroundImage: `url(${edit ? data.image.url : publicURL + data.image})` 
                 }}>
                 </div>
                 <div className='staff-card-name'>
@@ -26,7 +27,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                 </div>
                 <div className='staff-card-birth'>
                     <span className='mgr-10'><Icon icon={calendar} /></span>
-                    <span className='txt-bold'>生年月日: </span>{data.DOB}
+                    <span className='txt-bold'>生年月日: </span>{data.dob}
                 </div>
                 <div className='staff-card-sex'>
                     <span className='mgr-10'><Icon icon={user} /></span>

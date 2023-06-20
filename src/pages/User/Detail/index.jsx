@@ -60,6 +60,7 @@ export default function Details() {
     // console.log(pageData);
     setServiceList(pageData.serviceList);
     setRatingList(pageData.ratingList);
+    console.log(pageData.staffList);
   }, [pageData])
 
   return (
@@ -166,10 +167,10 @@ export default function Details() {
         </div>
           
         <div className="parlor-staffs row" >
-        {
-          [...Array(5)].map((count) => {
-            return (<StaffCard/>)
-          })
+        { pageData.staffList ? 
+          pageData.staffList.map((item, index) => {
+            return (<StaffCard data={item}/>)
+          }) : <></>
         }
         </div>
         <div className="parlor-services col" ref={section3}>
