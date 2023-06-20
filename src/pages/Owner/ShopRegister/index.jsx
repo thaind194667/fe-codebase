@@ -8,7 +8,7 @@ import Staff_Popup from '../RegisterPopup/Staff_Popup'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
-
+import Service from '../ServicePopup/Service'
 const defaultErrorState = {
     name: false,
     email: false,
@@ -334,10 +334,10 @@ export default function ShopRegister() {
                         </div>
 
                         <div>
-                            <button className='black form-btn row'>
-                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus" />
-                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover" />
-                                <div style={{ marginLeft: '36px' }}>追加</div>
+                            <button onClick={()=>{setOpenService(true)}} className='black form-btn row'>
+                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus"/>
+                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover"/>
+                                <div style={{marginLeft: '36px'}}>追加</div>
                             </button>
                         </div>
                     </div>
@@ -376,9 +376,10 @@ export default function ShopRegister() {
                     </div>
                 </div>
             </div>
-            {openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)} /> : <></>}
-            {openStaffPopup ? <Staff_Popup data={staffList} display={openStaffPopup} setDisplay={setOpenStaff} /> : <></>}
-            {openServicePopup ? 'service' : '0'}
+            { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
+            { openStaffPopup ? 'staff' : '0'}
+            { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
+
         </>
     )
 }
