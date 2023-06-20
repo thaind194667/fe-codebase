@@ -52,7 +52,7 @@
             }
 
             .Popup-form {
-                padding: 10px 10% ;
+                padding: 10px 10%;
                 // padding-top: 10px;
                 // padding-left: 6px;
                 // padding-bottom: 5px;
@@ -60,15 +60,49 @@
                 height: auto;
                 // border: 1px solid #CFCFCF;
                 margin: 0 auto;
-                
-                .form-col{
+
+                .form-col {
                     padding: 10px;
+
+                    .time-money {
+                        width: 100%;
+
+                        .time-select {
+                            font-size: 16px;
+                            padding: 8px;
+                            border: 2px solid #B4B4B4;
+                            border-radius: 8px;
+                            margin: 0 15px 12px 0;
+                            width: 30%;
+                        }
+
+                        .Input-text {
+                            width: 65%;
+                            font-size: 16px;
+                            padding: 8px;
+                            border: 2px solid #B4B4B4;
+                            border-radius: 8px;
+                            margin-bottom: 12px;
+
+
+                            .txt-placeholder {
+                                color: #AAAAA4;
+                            }
+                        }
+                    }
+
+                    .btn-more-time {
+                        width: 12%;
+                        font-size: 24px;
+                        font-weight: 600;
+                    }
                 }
 
                 .col-title {
                     text-align: left;
                     font-weight: 600;
-                    font-size: 18px;                
+                    font-size: 18px;
+
                     span {
                         color: red;
                         font-weight: bold;
@@ -82,18 +116,17 @@
                     border: 2px solid #B4B4B4;
                     border-radius: 8px;
                     margin-bottom: 12px;
-                    
-                
+
+
                     .txt-placeholder {
                         color: #AAAAA4;
                     }
-                
+
                 }
 
                 .big-input {
                     display: flex;
                     align-items: start;
-                    color: red  ;
 
                 }
 
@@ -110,7 +143,7 @@
                         text-align: center;
                         width: 100%;
                         height: 100%;
-                
+
                         .tool-text {
                             visibility: hidden;
                             width: 100px;
@@ -121,31 +154,32 @@
                             padding: 5px 0;
                             border-radius: 6px;
 
-                
+
                             /* Position the tooltip text - see examples below! */
                             position: absolute;
                             z-index: 1;
                         }
-                
-                
+
+
                         &:hover {
                             opacity: 0.8;
                             cursor: pointer;
                         }
-                
+
                         &:hover .tool-text {
                             visibility: visible;
                         }
-                
+
                         img {
                             width: 100%;
                             height: 100%;
                         }
-                
-                
+
+
                     }
-                    
+
                 }
+
                 .icon-img {
                     width: 25px;
                     height: 25px;
@@ -198,6 +232,3 @@
         }
     }
 }
-
-
-
