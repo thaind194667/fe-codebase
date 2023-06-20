@@ -106,7 +106,7 @@ export default function ShopRegister() {
             phoneNumber: shopData.phone,
             emailAddress: shopData.email,
             imageLibrary: arr['files'],
-            // staffList,
+            staffList,
             // serviceList,
         }
         console.log(apiParams);
@@ -115,6 +115,7 @@ export default function ShopRegister() {
         })
         .then((res) => {
             alert(res);
+            console.log(res);
         })
         alert("Done");
     }
