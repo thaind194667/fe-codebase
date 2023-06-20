@@ -6,44 +6,52 @@ import { calendar } from 'react-icons-kit/fa/calendar'
 import { user } from 'react-icons-kit/fa/user'
 import { home } from 'react-icons-kit/fa/home'
 
-const StaffCard = ({edit, openEditStaff, deleteStaff}) => {
+const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
 
     // const [canChange, setCanChange] = useState(true)
 
     return (
         <>
             <div className='staff-card-element col'>
-                <div className='staff-card-avatar' style={{ backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8-1YS5F5gtLy0gjKnyxuh6PtmmffLVwrSzGvNDeYQw&s")` }}></div>
+                <div className='staff-card-avatar' 
+                    style={{ 
+                        backgroundImage: `url(${data.image.url})` 
+                }}>
+                </div>
                 <div className='staff-card-name'>
-                    <span>広瀬すず</span>
+                    <span>{data.name}</span>
                 </div>
                 <div className='staff-card-jlpt'>
-                    <span className='txt-bold'>JLPT: </span>N2
+                    <span className='txt-bold'>JLPT: </span>N{data.jlpt}
                 </div>
                 <div className='staff-card-birth'>
                     <span className='mgr-10'><Icon icon={calendar} /></span>
-                    <span className='txt-bold'>生年月日: </span>12/09/1998
+                    <span className='txt-bold'>生年月日: </span>{data.DOB}
                 </div>
                 <div className='staff-card-sex'>
                     <span className='mgr-10'><Icon icon={user} /></span>
-                    <span className='txt-bold'>性別: </span> 女性
+                    <span className='txt-bold'>性別: </span> {data.gender ? '男性' : '女性'}
                 </div>
                 <div className='staff-card-hometown'>
                     <span className='mgr-10'><Icon icon={home} /></span>
-                    <span className='txt-bold'>ホームタウン: </span>ベトナム、ハイフォン市
+                    <span className='txt-bold'>ホームタウン: </span>{data.hometown}
                 </div>
                 {
                     edit ? (
                         <>
                             <div className='staff-card-change center-item row'>
-                                <SvgIcon
-                                    className="img-btn" name="edit-icon"
-                                    width="35px" height="35px" round={true} backgroundColor="#fff" padding="8px"
-                                />
-                                <SvgIcon
-                                    className="img-btn" name="delete-icon"
-                                    width="35px" height="35px" round={true} backgroundColor="#ffff" padding="8px"
-                                />
+                                <div onClick={openEditStaff}>
+                                    <SvgIcon
+                                        className="img-btn" name="edit-icon"
+                                        width="35px" height="35px" round={true} backgroundColor="#fff" padding="8px"
+                                    />
+                                </div>
+                                <div onClick={deleteStaff}>
+                                    <SvgIcon
+                                        className="img-btn" name="delete-icon"
+                                        width="35px" height="35px" round={true} backgroundColor="#ffff" padding="8px"
+                                    />
+                                </div>
                             </div>
                         </>
                     ) : <></>

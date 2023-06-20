@@ -4,7 +4,7 @@ import SvgIcon from '@/components/SvgIcon'
 import { useState, useEffect } from 'react'
 import Checkbox from '@/components/Checkbox'
 import ImagePopup from './ImagePopup'
-import Staff_Popup from '../RegisterPopup/Staff_Popup'
+import Staff_Popup from '../StaffPopup/Staff_Popup'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
@@ -42,8 +42,12 @@ export default function ShopRegister() {
     const [serviceList, setServiceList] = useState([]);
 
     const [openImgPopup, setOpenImg] = useState(false);
+
     const [openStaffPopup, setOpenStaff] = useState(false);
+    const [currentStaff, setCurrStaff] = useState();
+
     const [openServicePopup, setOpenService] = useState(false);
+    const [currentService, setCurrService] = useState();
 
     const [confirm, setConfirm] = useState(false);
 
@@ -81,7 +85,7 @@ export default function ShopRegister() {
 
     useEffect(() => {
         setError(   (prev) => ( { ...prev, staffList: false, } )  )
-        console.log(staffList);
+        console.log('staffList', staffList);
     }, [staffList])
 
     useEffect(() => {
@@ -164,16 +168,49 @@ export default function ShopRegister() {
         setOpenImg(false);
     }
 
-    const staffListHandle = (data) => {
+    const staffListHandle = (data, index) => {
         let arr = [...staffList];
-        arr.push(data);
+        if(index === -1)
+            arr.push(data);
+        else arr[index] = data;
         setStaffList(arr);
         setOpenStaff(false);
+        setCurrStaff(undefined);
     }
 
-    const serviceListHandle = (data) => {
-        setServiceList(data);
+    const serviceListHandle = (data, index) => {
+        let arr = [...serviceList];
+        if(!index)
+            arr.push(data);
+        else arr[index] = data;
+        setServiceList(arr);
         setOpenService(false);
+    }
+
+    const setEditStaff = (index) => {
+        setCurrStaff({
+            data: staffList[index],
+            index,
+        });
+        setOpenStaff(true);
+    }
+
+    const deleteStaff = (index) => {
+        let arr = [...staffList];
+        arr.splice(index, 1);
+        setStaffList(arr);
+        setCurrStaff(undefined);
+    }
+
+    const setEditService = (index) => {
+        setCurrService(serviceList[index]);
+        setOpenService(true);
+    }
+
+    const deleteService = (index) => {
+        let arr = [...serviceList];
+        arr.splice(index, 1);
+        setServiceList(arr);
     }
 
     return (
@@ -307,8 +344,15 @@ export default function ShopRegister() {
 
                         <div className="staff-list row">
                         {
-                            [...Array(5)].map((count) => {
-                                return (<StaffCard edit/>)
+                            staffList.map((item, index) => {
+                                console.log('111');
+                                return (
+                                    <StaffCard edit key={`staff${item}`}
+                                        data={item}
+                                        openEditStaff={() => setEditStaff(index)} 
+                                        deleteStaff={() => deleteStaff(index)} 
+                                    />
+                                )
                             })
                         }
                         </div>
@@ -378,7 +422,7 @@ export default function ShopRegister() {
                 </div>
             </div>
             { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
-            { openStaffPopup ? <Staff_Popup data={staffList} confirmPopup={staffListHandle} display={openStaffPopup} setDisplay={setOpenStaff} /> : <></>}
+            { openStaffPopup ? <Staff_Popup data={currentStaff ? currentStaff.data : undefined} index={ currentStaff ? currentStaff.index : -1} confirmPopup={staffListHandle} closePopup={() => setOpenStaff(false)} /> : <></>}
             { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
 
         </>

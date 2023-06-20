@@ -5,7 +5,7 @@ import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 
-function Service({ display, setDisplay }) {
+function Service({confirmPopup, closePopup, data, index}) {
     const [jlptImage, setJlptImage] = useState();
 
     const handleUpLoadJLPTImg = (e) => {
@@ -14,16 +14,16 @@ function Service({ display, setDisplay }) {
         setJlptImage(file);
     }
 
-    const closePopup = () => {
-        setDisplay(false);
-    }
+    // const closePopup = () => {
+    //     setDisplay(false);
+    // }
     const upLoadJlptImageInput = () => {
         document.querySelector(".Img-input").click()
     }
 
-    const handle = () => {
-        setDisplay(false);
-    }
+    // const handle = () => {
+    //     setDisplay(false);
+    // }
     
     const addMoreTime = () =>{
         

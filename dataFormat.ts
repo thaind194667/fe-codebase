@@ -126,9 +126,9 @@ type input4 = {
     location: String,
     phoneNumber: String,
     emailAddess: String, 
-    serviceImgList: FileList,
     serviceList: [    /// mảng object
         {
+            serviceImg: File,
             serviceName: String,
             serviceDescription: String,
             priceList: [
