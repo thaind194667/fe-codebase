@@ -5,15 +5,12 @@ import { useNavigate } from "react-router-dom";
 import {apiURL, publicURL} from '@/hooks/hooks'
 import axios from 'axios';
 
-const notiList = [
-    "Notification1",
-    "Notification2",
-    "Notification3", 
-    "Testing",
-]
+
+
 
 export default function Header() {
-
+    
+    const [notiList, setNotiList] = useState(localStorage.getItem('noti')?['あなたのリクエストはシステムのアドミンに送信されました。リクエストが処理されると通信が送信されます']:[])
     const navigate = useNavigate();
 
     const notiCount = notiList.length;
@@ -112,7 +109,7 @@ export default function Header() {
                                 </div>
                                 {
                                     localStorage.getItem('role') === 'user' ?
-                                    <div className="user-dropdown-item">
+                                    <div className="user-dropdown-item" onClick={()=>navigate("/my-shop")}>
                                         マッサージ部屋をリクエスト
                                     </div> : 
                                     <div className="user-dropdown-item">

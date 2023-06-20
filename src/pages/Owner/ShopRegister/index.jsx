@@ -122,8 +122,9 @@ export default function ShopRegister() {
             headers: headersWithToken,
         })
         .then((res) => {
-            alert(res);
             console.log(res);
+            localStorage.setItem("noti", 1);
+            navigate("/");
         })
         alert("Done");
     }

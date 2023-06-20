@@ -12,7 +12,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
     // const [canChange, setCanChange] = useState(true)
 
     return (
-        <>
+        <div className='col staff-card'>
             <div className='staff-card-element col'>
                 <div className='staff-card-avatar' 
                     style={{ 
@@ -37,6 +37,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                     <span className='mgr-10'><Icon icon={home} /></span>
                     <span className='txt-bold'>ホームタウン: </span>{data.hometown}
                 </div>
+            </div>
                 {
                     edit ? (
                         <>
@@ -57,9 +58,8 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                         </>
                     ) : <></>
                 }
-            </div>
 
-        </>
+        </div>
     )
 }
 
