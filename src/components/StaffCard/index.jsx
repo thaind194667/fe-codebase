@@ -27,7 +27,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                 </div>
                 <div className='staff-card-birth'>
                     <span className='mgr-10'><Icon icon={calendar} /></span>
-                    <span className='txt-bold'>生年月日: </span>{data.dob}
+                    <span className='txt-bold'>生年月日: </span>{edit ? data.DOB : data.dob}
                 </div>
                 <div className='staff-card-sex'>
                     <span className='mgr-10'><Icon icon={user} /></span>

@@ -115,7 +115,7 @@ export default function ShopRegister() {
             emailAddress: shopData.email,
             imageLibrary: arr['files'],
             staffList,
-            // serviceList,
+            serviceList,
         }
         console.log(apiParams);
         axios.post(`${apiURL}/massage-facilities/store`, apiParams, {
