@@ -19,30 +19,33 @@ export default function DetailsService({
 
     return (
         <div className="service-info row">
-            <div className="img-handle-btn row">
-                <div onClick={openEditService}>
-                    <SvgIcon
-                        className="img-btn"
-                        name="edit-icon"
-                        width="35px"
-                        height="35px"
-                        round={true}
-                        backgroundColor="#DCDCDC"
-                        padding="8px"
-                    />
-                </div>
-                <div onClick={deleteService}>
-                    <SvgIcon
-                        className="img-btn"
-                        name="delete-icon"
-                        width="35px"
-                        height="35px"
-                        round={true}
-                        backgroundColor="#DCDCDC"
-                        padding="8px"
-                    />
-                </div>
-            </div>
+            {
+                edit ? 
+                <div className="img-handle-btn row">
+                    <div onClick={openEditService}>
+                        <SvgIcon
+                            className="img-btn"
+                            name="edit-icon"
+                            width="35px"
+                            height="35px"
+                            round={true}
+                            backgroundColor="#DCDCDC"
+                            padding="8px"
+                        />
+                    </div>
+                    <div onClick={deleteService}>
+                        <SvgIcon
+                            className="img-btn"
+                            name="delete-icon"
+                            width="35px"
+                            height="35px"
+                            round={true}
+                            backgroundColor="#DCDCDC"
+                            padding="8px"
+                        />
+                    </div>
+                </div> : <></>
+            }
 
             <div className="col" style={{ flex: "2.5" }}>
                 <div className="service-name center-item">
