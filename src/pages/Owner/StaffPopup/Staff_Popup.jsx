@@ -8,10 +8,8 @@ import { close } from 'react-icons-kit/fa/close'
 import dayjs from 'dayjs'
 
 const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
-  // console.log(data);
-  // console.log(data ? 1 : 0);
 
-  const DefaultStaffSex = 1
+  const DefaultStaffSex = '1'
   const DefaulJLPT = 2
 
   const [staffName, setStaffName] = useState(data ? data.name : '')
@@ -56,13 +54,6 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
     document.querySelector(".jlpt-input").click()
   }
 
-
-  // const closePopup = () => {
-  //   setAvatar()
-  //   setJlptImage()
-  //   setDisplay(false);
-  // }
-
   const handleSubmit = () => {
     const staffInfor = {
       name : staffName,
@@ -75,15 +66,8 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
     }
     setAvatar()
     setJlptImage()
-    // if(!data)
-    //   confirmPopup(staffInfor, -1);
-  // else 
     confirmPopup(staffInfor, index);
-    // data.push(staffInfor)
-    // setDisplay(false);
   }
-
-
 
   return (
     

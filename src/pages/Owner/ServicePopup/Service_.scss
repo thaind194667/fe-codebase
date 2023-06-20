@@ -17,10 +17,9 @@
     visibility: visible;
     opacity: 1;
     z-index: 1000;
-    overflow: scroll;
 
 
-    .Popup {
+    .service-popup {
         margin: 10px auto 10px;
         padding: 10px;
         background: #fff;
@@ -29,7 +28,7 @@
         transition: all 1s ease-in-out;
 
 
-        .Popup-content {
+        .service-popup-content {
             text-align: center;
             position: relative;
 
@@ -43,7 +42,7 @@
                 }
             }
 
-            .popup-title {
+            .service-popup-title {
                 font-size: 24px;
                 font-weight: 600;
                 border-bottom: 2px solid #CFCFCF;
@@ -51,44 +50,48 @@
                 margin-bottom: 20px;
             }
 
-            .Popup-form {
+            .service-popup-form {
                 padding: 10px 10%;
                 // padding-top: 10px;
                 // padding-left: 6px;
                 // padding-bottom: 5px;
                 width: 80%;
-                height: auto;
+                height: 65vh;
+                overflow: scroll;
                 // border: 1px solid #CFCFCF;
                 margin: 0 auto;
 
                 .form-col {
                     padding: 10px;
 
-                    .time-money {
+                    .time-money-list {
                         width: 100%;
 
-                        .time-select {
-                            font-size: 16px;
-                            padding: 8px;
-                            border: 2px solid #B4B4B4;
-                            border-radius: 8px;
-                            margin: 0 15px 12px 0;
-                            width: 30%;
-                        }
+                        .time-money-item {
+                            align-items: center;
+                            padding: 10px 0;
+                            gap: 10px;
+                            .time-select {
+                                font-size: 16px;
+                                padding: 8px;
+                                border: 2px solid #B4B4B4;
+                                border-radius: 8px;
+                                // margin: 0 15px 12px 0;
+                                width: 30%;
+                            }
+    
+                            .Input-text {
+                                margin: 0;
+                            }
 
-                        .Input-text {
-                            width: 65%;
-                            font-size: 16px;
-                            padding: 8px;
-                            border: 2px solid #B4B4B4;
-                            border-radius: 8px;
-                            margin-bottom: 12px;
-
-
-                            .txt-placeholder {
-                                color: #AAAAA4;
+                            .btn-delete-time {
+                                // width: 12%;
+                                padding: 0 10px;
+                                font-size: 24px;
+                                font-weight: 600;
                             }
                         }
+
                     }
 
                     .btn-more-time {
@@ -117,17 +120,16 @@
                     border-radius: 8px;
                     margin-bottom: 12px;
 
-
-                    .txt-placeholder {
+                    &::placeholder {
                         color: #AAAAA4;
+                        font-weight: 600;
                     }
-
                 }
 
                 .big-input {
                     display: flex;
                     align-items: start;
-
+                    resize: none;
                 }
 
                 .img-input {

@@ -3,8 +3,27 @@
     gap: 12px;
     background: #FFFFFF;
     border: 1px solid #C5C5C5;
+    position: relative;
 
     padding: 15px;
+
+    &:hover {
+        .img-handle-btn {
+            display: flex;
+        }
+    }
+
+    .img-handle-btn {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .img-btn {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 
     .service-name {
         width: 25vw;
@@ -38,13 +57,22 @@
         padding: 20px;
         .price-table {
             margin-bottom: 15px;
-            th{
+            &.small-txt {
+                td {
+                    font-size: 16px;
+                }
+            }
+            thead{
                 padding: 12px;
                 padding-top: 0px;
                 font-weight: 600;
                 font-size: 24px;
                 line-height: 29px;
                 color: #FF9900;
+                tr {
+                    margin-left: 30px;
+                    text-align: center;
+                }
             }
         
             td {

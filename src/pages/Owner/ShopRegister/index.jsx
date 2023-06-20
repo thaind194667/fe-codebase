@@ -10,6 +10,7 @@ import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
 import Service from '../ServicePopup/Service'
 import StaffCard from '@/components/StaffCard'
+import DetailsService from '@/pages/User/Detail/DetailService'
 
 const defaultErrorState = {
     name: false,
@@ -179,12 +180,14 @@ export default function ShopRegister() {
     }
 
     const serviceListHandle = (data, index) => {
+        console.log(data);
         let arr = [...serviceList];
-        if(!index)
+        if(index === -1)
             arr.push(data);
         else arr[index] = data;
         setServiceList(arr);
         setOpenService(false);
+        setCurrService(undefined);
     }
 
     const setEditStaff = (index) => {
@@ -203,7 +206,10 @@ export default function ShopRegister() {
     }
 
     const setEditService = (index) => {
-        setCurrService(serviceList[index]);
+        setCurrService({
+            data :serviceList[index],
+            index,
+        });
         setOpenService(true);
     }
 
@@ -211,6 +217,7 @@ export default function ShopRegister() {
         let arr = [...serviceList];
         arr.splice(index, 1);
         setServiceList(arr);
+        setCurrService(undefined)
     }
 
     return (
@@ -374,8 +381,17 @@ export default function ShopRegister() {
                             <span className='error'>提供サービスは少なくとも1つが含まれています！</span> :
                             <></>}
 
-                        <div className="service-list">
-
+                        <div className="service-list col">
+                        {
+                            serviceList.map((item, index) => {
+                                return (
+                                    <DetailsService edit key={`service${index}`}
+                                    data={item} 
+                                    openEditService={() => setEditService(index)} 
+                                    deleteService={() => deleteService(index)}/>
+                                )
+                            })
+                        }
                         </div>
 
                         <div>
@@ -421,9 +437,19 @@ export default function ShopRegister() {
                     </div>
                 </div>
             </div>
-            { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
-            { openStaffPopup ? <Staff_Popup data={currentStaff ? currentStaff.data : undefined} index={ currentStaff ? currentStaff.index : -1} confirmPopup={staffListHandle} closePopup={() => {setOpenStaff(false);setCurrStaff(undefined);}} /> : <></>}
-            { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
+            { openImgPopup ? 
+                <ImagePopup confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)} 
+                    data={imgList} /> : <></> }
+            { openStaffPopup ? 
+                <Staff_Popup confirmPopup={staffListHandle} closePopup={() => {setOpenStaff(false); setCurrStaff(undefined)}} 
+                    data={currentStaff ? currentStaff.data : undefined} 
+                    index={ currentStaff ? currentStaff.index : -1} 
+                /> : <></>}
+            { openServicePopup ? 
+                <Service confirmPopup={serviceListHandle} closePopup={() => {setOpenService(false); setCurrService(undefined)}} 
+                    data={currentService ? currentService.data : undefined} 
+                    index={ currentService ? currentService.index : -1} 
+                /> : <></> }
 
         </>
     )

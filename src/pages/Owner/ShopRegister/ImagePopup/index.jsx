@@ -128,14 +128,16 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                                                         <div onClick={() => reUploadImg(index)}>
                                                             <SvgIcon 
                                                                 className="img-btn" name="edit-icon" 
-                                                                width="35px" height="35px" round={true} backgroundColor="#DCDCDC" padding="8px"
+                                                                width="35px" height="35px" round={true} 
+                                                                backgroundColor="#DCDCDC" padding="8px"
                                                             />
 
                                                         </div>
                                                         <div onClick={() => removeImg(index)}>
                                                             <SvgIcon
                                                                 className="img-btn" name="delete-icon" 
-                                                                width="35px" height="35px" round={true} backgroundColor="#DCDCDC" padding="8px"
+                                                                width="35px" height="35px" round={true} 
+                                                                backgroundColor="#DCDCDC" padding="8px"
                                                             />
                                                         </div>
                                                     </div>
