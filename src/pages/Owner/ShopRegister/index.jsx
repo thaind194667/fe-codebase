@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
 import Service from '../ServicePopup/Service'
+import StaffCard from '../StaffCard/StaffCard'
+
 const defaultErrorState = {
     name: false,
     email: false,
@@ -313,6 +315,7 @@ export default function ShopRegister() {
                                 })
                             ) : <></>
                             }
+                            <StaffCard />
                         </div>
 
                         <div>
