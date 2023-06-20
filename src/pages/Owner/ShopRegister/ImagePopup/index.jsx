@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './ImagePopup.scss'
 import SvgIcon from '@/components/SvgIcon'
 
+let sendList = new DataTransfer();
+
 export default function ImagePopup({closePopup, confirmPopup, data}) {
 
     const [imgList, setImgList] = useState(data);
@@ -12,7 +14,7 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
     const handleReUploadImg = (e, index) => {
         const file = e.target.files[0];
         // file.url = (URL.createObjectURL(file));
-        const arr = [...imgList];
+        const arr = {...imgList};
         arr[index] = {
             image: file,
             url: (URL.createObjectURL(file)),
@@ -22,7 +24,7 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
 
     const removeImg = (index) => {
         console.log("remove " + index);
-        const arr = [...imgList];
+        const arr = {...imgList};
         arr.splice(index, 1);
         setImgList(arr);
     }
@@ -37,17 +39,21 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
     }
 
     const handleAddImg = (e) => {
-        const arr = [...imgList];
-        arr.pop();
+        const arr = {...imgList};
+        arr['url'].pop();
         for(let i = 0; i < e.target.files.length; i++) {
             let file = e.target.files[i];
+            sendList.items.add(file);
             // file.url = (URL.createObjectURL(file));
-            arr.push ({
-                image: file,
-                url: (URL.createObjectURL(file)),
-            })
+            // arr['file'].push(file);
+            arr['url'].push(URL.createObjectURL(file));
+            // arr.push ({
+            //     image: file,
+            //     url: (URL.createObjectURL(file)),
+            // })
         }
-        arr.push('add');
+        arr['files'] = sendList.files;
+        arr['url'].push('add');
         // arr[arr.length] = "add";
         console.log('arr', arr);
         setImgList(arr);
@@ -73,7 +79,7 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                     <div style={{fontSize: '20px'}}>画像を追加してストアを最も視覚的に説明します。</div>
                     <div className="img-list-choose col">
                     {
-                        imgList.map((item, i) => {
+                        imgList.url.map((item, i) => {
                             if(i % 3 === 0)
                                 return (
                                     <div className={`img-row row`} key={`row${i}`}>
@@ -81,14 +87,14 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                                         [...Array(3)].map((count, j) => {
                                             let index = i + j;
                                             console.log(index);
-                                            if(index >= imgList.length) return (
+                                            if(index >= imgList.url.length) return (
                                                 <div className="img-item" style={{flex: '1'}}></div>
                                                 
                                             )
-                                            else if(imgList[index] !== 'add') 
+                                            else if(imgList.url[index] !== 'add') 
                                             return (
                                                 <div className="img-item" key={`item${index}`}>
-                                                    <img className='image-item' src={imgList[index].url} alt={`image${index}`} />
+                                                    <img className='image-item' src={imgList.url[index]} alt={`image${index}`} />
                                                     {index === 0 ? <div className='main-img'>メイン画像</div> : <></>}
                                                     <input type="file" name={`img-file${index}`} id={`file-choose${index}`} hidden onChange={(e) => handleReUploadImg(e, index)}/>
                                                     <div className="img-handle-btn row">

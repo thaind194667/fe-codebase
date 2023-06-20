@@ -4,6 +4,7 @@ import SvgIcon from '@/components/SvgIcon'
 import { useState, useEffect } from 'react'
 import Checkbox from '@/components/Checkbox'
 import ImagePopup from './ImagePopup'
+import Staff_Popup from '../RegisterPopup/Staff_Popup'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
@@ -33,7 +34,9 @@ export default function ShopRegister() {
     });
 
     const [staffList, setStaffList] = useState([]);
-    const [imgList, setImgList] = useState([]);
+    const [imgList, setImgList] = useState({
+        files : FileList, url: []
+    });
     const [serviceList, setServiceList] = useState([]);
 
     const [openImgPopup, setOpenImg] = useState(false);
@@ -48,15 +51,15 @@ export default function ShopRegister() {
         const textarea = document.getElementById("shop-info-description");
         textarea.style.height = "176px";
         let scHeight = e.target.scrollHeight;
-        if( scHeight > 300) 
+        if (scHeight > 300)
             textarea.style.height = '300px';
-        else 
+        else
             textarea.style.height = `${scHeight}px`;
     }
 
     useEffect(() => {
-        if(!imgList.length)
-            imgList.push("add");
+        if(!imgList['url'].length)
+            imgList['url'].push("add");
     }, [])
 
     // useEffect(() => {
@@ -86,15 +89,15 @@ export default function ShopRegister() {
         setData((prev) => ({
             ...prev,
             [field]: value,
-            })
+        })
         );
-        setError(   (prev) => ( { ...prev, [field]: false, } )  );
+        setError((prev) => ({ ...prev, [field]: false, }));
     }
 
     const postData = () => {
         console.log(imgList);
-        const arr = [...imgList];
-        arr.pop();
+        const arr = {...imgList};
+        arr['url'].pop();
         const apiParams = {
             // token: localStorage.getItem('accessToken'),
             name: shopData.name,
@@ -102,8 +105,8 @@ export default function ShopRegister() {
             location: shopData.address,
             phoneNumber: shopData.phone,
             emailAddress: shopData.email,
-            imageLibrary: arr,
-            // staffList,
+            imageLibrary: arr['files'],
+            staffList,
             // serviceList,
         }
         console.log(apiParams);
@@ -112,6 +115,7 @@ export default function ShopRegister() {
         })
         .then((res) => {
             alert(res);
+            console.log(res);
         })
         alert("Done");
     }
@@ -177,18 +181,18 @@ export default function ShopRegister() {
 
                 <div className="body-form col">
                     <div className="shop-info-form col">
-                        <div className="row" style={{gap: '10px'}}>
+                        <div className="row" style={{ gap: '10px' }}>
                             <div className="col input-field">
                                 <div className="form-title">
                                     名前 <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
                                     <input type="text" required
-                                        placeholder='名前を入力してください' 
-                                        value={shopData.name} 
-                                        onChange={(e) => setDataValue(e.target.value, 'name')}/>
-                                    {error.name ? 
-                                        <span className='error'>名前は必須です！</span> : 
+                                        placeholder='名前を入力してください'
+                                        value={shopData.name}
+                                        onChange={(e) => setDataValue(e.target.value, 'name')} />
+                                    {error.name ?
+                                        <span className='error'>名前は必須です！</span> :
                                         <></>}
                                 </div>
                             </div>
@@ -198,30 +202,30 @@ export default function ShopRegister() {
                                     イーメール <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
-                                    <input type="text" 
+                                    <input type="text"
                                         placeholder='イーメールを入力してください'
-                                        value={shopData.email} 
+                                        value={shopData.email}
                                         onChange={(e) => setDataValue(e.target.value, 'email')}
-                                        />
-                                    {error.email ? 
-                                        <span className='error'>イーメールは必須です！</span> : 
+                                    />
+                                    {error.email ?
+                                        <span className='error'>イーメールは必須です！</span> :
                                         <></>}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="row" style={{gap: '10px'}}>
+                        <div className="row" style={{ gap: '10px' }}>
                             <div className="col input-field">
                                 <div className="form-title">
                                     アドレス <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
-                                    <input type="text" 
+                                    <input type="text"
                                         placeholder='アドレスを入力してください'
-                                        value={shopData.address} 
-                                        onChange={(e) => setDataValue(e.target.value, 'address')}/>
-                                    {error.address ? 
-                                        <span className='error'>アドレスは必須です！</span> : 
+                                        value={shopData.address}
+                                        onChange={(e) => setDataValue(e.target.value, 'address')} />
+                                    {error.address ?
+                                        <span className='error'>アドレスは必須です！</span> :
                                         <></>}
                                 </div>
                             </div>
@@ -231,7 +235,7 @@ export default function ShopRegister() {
                                     電話番号 <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
-                                    <input type="text" 
+                                    <input type="text"
                                         placeholder='電話番号を入力してください'
                                         value={shopData.phone} 
                                         onChange={(e) => setDataValue(e.target.value, 'phone')}/>
@@ -248,18 +252,18 @@ export default function ShopRegister() {
                                     説明 <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
-                                    <textarea 
-                                    name="description" 
-                                    id="shop-info-description" 
-                                    placeholder='説明を入力してください'
-                                    onKeyUp={setTextareaHeight}
-                                    value={shopData.description} 
-                                    onChange={(e) => setDataValue(e.target.value, 'description')}
+                                    <textarea
+                                        name="description"
+                                        id="shop-info-description"
+                                        placeholder='説明を入力してください'
+                                        onKeyUp={setTextareaHeight}
+                                        value={shopData.description}
+                                        onChange={(e) => setDataValue(e.target.value, 'description')}
                                     >
 
                                     </textarea>
-                                    {error.description ? 
-                                        <span className='error'>説明は必須です！</span> : 
+                                    {error.description ?
+                                        <span className='error'>説明は必須です！</span> :
                                         <></>}
                                     {/* <input type="text" placeholder='説明を入力してください'/> */}
                                 </div>
@@ -271,19 +275,19 @@ export default function ShopRegister() {
                         <div className="form-title">
                             画像ギャラリー <span className='required-field'>*</span>
                         </div>
-                        {error.imgList ? 
-                            <span className='error'>画像ギャラリーは少なくとも1つが含まれています！</span> : 
+                        {error.imgList ?
+                            <span className='error'>画像ギャラリーは少なくとも1つが含まれています！</span> :
                             <></>}
 
                         <div className="form-notice">
-                            {imgList.length - 1}枚の写真が選択されています
+                            {imgList['url'].length - 1}枚の写真が選択されています
                         </div>
 
                         <div>
                             <button className='black form-btn row' onClick={() => setOpenImg(true)}>
-                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus"/>
-                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover"/>
-                                <div style={{marginLeft: '36px'}}>追加</div>
+                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus" />
+                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover" />
+                                <div style={{ marginLeft: '36px' }}>追加</div>
                             </button>
                         </div>
                     </div>
@@ -292,19 +296,27 @@ export default function ShopRegister() {
                         <div className="form-title">
                             スタッフ <span className='required-field'>*</span>
                         </div>
-                        {error.staffList ? 
-                            <span className='error'>スタッフは少なくとも１人が含まれています！</span> : 
+                        {error.staffList ?
+                            <span className='error'>スタッフは少なくとも１人が含まれています！</span> :
                             <></>}
 
                         <div className="staff-list">
+                            {staffList.length ? (
+                                staffList.map((staff, index) => {
+                                    return (
+                                        <img  key={'img_'+index} src={staff.image.url} style={{width: '100px', height: '100px', marginRight: '5px'}} />
+                                    )
 
+                                })
+                            ) : <></>
+                            }
                         </div>
 
                         <div>
-                            <button className='black form-btn row'>
-                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus"/>
-                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover"/>
-                                <div style={{marginLeft: '36px'}}>追加</div>
+                            <button className='black form-btn row' onClick={() => setOpenStaff(true)}>
+                                <SvgIcon width='25px' height="25px" name="icon-plus" className="icon-plus" />
+                                <SvgIcon width='25px' height="25px" name="icon-plus-hover" className="icon-plus-hover" />
+                                <div style={{ marginLeft: '36px' }}>追加</div>
                             </button>
                         </div>
                     </div>
@@ -313,8 +325,8 @@ export default function ShopRegister() {
                         <div className="form-title">
                             提供サービス <span className='required-field'>*</span>
                         </div>
-                        {error.serviceList ? 
-                            <span className='error'>提供サービスは少なくとも1つが含まれています！</span> : 
+                        {error.serviceList ?
+                            <span className='error'>提供サービスは少なくとも1つが含まれています！</span> :
                             <></>}
 
                         <div className="service-list">
@@ -333,29 +345,29 @@ export default function ShopRegister() {
                     <div className="col" >
                         <div className=' confirm-field row' onClick={() => {
                             setConfirm(!confirm);
-                            setError(   (prev) => ( { ...prev, confirm: false, } )  )
-                        } }>
-                            <Checkbox 
+                            setError((prev) => ({ ...prev, confirm: false, }))
+                        }}>
+                            <Checkbox
                                 item={{
                                     check: confirm,
                                 }}
-                                length={20}/>
+                                length={20} />
                             上記の情報が真実であることを保証します
                         </div>
-                        {error.confirm ? 
-                            <span className='error'>保証は必須です！</span> : 
+                        {error.confirm ?
+                            <span className='error'>保証は必須です！</span> :
                             <></>}
                     </div>
 
                     <div className="btn-field row">
-                        <button 
+                        <button
                             className="green request-confirm"
                             onClick={checkData}
                         >
                             リクエスト
                         </button>
-                        <div style={{flex: '1'}}></div>
-                        <button 
+                        <div style={{ flex: '1' }}></div>
+                        <button
                             className="red cancel-confirm"
                             onClick={() => navigate('/')}
                         >
@@ -367,6 +379,7 @@ export default function ShopRegister() {
             { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
             { openStaffPopup ? 'staff' : '0'}
             { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
+
         </>
     )
 }
