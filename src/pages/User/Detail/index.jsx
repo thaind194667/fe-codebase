@@ -8,6 +8,7 @@ import DetailReview from "./DetailReview";
 import Header from "@/layouts/Header";
 import axios from "axios";
 import {apiURL, publicURL, scrollToSection} from "@/hooks/hooks";
+import StaffCard from "@/components/StaffCard";
 
 export default function Details() {
 
@@ -162,7 +163,14 @@ export default function Details() {
         <div className="parlor-description">
           <div className="title">概要</div>
           <div className="description"> {pageData.description} </div>
+        </div>
           
+        <div className="parlor-staffs row" >
+        {
+          [...Array(5)].map((count) => {
+            return (<StaffCard/>)
+          })
+        }
         </div>
         <div className="parlor-services col" ref={section3}>
           <div className="title"> 提供サービス  </div>

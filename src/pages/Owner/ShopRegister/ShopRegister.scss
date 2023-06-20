@@ -36,6 +36,10 @@
 
         .shop-staff-form{ 
             gap: 5px;
+            .staff-list {
+                max-width: 100%;
+                overflow-x: scroll;
+            }
         }
 
         .shop-service-form {

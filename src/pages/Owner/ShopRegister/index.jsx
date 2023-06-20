@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {apiURL, headersWithToken} from '@/hooks/hooks'
 import Service from '../ServicePopup/Service'
-import StaffCard from '../StaffCard/StaffCard'
+import StaffCard from '@/components/StaffCard'
 
 const defaultErrorState = {
     name: false,
@@ -305,17 +305,12 @@ export default function ShopRegister() {
                             <span className='error'>スタッフは少なくとも１人が含まれています！</span> :
                             <></>}
 
-                        <div className="staff-list">
-                            {staffList.length ? (
-                                staffList.map((staff, index) => {
-                                    return (
-                                        <img  key={'img_'+index} src={staff.image.url} style={{width: '100px', height: '100px', marginRight: '5px'}} />
-                                    )
-
-                                })
-                            ) : <></>
-                            }
-                            <StaffCard />
+                        <div className="staff-list row">
+                        {
+                            [...Array(5)].map((count) => {
+                                return (<StaffCard edit/>)
+                            })
+                        }
                         </div>
 
                         <div>
