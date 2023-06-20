@@ -6,9 +6,6 @@
     font-weight: 600;
 }
 
-.staff-card {
-    width: 20vw;
-}
 .staff-card-element {
     flex: 1;
     $cardWidth: 18vw;
@@ -22,63 +19,66 @@
     gap: 5px;
     position: relative;
 
-    .staff-card-avatar {
-        margin: 5px auto;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        padding: 5px;
-        width: 60px;
-        height: 60px;
-        border: 2px solid #000;
-        border-radius: 50px;
-        align-items: center;
-    }
-
-    .staff-card-name {
-        font-size: 18px;
-        font-weight: 600;
-        color: #559901;
-    }
-
-    .staff-card-jlpt {
-        font-weight: 400;
-        font-size: 16px;
-        margin: 8px 0 10px;
-        color: #FF9900;
-    }
-
-    .staff-card-birth {
-        text-align: left;
-        width: 85%;
-        margin: 0 auto 5px;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-    }
-
-    .staff-card-sex {
-        @extend .staff-card-birth;
-    }
-
-    .staff-card-hometown {
-        @extend .staff-card-birth;
-        padding-bottom: 10px;
-    }
-
-}
-
-.staff-card-change {
-    background: #E7E7E7;
-    height: 50px;
-    width: 18vw;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: space-around;
-
-    .img-btn {
-        &:hover {
-            cursor: pointer;
+    .staff-card-info {
+        flex : 1;
+        .staff-card-avatar {
+            margin: 5px auto;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 5px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+            border-radius: 50px;
+            align-items: center;
+        }
+    
+        .staff-card-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #559901;
+        }
+    
+        .staff-card-jlpt {
+            font-weight: 400;
+            font-size: 16px;
+            margin: 8px 0 10px;
+            color: #FF9900;
+        }
+    
+        .staff-card-birth {
+            text-align: left;
+            width: 85%;
+            margin: 0 auto 5px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+        }
+    
+        .staff-card-sex {
+            @extend .staff-card-birth;
+        }
+    
+        .staff-card-hometown {
+            @extend .staff-card-birth;
+            padding-bottom: 10px;
         }
     }
+
+    .staff-card-change {
+        background: #E7E7E7;
+        height: 50px;
+        width: 18vw;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-around;
+    
+        .img-btn {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
 }

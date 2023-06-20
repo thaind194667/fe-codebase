@@ -12,8 +12,8 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
     // const [canChange, setCanChange] = useState(true)
 
     return (
-        <div className='col staff-card'>
-            <div className='staff-card-element col'>
+        <div className='col staff-card-element'>
+            <div className='staff-card-info col'>
                 <div className='staff-card-avatar' 
                     style={{ 
                         backgroundImage: `url(${edit ? data.image.url : publicURL + data.image})` 
