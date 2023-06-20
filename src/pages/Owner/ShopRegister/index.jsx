@@ -97,7 +97,7 @@ export default function ShopRegister() {
     const postData = () => {
         console.log(imgList);
         const arr = {...imgList};
-        arr['url'].pop();
+        // arr['url'].pop();
         const apiParams = {
             // token: localStorage.getItem('accessToken'),
             name: shopData.name,
@@ -377,7 +377,7 @@ export default function ShopRegister() {
                 </div>
             </div>
             { openImgPopup ? <ImagePopup data={imgList} confirmPopup={imgListHandle} closePopup={() => setOpenImg(false)}/> : <></> }
-            { openStaffPopup ? 'staff' : '0'}
+            { openStaffPopup ? <Staff_Popup data={staffList} display={openStaffPopup} setDisplay={setOpenStaff} /> : <></>}
             { openServicePopup ? <Service setDisplay={setOpenService} display={openServicePopup}/> : '0'}
 
         </>

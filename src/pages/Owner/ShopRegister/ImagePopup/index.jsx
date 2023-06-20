@@ -8,25 +8,55 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
 
     const [imgList, setImgList] = useState(data);
     const saveData = () => {
+        // let arr = new DataTransfer();
+        // imgList.files;
+        // for(let i = 0; i < arr.length; i++) {
+        //     arr.push(arr[i]);
+        //     console.log(arr[i]);
+        // }
+        // console.log(arr);
         confirmPopup(imgList)
     }
 
     const handleReUploadImg = (e, index) => {
-        const file = e.target.files[0];
-        // file.url = (URL.createObjectURL(file));
-        const arr = {...imgList};
-        arr[index] = {
-            image: file,
-            url: (URL.createObjectURL(file)),
+        const newFile = e.target.files[0];
+        const newUrl = (URL.createObjectURL(newFile));
+
+        let fileArr = new DataTransfer();   /// use to copy imgList.files
+        let urlArr = [...imgList.url];      /// copy imgList.url 
+        // urlArr.pop();
+        for(let i = 0 ; i < imgList.files.length; i++) { /// copy imgList.files
+            if(i === index) {
+                fileArr.items.add(newFile);
+                urlArr[index] = newUrl;
+            }
+            else 
+                fileArr.items.add(imgList.files[i]);
         }
-        setImgList(arr);
+        console.log('arr', fileArr, urlArr);
+        setImgList({
+            files : fileArr.files,
+            url: urlArr,
+        });
     }
 
     const removeImg = (index) => {
         console.log("remove " + index);
-        const arr = {...imgList};
-        arr.splice(index, 1);
-        setImgList(arr);
+
+        let fileArr = new DataTransfer();   /// use to copy imgList.files
+        let urlArr = [...imgList.url];      /// copy imgList.url 
+        urlArr.splice(index, 1);
+        // urlArr.pop();
+        for(let i = 0 ; i < imgList.files.length; i++) { /// copy imgList.files
+            if(i === index) 
+                continue;
+            else 
+                fileArr.items.add(imgList.files[i]);
+        }
+        setImgList({
+            files : fileArr.files,
+            url: urlArr,
+        });
     }
 
     const reUploadImg = (index) => {
@@ -39,24 +69,23 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
     }
 
     const handleAddImg = (e) => {
-        const arr = {...imgList};
-        arr['url'].pop();
+        let fileArr = new DataTransfer();   /// use to copy imgList.files
+        let urlArr = [...imgList.url];      /// copy imgList.url 
+        urlArr.pop();
+        for(let i = 0 ; i < imgList.files.length; i++) { /// copy imgList.files
+            fileArr.items.add(imgList.files[i]);
+        }
         for(let i = 0; i < e.target.files.length; i++) {
             let file = e.target.files[i];
-            sendList.items.add(file);
-            // file.url = (URL.createObjectURL(file));
-            // arr['file'].push(file);
-            arr['url'].push(URL.createObjectURL(file));
-            // arr.push ({
-            //     image: file,
-            //     url: (URL.createObjectURL(file)),
-            // })
+            fileArr.items.add(file);
+            urlArr.push(URL.createObjectURL(file));
         }
-        arr['files'] = sendList.files;
-        arr['url'].push('add');
-        // arr[arr.length] = "add";
-        console.log('arr', arr);
-        setImgList(arr);
+        urlArr.push('add');
+        console.log('arr', fileArr, urlArr);
+        setImgList({
+            files : fileArr.files,
+            url: urlArr,
+        });
     }
 
     useEffect(() => {
@@ -86,10 +115,8 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                                     {
                                         [...Array(3)].map((count, j) => {
                                             let index = i + j;
-                                            console.log(index);
                                             if(index >= imgList.url.length) return (
-                                                <div className="img-item" style={{flex: '1'}}></div>
-                                                
+                                                <div className="img-item" style={{flex: '1'}} key={`item${index}`}></div>
                                             )
                                             else if(imgList.url[index] !== 'add') 
                                             return (
@@ -115,12 +142,10 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                                                 </div>
                                             )
                                             else return (
-                                                <div className={"img-item"} style={{flex: '1'}} >
+                                                <div className={"img-item"} style={{flex: '1'}} key={`item${index}`}>
                                                     <input type="file" name="new-file" id="file++" onChange={handleAddImg} multiple hidden/>
                                                     <div className="add-img row" onClick={uploadImg}>
                                                         <SvgIcon name="add-img" width="40px" height="40px" round={true} backgroundColor="gray" padding="10px"/>
-                                                        {/* <SvgIcon name="gallery-add" type="png" width="40px" height="40px"/> */}
-
                                                     </div>
                                                 </div>
                                             )

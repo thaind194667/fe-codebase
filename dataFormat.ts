@@ -126,11 +126,11 @@ type input4 = {
     location: String,
     phoneNumber: String,
     emailAddess: String, 
+    serviceImgList: FileList,
     serviceList: [    /// mảng object
         {
             serviceName: String,
             serviceDescription: String,
-            image: File, 
             priceList: [
                 {
                     price: Number,
@@ -139,20 +139,15 @@ type input4 = {
             ]
         }   
     ],
-    imageLibrary: [ 
-        {
-            url: String, 
-            image: File,
-        }
-    ],  /// mảng object, backend chỉ cần lấy trường image
+    imageLibrary: FileList,  /// mảng object, backend chỉ cần lấy trường image
+    staffImgList: FileList,
+    staffCertificateImgList: FileList,
     staffList: [  
         {
             name: String,
             DOB: String,
             gender: Number,
             jlpt: Number,
-            certificateImage: File,
-            image: File,
             hometown: String,
         }
     ]
