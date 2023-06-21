@@ -165,13 +165,16 @@ export default function Details() {
           <div className="title">概要</div>
           <div className="description"> {pageData.description} </div>
         </div>
+        <div className="col" >
+          <div className="title" style={{fontSize : '35px', fontWeight: '700'}}>スタッフ</div>
+          <div className="parlor-staffs row" >
+          { pageData.staffList ? 
+            pageData.staffList.map((item, index) => {
+              return (<StaffCard data={item}/>)
+            }) : <></>
+          }
+          </div>
           
-        <div className="parlor-staffs row" >
-        { pageData.staffList ? 
-          pageData.staffList.map((item, index) => {
-            return (<StaffCard data={item}/>)
-          }) : <></>
-        }
         </div>
         <div className="parlor-services col" ref={section3}>
           <div className="title"> 提供サービス  </div>
