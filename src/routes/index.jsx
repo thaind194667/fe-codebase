@@ -10,7 +10,8 @@ import Admin from './admin'
 import Owner from './owner'
 import Login from '@/pages/Login'
 import HomePage from '@/pages/HomePage'
-
+import Search from '@/pages/User/Search'
+import Detail from '@/pages/User/Detail'
 // import Register from '@/pages/Register'
 
 let type = localStorage.getItem("role");
@@ -34,7 +35,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="*" element={
-          !type ? <HomePage /> : 
+          !type ? <Search /> : 
             type === "user" ?   <User /> : 
             type === "admin" ?  <Admin /> : 
                                <Owner />
@@ -43,6 +44,7 @@ const Router = () => {
           !type ?
             <Route path="/login" element={<Login />} /> : <></>
         }
+        <Route path='/detail/:id' element={<Detail />} />
       </Routes>
     </BrowserRouter>
   )

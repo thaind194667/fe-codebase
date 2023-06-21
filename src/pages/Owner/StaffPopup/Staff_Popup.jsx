@@ -106,7 +106,7 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                     名前
                   </div>
                   <input type='text'  id = 'staff_name' className='txt-input' value={staffName}
-                  placeholder='メールを入力してください' onChange={(e)=>setStaffName(e.target.value )}/>
+                  placeholder='氏名を入力してください' onChange={(e)=>setStaffName(e.target.value )}/>
                 </div>
                 <div className='row'>
                   <div className='w-200'>
