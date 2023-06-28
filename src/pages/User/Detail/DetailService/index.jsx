@@ -53,8 +53,8 @@ export default function DetailsService({
                 </div>
 
                 <div className="row" style={{ gap: "15px" }}>
-                    <div className="service-picture" style={{ width: "300px" }}>
-                        <img src={edit ? data.serviceImg.url : `${publicURL}${data.serviceImg}`} alt="" width={"100%"} />
+                    <div className="service-picture" style={{ width: "300px", height: '300px' }}>
+                        <img src={edit ? data.serviceImg.url : `${publicURL}${data.serviceImg}`} alt="" style={{maxWidth: '100%', maxHeight: '100%'}} />
                     </div>
                     <div className="service-description">{data.serviceDescription}</div>
                 </div>

@@ -13,15 +13,15 @@ import StaffCard from '@/components/StaffCard'
 import DetailsService from '@/pages/User/Detail/DetailService'
 
 const defaultErrorState = {
-    name: false,
-    email: false,
-    address: false,
-    phone: false,
-    description: false,
-    staffList: false,
-    imgList: false,
-    serviceList: false,
-    confirm: false,
+    name: '',
+    email: '',
+    address: '',
+    phone: '',
+    description: '',
+    staffList: '',
+    imgList: '',
+    serviceList: '',
+    confirm: '',
 }
 
 export default function ShopRegister() {
@@ -131,30 +131,38 @@ export default function ShopRegister() {
 
     const checkData = () => {
         let errorCount = 0;
-        // setError(defaultErrorState);
-        // if(!confirm) {
-        //     setError(   (prev) => ( { ...prev, confirm: true, } )  )
-        //     errorCount++;
-        // }
-        // for(const key in shopData)  {
-        //     // console.log(key, shopData[key]);
-        //     if(!shopData[key]) {
-        //         setError(   (prev) => ( { ...prev, [key]: true, } )  );
-        //         errorCount++;
-        //     }
-        // }
-        // // if(!staffList.length) {
-        // //     setError(   (prev) => ( { ...prev, staffList: true, } )  )
-        // //     errorCount++;
-        // // }
-        // if(imgList.length === 1) {
-        //     setError(   (prev) => ( { ...prev, imgList: true, } )  )
-        //     errorCount++;
-        // }
-        // if(!serviceList.length) {
-        //     setError(   (prev) => ( { ...prev, serviceList: true, } )  )
-        //     errorCount++;
-        // }
+        setError(defaultErrorState);
+        if(!confirm) {
+            setError(   (prev) => ( { ...prev, confirm: true, } )  )
+            errorCount++;
+        }
+        for(const key in shopData)  {
+            // console.log(key, shopData[key]);
+            if(!shopData[key]) {
+                setError(   (prev) => ( { ...prev, [key]: 'このフィールドは必須です！', } )  );
+                errorCount++;
+            }
+        }
+        if(!staffList.length) {
+            setError(   (prev) => ( { ...prev, staffList: 'スタッフは少なくとも１人が含まれています！', } )  )
+            errorCount++;
+        }
+        if(!imgList.length) {
+            setError(   (prev) => ( { ...prev, imgList: '画像ギャラリーは少なくとも1つが含まれています！', } )  )
+            errorCount++;
+        }
+        if(!serviceList.length) {
+            setError(   (prev) => ( { ...prev, serviceList: '提供サービスは少なくとも1つが含まれています！', } )  )
+            errorCount++;
+        }
+        if ( shopData.email && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(shopData.email)) ){
+            setError(   (prev) => ( { ...prev, email: 'イーメールは正しい形を入力してください！', } )  )
+            errorCount++;
+        }
+        if(shopData.phone.length > 10) {
+            setError(   (prev) => ( { ...prev, phone: '電話番号は正しい形を入力してください！', } )  )
+            errorCount++;
+        }
         if(errorCount) {
             alert("もう一度確認してすべてのフィールドに入力してください");
             return;
@@ -242,7 +250,7 @@ export default function ShopRegister() {
                                         value={shopData.name}
                                         onChange={(e) => setDataValue(e.target.value, 'name')} />
                                     {error.name ?
-                                        <span className='error'>名前は必須です！</span> :
+                                        <span className='error'>{error.name}</span> :
                                         <></>}
                                 </div>
                             </div>
@@ -258,7 +266,7 @@ export default function ShopRegister() {
                                         onChange={(e) => setDataValue(e.target.value, 'email')}
                                     />
                                     {error.email ?
-                                        <span className='error'>イーメールは必須です！</span> :
+                                        <span className='error'>{error.email}</span> :
                                         <></>}
                                 </div>
                             </div>
@@ -275,7 +283,7 @@ export default function ShopRegister() {
                                         value={shopData.address}
                                         onChange={(e) => setDataValue(e.target.value, 'address')} />
                                     {error.address ?
-                                        <span className='error'>アドレスは必須です！</span> :
+                                        <span className='error'>{error.address}</span> :
                                         <></>}
                                 </div>
                             </div>
@@ -285,12 +293,21 @@ export default function ShopRegister() {
                                     電話番号 <span className='required-field'>*</span>
                                 </div>
                                 <div className="form-input col">
-                                    <input type="text"
+                                    <input type="telephone" 
+                                        pattern="[0-9]{10}" 
                                         placeholder='電話番号を入力してください'
                                         value={shopData.phone} 
-                                        onChange={(e) => setDataValue(e.target.value, 'phone')}/>
+                                        onChange={(e) => {
+                                            // let val = e.target.value
+                                            // val = val.replace(/[^0-9]/g, "");
+                                            setDataValue(e.target.value, 'phone')
+                                        }}
+                                        onInput={(e) => {
+                                            e.target.value = e.target.value.replace(/[^0-9]/g, "")
+                                        }}
+                                    />
                                     {error.phone ? 
-                                        <span className='error'>電話番号は必須です！</span> : 
+                                        <span className='error'>{error.phone}</span> : 
                                         <></>}
                                 </div>
                             </div>
@@ -313,7 +330,7 @@ export default function ShopRegister() {
 
                                     </textarea>
                                     {error.description ?
-                                        <span className='error'>説明は必須です！</span> :
+                                        <span className='error'>{error.description}</span> :
                                         <></>}
                                     {/* <input type="text" placeholder='説明を入力してください'/> */}
                                 </div>
@@ -326,7 +343,7 @@ export default function ShopRegister() {
                             画像ギャラリー <span className='required-field'>*</span>
                         </div>
                         {error.imgList ?
-                            <span className='error'>画像ギャラリーは少なくとも1つが含まれています！</span> :
+                            <span className='error'>{error.imgList}</span> :
                             <></>}
 
                         <div className="form-notice">
@@ -347,7 +364,7 @@ export default function ShopRegister() {
                             スタッフ <span className='required-field'>*</span>
                         </div>
                         {error.staffList ?
-                            <span className='error'>スタッフは少なくとも１人が含まれています！</span> :
+                            <span className='error'>{error.staffList}</span> :
                             <></>}
 
                         <div className="staff-list row">
@@ -379,7 +396,7 @@ export default function ShopRegister() {
                             提供サービス <span className='required-field'>*</span>
                         </div>
                         {error.serviceList ?
-                            <span className='error'>提供サービスは少なくとも1つが含まれています！</span> :
+                            <span className='error'>{error.serviceList}</span> :
                             <></>}
 
                         <div className="service-list col">
@@ -423,8 +440,9 @@ export default function ShopRegister() {
 
                     <div className="btn-field row">
                         <button
-                            className="green request-confirm"
+                            className={`request-confirm ${confirm ? 'green' : 'gray'}`}
                             onClick={checkData}
+                            disabled={!confirm}
                         >
                             リクエスト
                         </button>

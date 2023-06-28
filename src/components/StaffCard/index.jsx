@@ -31,7 +31,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                 </div>
                 <div className='staff-card-sex'>
                     <span className='mgr-10'><Icon icon={user} /></span>
-                    <span className='txt-bold'>性別: </span> {data.gender === '1' ? '男性' : '女性'}
+                    <span className='txt-bold'>性別: </span> {data.gender === '1' || data.gender === 1 ? '男性' : '女性'}
                 </div>
                 <div className='staff-card-hometown'>
                     <span className='mgr-10'><Icon icon={home} /></span>

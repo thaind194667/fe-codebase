@@ -15,7 +15,7 @@ export default function Header() {
 
     const notiCount = notiList.length;
 
-    const [read, setRead] = useState(false);
+    const [read, setRead] = useState(localStorage.getItem('seen'));
     const [openUserTab, setOpenUser] = useState(false);
     const [openNoti, setOpenNoti] = useState(false);
 
@@ -75,7 +75,10 @@ export default function Header() {
                 : <div className="user-info row">
                     <div className="col" style={{position: 'relative'}}>
                         <div className="notification-btn col" onClick={() => {
-                                if(!read) setRead(true);
+                                if(!read) {
+                                    setRead(true);
+                                    localStorage.setItem('seen', true)
+                                }
                                 setOpenNoti(!openNoti);
                                 if(openUserTab) setOpenUser(false);
                             }}>
