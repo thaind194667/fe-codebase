@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/layouts/Header";
 import { apiURL, publicURL } from "@/hooks/hooks";
 import axios from 'axios';
+import LoadingPage from "@/pages/Loading";
 
 const minRate = 0;
 const maxRate = 50;
@@ -172,7 +173,7 @@ export default function Search() {
   }, [loading])
 
   return (
-    loading === true ? <div>Loading</div> :
+    loading === true ? <LoadingPage /> :
     <>
       <Header />
       <div className="page-body-search">

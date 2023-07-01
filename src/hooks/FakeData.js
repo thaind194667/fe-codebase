@@ -112,11 +112,41 @@ const parlorServiceList = [
         note : 'cccc' },
 ]
 
+function shuffle(arr) {
+    for (let i = arr.length - 1; 0 < i; i--) {
+       const j = Math.floor(Math.random() * i);
+       [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr
+ }
+
+const statusArray = ['承認待ち', '承認済み', '拒否された']
+
+let fakeRequestList = []
+let length = 35
+for(let i = 0; i < length; i++) {
+    const fake_status = Math.round(Math.random() * 2);
+    const is_active = Math.round(Math.random());
+    const j = length - 1 - i;
+    fakeRequestList.push({
+        startIndex: i,
+        requestID: "000" + (i < 10 ? '0' + i : i),
+        username: "user" + (i < 10 ? '0' + i : i),
+        facilityID: i,
+        facilityName: "shop _" + (i < 10 ? '0' + i : i),
+        status: statusArray[fake_status],
+        isActive: is_active === 1 ? true : false,
+        createdDate: "13/01/20" +  (j < 10 ? '0' + j : j)
+    })
+}
+fakeRequestList = shuffle(fakeRequestList)
+
 
 export { 
     parlorList, 
     serviceList, 
     parlorServiceList, 
     commentList,
-    userList 
+    userList,
+    fakeRequestList
 }

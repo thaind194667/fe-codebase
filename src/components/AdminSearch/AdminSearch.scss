@@ -1,6 +1,6 @@
 .adm-search-content {
-    width: 95%;
-    height: 70vh;
+    width: 100%;
+    // height: 70vh;
     margin: 0 auto;
 
     .page-title {
@@ -22,12 +22,18 @@
     }
 
     .txt-input {
-        width: 100%;
+        // width: 98%;
         position: relative;
         border: 2px solid #B4B4B4;
         border-radius: 8px;
         padding: 5px;
         align-items: center;
+
+        .search-btn {
+            &:hover {
+                cursor: pointer;
+            }
+        }
         
         input {
             margin-left: 5px;

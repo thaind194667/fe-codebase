@@ -9,6 +9,7 @@ import Header from "@/layouts/Header";
 import axios from "axios";
 import {apiURL, publicURL, scrollToSection} from "@/hooks/hooks";
 import StaffCard from "@/components/StaffCard";
+import LoadingPage from "@/pages/Loading";
 
 export default function Details() {
 
@@ -201,7 +202,7 @@ export default function Details() {
       </div>
     </div>
     :
-    <div>Loading...</div>
+    <LoadingPage />
     // <div className="returnHome">
     //     <p>Details page here</p>
     //   <button onClick={() => navigate("/")}>Home</button>

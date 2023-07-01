@@ -157,15 +157,17 @@ type input4 = {
 
 ///////-- get request list (get) (admin)
 /// output
-type output5 = [  /// mảng object
-    {
-        requestID: Number,
-        username: String,  /// username của user thực hiện request
-        facilityID: String,
-        createdDate: String,
-        requestStatus: Number,
-    }
-]
+type output5 = {
+    result: [
+        {
+            requestID: Number,
+            facilityID: Number,
+            username: String, /// tên user tạo request
+            status: String,
+            createdDate: String
+        }
+    ]
+}
 
 
 ///////-- accept shop create request (post) (admin)
@@ -180,3 +182,18 @@ type input7 = {
     requestID: Number,
 }
 
+
+////--- create new comment (post)
+/// input:
+type input8 = {
+    // ratingId: Number,
+    shopId: Number,
+    userId: Number,
+    comment: String | null,
+    rate: Number,
+}
+/// output: 
+type output8 = {
+    code: Number,
+    msg: String,    /// chuỗi thông báo kết quả
+}

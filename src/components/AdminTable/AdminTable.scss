@@ -1,0 +1,68 @@
+.admin-table {
+    margin-top: 20px;
+    max-height: 53vh;
+    // width: 100%;
+    // flex: 1;
+    overflow-y: scroll;
+    border-bottom: solid 1px #D3D3D3;
+    table {
+        width: 100%;
+        position: relative;
+        border-collapse: collapse;
+        thead {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: #F1F1F1;
+            z-index: 1000;
+            tr {
+                th {
+                    font-size: 20px;
+                    font-weight: 600;
+                    padding: 16px;
+                    div {
+                        justify-content: center;
+                    }
+                    &:hover {
+                        cursor: auto;
+                    }
+                }
+            }
+        }
+        tbody {
+            tr {
+                border-bottom: solid 1px #D3D3D3;
+                td {
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 400;
+                    padding: 16px;
+
+                    &.cell-shopid {
+                        color: #559901;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: normal;
+                        text-decoration-line: underline;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .action-btn {
+                        &:hover {
+                            cursor: pointer;
+                        }
+                        &.disabled {
+                            opacity: 0.5;
+                            &:hover {
+                                cursor: auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // flex: 1;
+    }
+}

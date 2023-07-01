@@ -17,6 +17,7 @@ export default function Header() {
 
     const [read, setRead] = useState(localStorage.getItem('seen'));
     const [openUserTab, setOpenUser] = useState(false);
+    const [openAdminTab, setOpenAdmin] = useState(false);
     const [openNoti, setOpenNoti] = useState(false);
 
     const [userInfo, setUserInfo] = useState({});
@@ -123,6 +124,26 @@ export default function Header() {
                                 <button className='green logout-btn' onClick={logout}>ログアウト</button>
                             </div> 
                             : <></>}
+                        { openAdminTab ? 
+                            <div className="admin-dropdown-panel col">
+                                <div className="admin-dropdown-item">
+                                    プロファイル
+                                </div>
+                                {
+                                    localStorage.getItem('role') === 'user' ?
+                                    <div className="user-dropdown-item" onClick={()=>navigate("/my-shop")}>
+                                        マッサージ部屋をリクエスト
+                                    </div> : 
+                                    <div className="user-dropdown-item">
+                                        私のマッサージ部屋
+                                    </div> 
+                                }
+                                <hr />
+                                <button className='green logout-btn' onClick={logout}>ログアウト</button>
+                            </div> 
+                            : <></>}
+
+
                         { openNoti ? 
                             <div className="notification-panel col">
                             {

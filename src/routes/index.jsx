@@ -45,6 +45,7 @@ const Router = () => {
             <Route path="/login" element={<Login />} /> : <></>
         }
         <Route path='/detail/:id' element={<Detail />} />
+        <Route path='/search' element={<Search />} />
       </Routes>
     </BrowserRouter>
   )
