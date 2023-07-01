@@ -1,0 +1,41 @@
+.adm-search-content {
+    width: 95%;
+    height: 70vh;
+    margin: 0 auto;
+
+    .page-title {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 29px;
+        text-align: left;
+        color: #559901;
+        margin-bottom: 20px;
+    }
+
+    .tb-name {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 39px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .txt-input {
+        width: 100%;
+        position: relative;
+        border: 2px solid #B4B4B4;
+        border-radius: 8px;
+        padding: 5px;
+        align-items: center;
+        
+        input {
+            margin-left: 5px;
+            flex: 1;
+            padding: 8px;
+            outline: none;
+            border: hidden;
+            font-size: 18px;
+        }
+    }
+}

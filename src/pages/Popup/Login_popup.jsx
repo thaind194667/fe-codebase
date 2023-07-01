@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./popup.scss"
+import "./login_popup.scss"
 import logo from "./cross.png"
 
 export default function Login_popup({display, setDisplay, txtPopup}) {
@@ -7,7 +7,7 @@ export default function Login_popup({display, setDisplay, txtPopup}) {
 
   return (display)?(
     <>
-      <div id="popup1" className="popup-overlay">
+      <div id="popup1" className="login-popup-overlay">
         <div className="popup">
           <div className="content">
             <div className='text-content'>

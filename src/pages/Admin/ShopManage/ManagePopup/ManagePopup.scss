@@ -1,0 +1,92 @@
+.manage-popup-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 1;
+    z-index: 1002;
+
+    .popup {
+        margin: 200px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 30%;
+        position: relative;
+        transition: all 1s ease-in-out;
+
+
+        .content {
+
+
+            .popup-title {
+                width: 95%;
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 10px;
+
+                .icon {
+                    padding: 8px;
+                    margin-right: 10px;
+                    text-align: center;
+                    border: 1px solid #ccc;
+                    border-radius: 50%;
+                }
+
+                .popup-question {
+                    font-size: 24px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+
+                .popup-note {
+                    margin-top: 5px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+
+            }
+
+            .popup-button {
+                width: 95%;
+                display: flex;
+                justify-content: flex-end;;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 19px;
+                letter-spacing: 0em;
+                text-align: left;
+
+                .btn-ok {
+                    margin: 5px 20px;
+                    font-size: 20px;
+                    background-color: #06D85F;
+                    color: #fff;
+                    padding: 0 20px;
+                    display: block;
+                    border-radius: 8px;
+                }
+
+                .btn-cancel {
+                    margin: 5px 0;
+                    font-size: 20px;
+                    background-color: #E2442E;
+                    color: #fff;
+                    padding: 0 8px;
+                    border-radius: 8px;
+                    display: block;
+                }
+            }
+        }
+
+    }
+}
