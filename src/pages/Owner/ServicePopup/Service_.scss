@@ -3,6 +3,7 @@
     color: #AAAAA4 !important;
 }
 
+//.Service-popup-overlay {
 .Service-popup-overlay {
     // display: flex;
     // justify-content: center;
@@ -40,6 +41,12 @@
                 :hover {
                     cursor: pointer;
                 }
+            }
+            
+            span.error {
+                color: red;
+                font-size: 12px;
+                line-height: 12px;
             }
 
             .service-popup-title {
@@ -181,6 +188,14 @@
                     }
 
                 }
+                .icon-img {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50px;
+                    border: 1px solid #8F8F8F;
+                    text-align: center;
+                    align-items: center;
+                    background: #8F8F8F !important;
 
                 .icon-img {
                     width: 25px;
@@ -195,6 +210,7 @@
                         cursor: pointer;
                     }
                 }
+
 
             }
 
@@ -233,4 +249,4 @@
 
         }
     }
-}
+}}

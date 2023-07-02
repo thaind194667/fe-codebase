@@ -17,6 +17,64 @@ function Service({confirmPopup, closePopup, data, index}) {
     const [serviceDescription, setDescription] = useState(data ? data.serviceDescription : '');
     const [priceList, setPriceList] = useState(data ? data.priceList : [defaultPriceDuration]);
 
+    //validation
+    const defaultErrorState = {
+        name: '',
+        desc: '',
+        imgUrl: '',
+        price: ''
+    }
+    const [validateData,setValidateData] = useState({
+        name: '',
+        desc: '',
+        imgUrl: '',
+        price: 0
+    })
+
+    const [error, setError] = useState(defaultErrorState);
+
+    useEffect(() => {
+        setError(   (prev) => ( { ...prev, name: false, } )  )
+    }, [serviceName])
+
+    useEffect(() => {
+        setError(   (prev) => ( { ...prev, desc: false, } )  )
+    }, [serviceDescription])
+    
+    useEffect(() => {
+        setError(   (prev) => ( { ...prev, imgUrl: false, } )  )
+    }, [serviceImg.url])
+
+    useEffect(() => {
+        setError(   (prev) => ( { ...prev, price: false, } )  )
+    }, [priceList.price])
+
+    const setValidateValue = (value, field) => {
+        setValidateData((prev) => ({
+            ...prev,
+            [field]: value,
+        })
+        );
+        setError((prev) => ({ ...prev, [field]: false, }));
+    }
+
+    const checkValidation = ()=>{
+        let errorCount = 0;
+        setError(defaultErrorState);
+        for(const key in validateData)  {
+            if(!validateData[key]) {
+                setError(   (prev) => ( { ...prev, [key]: 'このフィールドは必須です！'} )  );
+                errorCount++;
+            }
+        }
+        if(errorCount==0){
+            sendData();
+        }
+    }
+    ////////
+
+    
+
     const handleUpLoadImg = (e) => {
         const file = e.target.files[0];
         file.url = (URL.createObjectURL(file));
@@ -80,31 +138,52 @@ function Service({confirmPopup, closePopup, data, index}) {
                             <div className='col form-col' style={{ flex: '1' }}>
                                 <div className='col-title'>
                                     名前<span>*</span>
+                                    {error.name ?
+                                        <span className='error'>{error.name}</span> :
+                                        <></>
+                                    }
                                 </div>
                                 <input type='text' value={serviceName}
                                     className='Input-text' 
                                     placeholder='名前を入力してください' 
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e) => {
+                                        setName(e.target.value)
+                                        setValidateValue(e.target.value, 'name')
+                                    }}
                                     />
 
                                 <div className='col-title'>
                                     説明<span>*</span>
+                                    {error.desc ?
+                                        <span className='error'>{error.desc}</span> :
+                                        <></>
+                                    }
                                 </div>
                                 <textarea value={serviceDescription}
                                     type='text' 
                                     className=' Input-text big-input' 
                                     placeholder='説明を入力してください' 
                                     style={{ minHeight: '274px' }} 
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    onChange={(e) => {
+                                        setDescription(e.target.value)
+                                        setValidateValue(e.target.value, 'desc')
+                                    }}
                                 />
 
                             </div>
                             <div className='col form-col' style={{ flex: '1' }}>
                                 <div className='col-title'>
                                     イメージ<span>*</span>
+                                    {error.imgUrl ?
+                                        <span className='error'>{error.imgUrl}</span> :
+                                        <></>
+                                    }
                                     <input 
                                         type="file" className='Img-input' 
-                                        onChange={handleUpLoadImg} hidden />
+                                        onChange={(e)=>{
+                                            handleUpLoadImg(e)
+                                            setValidateValue(e.target.value,'imgUrl')
+                                        }} hidden />
                                 </div>
 
                                 <div className='img-input center-item'>
@@ -121,6 +200,10 @@ function Service({confirmPopup, closePopup, data, index}) {
                                 </div>
                                 <div className='col-title'>
                                     価格<span>*</span>
+                                    {error.price ?
+                                        <span className='error'>{error.price}</span> :
+                                        <></>
+                                    }
                                 </div>
                                 <div className='time-money-list col'>
                                 { 
@@ -139,7 +222,10 @@ function Service({confirmPopup, closePopup, data, index}) {
                                                     <input 
                                                         type='number' className='Input-text' placeholder='130000' 
                                                         value={item.price}
-                                                        onChange={(e) => changePrice(index, e.target.value)}
+                                                        onChange={(e) => {
+                                                            changePrice(index, e.target.value)
+                                                            setValidateValue(e.target.value, 'price')
+                                                        }}
                                                     />VND
                                                 </div>
                                                 { priceList.length === 1 && index === 0 ? <></> :
@@ -161,7 +247,9 @@ function Service({confirmPopup, closePopup, data, index}) {
                     </div>
                     <div className="btn">
                         <div className="space-between">
-                            <button type='button' onClick={sendData} className='green btn-add'>保存する</button>
+                            <button type='button' onClick={()=>{
+                                checkValidation();
+                            }} className='green btn-add'>保存する</button>
                             <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
                         </div>
                     </div>
