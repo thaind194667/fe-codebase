@@ -12,6 +12,8 @@ import Service from '../ServicePopup/Service'
 import StaffCard from '@/components/StaffCard'
 import DetailsService from '@/pages/User/Detail/DetailService'
 
+import { toast } from 'react-toastify'
+
 const defaultErrorState = {
     name: '',
     email: '',
@@ -102,6 +104,16 @@ export default function ShopRegister() {
         setError((prev) => ({ ...prev, [field]: false, }));
     }
 
+    const toastWaiting = () => {
+        nowToast = toast("Processing ....", {
+            autoClose: false,
+        });
+    }
+
+    const closeWaitToast = () => {
+        toast.dismiss(nowToast);
+    }
+
     const postData = () => {
         console.log(imgList);
         const arr = {...imgList};
@@ -118,15 +130,22 @@ export default function ShopRegister() {
             serviceList,
         }
         console.log(apiParams);
+        toastWaiting();
         axios.post(`${apiURL}/massage-facilities/store`, apiParams, {
             headers: headersWithToken,
         })
         .then((res) => {
             console.log(res);
+            if(res.status === 200) {
+                closeWaitToast();
+                toast.success("登録が成功しました！")
+            }
             localStorage.setItem("noti", 1);
-            navigate("/");
+            setTimeout(()=>{
+                navigate("/");
+            }, 2000)
         })
-        alert("Done");
+        // alert("Done");
     }
 
     const checkData = () => {

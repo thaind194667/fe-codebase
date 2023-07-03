@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {apiURL, publicURL} from '@/hooks/hooks'
 import axios from 'axios';
-
-
-
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Header() {
     
@@ -60,6 +59,20 @@ export default function Header() {
 
     return (
         <div className="page-header row">
+            {/* <div className="toast-container" style={{position: 'fixed'}}> */}
+                <ToastContainer 
+                    position="bottom-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    // draggable
+                    pauseOnHover
+                    theme="light"
+                />
+            {/* </div> */}
             <div className='header-title'>
                 <div className='col' onClick={() => navigate('/')}>
                     <p>Seishin</p>
@@ -158,8 +171,8 @@ export default function Header() {
                     </div>
                 </div>
                 : <div className="non-user-action row">
-                    <button className='info-btn white' >Sign up</button>
-                    <button className='info-btn black' onClick={() => navigate('/login')}>Sign in</button>
+                    <button className='info-btn white' >サインアップ</button>
+                    <button className='info-btn black' onClick={() => navigate('/login')}>ログイン</button>
                 </div>
             }
         </div>

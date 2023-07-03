@@ -1,8 +1,6 @@
 .admin-table {
     margin-top: 20px;
-    max-height: 53vh;
-    // width: 100%;
-    // flex: 1;
+    height: 53vh;
     overflow-y: scroll;
     border-bottom: solid 1px #D3D3D3;
     table {
@@ -19,8 +17,11 @@
                 th {
                     font-size: 20px;
                     font-weight: 600;
-                    padding: 16px;
+                    // padding: 16px;
                     div {
+                        display: flex;
+                        align-items: center;
+                        height: 9vh;
                         justify-content: center;
                     }
                     &:hover {
@@ -36,18 +37,24 @@
                     text-align: center;
                     font-size: 16px;
                     font-weight: 400;
-                    padding: 16px;
-
-                    &.cell-shopid {
-                        color: #559901;
-                        font-size: 16px;
-                        font-weight: 500;
-                        line-height: normal;
-                        text-decoration-line: underline;
-                        &:hover {
-                            cursor: pointer;
+                    // padding: 16px;
+                    div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 9vh;
+                        &.cell-shopid {
+                            color: #559901;
+                            font-size: 16px;
+                            font-weight: 500;
+                            line-height: normal;
+                            text-decoration-line: underline;
+                            &:hover {
+                                cursor: pointer;
+                            }
                         }
                     }
+
 
                     .action-btn {
                         &:hover {
@@ -63,6 +70,5 @@
                 }
             }
         }
-        // flex: 1;
     }
 }

@@ -1,13 +1,17 @@
 import "./AdminSearch.scss";
 import React from 'react'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react';
+// import { useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react';
 import SvgIcon from "@/components/SvgIcon";
 
 
 const AdminSearch = ({ pageTitle, tableName, setSearch }) => {
 
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    setInputValue("")
+  }, [tableName])
 
   return (
     <div className='adm-search-content'>

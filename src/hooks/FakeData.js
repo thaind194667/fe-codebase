@@ -150,3 +150,7 @@ export {
     userList,
     fakeRequestList
 }
+
+
+// {status = 0, isActive = 0}  |---> Accept => {status = 1, isActive = 1}   ---> Deactive => {status = 1, isActive = 0} ---> Active => {status = 1, isActive = 1}
+//                             |---> Deny   => {status = 2, isActive = 0}   ---> Accept => {status = 1, isActive = 1}

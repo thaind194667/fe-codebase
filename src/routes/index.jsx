@@ -2,9 +2,8 @@ import {
   BrowserRouter, 
   Routes, 
   Route, 
-  useNavigate, 
-  useLocation,
-  generatePath } from 'react-router-dom'
+  Navigate,
+} from 'react-router-dom'
 import User from './user'
 import Admin from './admin'
 import Owner from './owner'
@@ -35,7 +34,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="*" element={
-          !type ? <Search /> : 
+          !type ? <Navigate to={'/search'} /> : 
             type === "user" ?   <User /> : 
             type === "admin" ?  <Admin /> : 
                                <Owner />

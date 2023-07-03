@@ -27,6 +27,8 @@ export default function Details() {
 
   const [imgList, setImgList] = useState([])
 
+  const [curCommentPage, setCommentPage] = useState(1);
+
   const [serviceList, setServiceList] = useState([])
   const [ratingList, setRatingList] = useState([])
 
