@@ -37,6 +37,8 @@ export default function Details() {
   const [serviceList, setServiceList] = useState([]);
   const [ratingList, setRatingList] = useState([]);
 
+  const [error, setError] = useState("");
+
   const [userInfo, setUserInfo] = useState({
     userID: "",
     username: "default",
@@ -51,11 +53,11 @@ export default function Details() {
     nowToast = toast("Processing ....", {
         autoClose: false,
     });
-}
+  }
 
-const closeWaitToast = () => {
+  const closeWaitToast = () => {
     toast.dismiss(nowToast);
-}
+  }
 
   const getDetails = () => {
     // ${
@@ -100,6 +102,10 @@ const closeWaitToast = () => {
   };
 
   const postNewComment = () => {
+    if(!userComment) {
+      setError("レビューが必須です！！");
+      return;
+    }
     console.log(rating, userComment, userInfo.userID, id);
     toastWaiting();
     const apiParam = {
@@ -368,8 +374,13 @@ const closeWaitToast = () => {
                   id={`comment`}
                   placeholder="ここにあなたの気持ちを説明してください"
                   value={userComment}
-                  onInput={(e) => setComment(e.target.value)}
+                  onInput={(e) => {
+                    setComment(e.target.value)
+                    setError("")
+                  }}
                 ></textarea>
+                {error ? <span style={{color: "red"}}> {error} </span> : <></>}
+                {/* <span>  </span> */}
               </div>
 
               <button className="submit-rating orange" onClick={postNewComment}>レビューを送る</button>

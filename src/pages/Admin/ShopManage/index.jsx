@@ -24,11 +24,11 @@ const actionListURL = {
 }
 
 const actionListMsg = {
-    accept:     "承認するのが構成しました",
-    deny:       "拒否するのが構成しました",
-    active :    "活性化するのが構成しました",
-    deactive:   "無効化するのが構成しました",
-    remove:     "削除するのが構成しました",
+    accept:     "承認するのが成功しました",
+    deny:       "拒否するのが成功しました",
+    active :    "活性化するのが成功しました",
+    deactive:   "無効化するのが成功しました",
+    remove:     "削除するのが成功しました",
 }
 
 let actionParam;

@@ -38,7 +38,7 @@ export default function ManagePopup({ popuptype, confirmPopup, cancelPopup }) {
         <div className="popup">
           <div className="content">
             <div className='popup-title row'>
-              {popuptype === "accept" ?
+              {popuptype === "accept" || popuptype === "active" ?
                 <div className="icon" style={{background: "#55990159"}}>
                   <Icon icon={question} size={30} style={{ color: "#559901" }} />
                 </div>

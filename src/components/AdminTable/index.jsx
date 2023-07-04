@@ -139,7 +139,7 @@ export default function AdminTable({
                                 <td >
                                     <div className="cell-shopid" onClick={() => navigate(`/detail/${item.facilityID}`, { id: item.facilityID })}>
                                         {item.facilityName} 
-                                        {type === "request" ? " - " + item.facilityID : ""}
+                                        {/* {type === "request" ? " - " + item.facilityID : ""} */}
                                     </div>
                                 </td>
 
