@@ -1,5 +1,5 @@
-const apiURL = "http://127.0.0.1:8000/api"
-const publicURL = "http://127.0.0.1:8000/"
+const publicURL = "http://phplaravel-1045046-3669555.cloudwaysapps.com/"
+const apiURL = publicURL + "api"
 
 const headersWithToken = {
     accept: 'application/json',

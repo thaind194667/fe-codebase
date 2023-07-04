@@ -102,22 +102,15 @@ const closeWaitToast = () => {
     })
     .then((res) => {
       closeWaitToast();
-      toast(res.data);
+      if(res.data === "ok") {
+        toast.success("新しいレビューの追加が成功しました");
+        setComment("");
+        setRating(5);
+        changeCommentPage(1);
+      } 
       console.log(res);
     })
   }
-
-  // const getImgList = async () => {
-  //   let arr = []
-  //   for(let i = 0 ; i < 5 ; i++) {
-  //     arr.push('pic')
-  //   }
-  // }
-
-  // const fetchData = async () => {
-  //   await getDetails();
-  //   // getImgList();
-  // }
 
   useEffect(() => {
     // console.log(parlorList);
@@ -127,7 +120,6 @@ const closeWaitToast = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(pageData);
     setServiceList(pageData.serviceList);
     setRatingList(pageData.ratingList);
     console.log(pageData.staffList);
@@ -138,7 +130,9 @@ const closeWaitToast = () => {
   }, [curCommentPage])
 
   const changeCommentPage = (index) => {
-    setCommentPage(index);
+    if(curCommentPage === index) getComment();
+    else
+      setCommentPage(index);
   }
 
   const getComment = () => {
@@ -147,7 +141,8 @@ const closeWaitToast = () => {
     })
     .then((res) => {
       console.log(res.data.ratingList);
-      setRatingList(res.data.ratingList)  
+      setRatingList(res.data.ratingList);
+      setCommentCount(res.data.review_count);
     })
     .catch(error => console.error(error))
   }
@@ -381,10 +376,4 @@ const closeWaitToast = () => {
   ) : (
     <LoadingPage />
   );
-  // <div className="returnHome">
-  //     <p>Details page here</p>
-  //   <button onClick={() => navigate("/")}>Home</button>
-  //   <button onClick={() => navigate("/search")}>Search</button>
-
-  // </div>
 }

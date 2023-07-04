@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './ImagePopup.scss'
 import SvgIcon from '@/components/SvgIcon'
+import { Icon } from 'react-icons-kit'
+import { close } from 'react-icons-kit/fa/close'
 
 let sendList = new DataTransfer();
 
@@ -100,9 +102,12 @@ export default function ImagePopup({closePopup, confirmPopup, data}) {
                     <div className="popup-title">
                         イメージの追加
                     </div>
-                    <div onClick={closePopup} className="popup-close-btn">
+                    <span className="popup-close-btn" onClick={closePopup}>
+                        <Icon icon={close} size={18} />
+                    </span>
+                    {/* <div onClick={closePopup} className="popup-close-btn">
                         <SvgIcon name={'close-btn'} width="20px" height="20px"/>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="popup-main-content col" >
                     <div style={{fontSize: '20px'}}>画像を追加してストアを最も視覚的に説明します。</div>

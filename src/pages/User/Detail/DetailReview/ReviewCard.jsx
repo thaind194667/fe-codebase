@@ -14,7 +14,7 @@ export default function ReviewCard({ data, status, submitReview }) {
             setRating(data.rate);
             console.log(data.rate);
         }
-    }, []);
+    }, [data]);
 
     // const rating = () => {
     // console.log("clcik");

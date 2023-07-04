@@ -20,7 +20,7 @@ export default function DetailReview({data, postData}) {
     useEffect(() => {
         // setCurPage(1);
         setData(data);
-    }, [])
+    }, [data])
 
     return (
         // <div className='row' style={{width: '100%',}}>

@@ -64,7 +64,7 @@ export default function DetailsService({
                 <table className={`price-table ${edit ? 'small-txt' : ''}`}>
                     <thead>
                         <tr>
-                            {edit ? <></> : <th></th>}
+                            {/* {edit ? <></> : <th></th>} */}
                             <th></th>
                             <th>価格</th>
                             <th></th>
@@ -84,9 +84,9 @@ export default function DetailsService({
                     data.servicePrice.map((item, index) => {
                         return (
                             <tr key={`rownormal${index}`}>
-                                <td>
+                                {/* <td>
                                     <input type="radio" name={"price-choose" + data.id} />
-                                </td>
+                                </td> */}
                                 <td className="duration">{item.duration}分</td>
                                 <td className="customer-count">１人</td>
                                 <td className="price">{currencyConvert(item.price)} VND</td>

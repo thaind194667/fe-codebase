@@ -185,7 +185,7 @@ export default function ShopRegister() {
             errorCount++;
         }
         if(errorCount) {
-            alert("もう一度確認してすべてのフィールドに入力してください");
+            toast.error("もう一度フィールドをすべて確認してください");
             return;
         }
         else 

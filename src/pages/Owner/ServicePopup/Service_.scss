@@ -214,39 +214,39 @@
 
             }
 
-            .btn {
-                padding: 20px;
-                // width: 100%;
-
-                .space-between {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-
-                    button {
-                        width: 160px;
-                    }
-
-                    .btn-add {
-                        // background-color: #559901;
-                        padding: 18px 34px;
-                        // color: #fff;
-                        font-weight: 600;
-                        font-size: 18px;
-                        border-radius: 8px;
-                    }
-
-                    .btn-cancel {
-                        // background-color: #E2442E;
-                        padding: 18px 18px;
-                        // color: #fff;
-                        font-weight: 600;
-                        font-size: 18px;
-                        border-radius: 8px;
-                    }
+            
+        }
+        .btn {
+            padding: 20px;
+            // width: 100%;
+            
+            .space-between {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                button {
+                    width: 160px;
                 }
-            }
+    
+                .btn-add {
+                    // background-color: #559901;
+                    padding: 18px 34px;
+                    // color: #fff;
+                    font-weight: 600;
+                    font-size: 18px;
+                    border-radius: 8px;
+                }
+    
+                .btn-cancel {
+                    // background-color: #E2442E;
+                    padding: 18px 18px;
+                    // color: #fff;
+                    font-weight: 600;
+                    font-size: 18px;
+                    border-radius: 8px;
+                }
 
+            }
         }
     }
 }}

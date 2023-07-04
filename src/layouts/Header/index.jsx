@@ -70,7 +70,7 @@ export default function Header() {
                     pauseOnFocusLoss
                     // draggable
                     pauseOnHover
-                    theme="light"
+                    theme="colored"
                 />
             {/* </div> */}
             <div className='header-title'>
