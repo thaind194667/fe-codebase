@@ -70,8 +70,8 @@ export default function Search() {
       headers: headersWithToken,
     })
     .then((result) => {
-      console.log(result);
-      setRes(result.data.result);
+      console.log(result.data);
+      setRes(result.data.result.sort((a,b)=>b.rating-a.rating));
       setCurrentPage(1);
     })
     .catch((err) => console.error(err))
@@ -126,7 +126,7 @@ export default function Search() {
     })
     .then((result) => {
       console.log(result.data);
-      setRes(result.data.result);
+      setRes(result.data.result.sort((a,b)=>b.rating-a.rating));
       setCurrentPage(1);
       let serviceListArr;
       // if(typeof result.data.serviceList === "array")
@@ -185,7 +185,7 @@ export default function Search() {
       if (i === searchRes.length) break;
       arr.push(searchRes[i]);
     }
-    setShowList(arr.sort((a,b)=>b.rating-a.rating));
+    setShowList(arr);
   }, [searchRes, currentPage]);
   
   useEffect(() => {
