@@ -28,6 +28,8 @@ const defaultErrorState = {
 
 export default function ShopRegister() {
 
+    let nowToast;
+
     const navigate = useNavigate();
 
     const [shopData, setData] = useState({

@@ -25,9 +25,9 @@ export default function DetailReview({data, postData}) {
     return (
         // <div className='row' style={{width: '100%',}}>
         <div className='review-list row'>
-            <div className="add-review-form">
+            {/* <div className="add-review-form">
                 <ReviewCard status="add" data={{name: 'myname'}}/>
-            </div>
+            </div> */}
             <div className="review-list-info row">
             {
                 listData.length ?

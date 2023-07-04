@@ -84,7 +84,19 @@ export default function Header() {
                 localStorage.getItem('role') ? 
                 localStorage.getItem('role') === 'admin' ? 
                 <div className='admin-info row'>
-                    <button className='black admin-btn' onClick={logout}>システムアドミン</button> 
+                    <button className='black admin-btn' onClick={() => {
+                        setOpenAdmin(!openAdminTab);
+                        // alert(openAdminTab)
+                    }}>システムアドミン</button> 
+                    { openAdminTab ? 
+                        <div className="admin-dropdown-panel col">
+                            {/* <div className="admin-dropdown-item">
+                                プロファイル
+                            </div> */}
+                            {/* <hr /> */}
+                            <button className='green logout-btn' onClick={logout}>ログアウト</button>
+                        </div> 
+                        : <></>}
                 </div>
                 : <div className="user-info row">
                     <div className="col" style={{position: 'relative'}}>
@@ -137,25 +149,6 @@ export default function Header() {
                                 <button className='green logout-btn' onClick={logout}>ログアウト</button>
                             </div> 
                             : <></>}
-                        { openAdminTab ? 
-                            <div className="admin-dropdown-panel col">
-                                <div className="admin-dropdown-item">
-                                    プロファイル
-                                </div>
-                                {
-                                    localStorage.getItem('role') === 'user' ?
-                                    <div className="user-dropdown-item" onClick={()=>navigate("/my-shop")}>
-                                        マッサージ部屋をリクエスト
-                                    </div> : 
-                                    <div className="user-dropdown-item">
-                                        私のマッサージ部屋
-                                    </div> 
-                                }
-                                <hr />
-                                <button className='green logout-btn' onClick={logout}>ログアウト</button>
-                            </div> 
-                            : <></>}
-
 
                         { openNoti ? 
                             <div className="notification-panel col">
