@@ -1,4 +1,4 @@
-const publicURL = "http://phplaravel-1045046-3669555.cloudwaysapps.com/"
+const publicURL = "https://phplaravel-1045046-3669555.cloudwaysapps.com/"
 const apiURL = publicURL + "api"
 
 const headersWithToken = {
