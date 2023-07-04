@@ -43,6 +43,13 @@
                 }
             }
 
+            .error {
+                color: red;
+                font-size: 12px;
+                line-height: 14px;
+                font-weight: bold;
+            }
+
             .popup-title {
                 font-size: 24px;
                 font-weight: 600;
@@ -53,7 +60,7 @@
 
             .popup-form {
                 overflow: scroll;
-                padding: 10px 10% ;
+                padding: 10px 10%;
                 // padding-top: 10px;
                 // padding-left: 6px;
                 // padding-bottom: 5px;

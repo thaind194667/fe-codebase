@@ -48,6 +48,9 @@ export default function Header() {
 
     const logout = () => {
         localStorage.removeItem('role');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('type_token');
+        localStorage.removeItem('noti');
         navigate('/')
         window.location.reload();
     }

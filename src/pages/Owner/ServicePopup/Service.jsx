@@ -5,7 +5,7 @@ import { Icon } from 'react-icons-kit'
 import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 
-function Service({confirmPopup, closePopup, data, index}) {
+function Service({ confirmPopup, closePopup, data, index }) {
 
     const defaultPriceDuration = {
         duration: 60,
@@ -24,29 +24,29 @@ function Service({confirmPopup, closePopup, data, index}) {
         imgUrl: '',
         price: ''
     }
-    const [validateData,setValidateData] = useState({
-        name: '',
-        desc: '',
-        imgUrl: '',
-        price: 0
+    const [validateData, setValidateData] = useState({
+        name: serviceName,
+        desc: serviceDescription,
+        imgUrl: serviceImg,
+        price: data ? data.priceList.price : 0
     })
 
     const [error, setError] = useState(defaultErrorState);
 
     useEffect(() => {
-        setError(   (prev) => ( { ...prev, name: false, } )  )
+        setError((prev) => ({ ...prev, name: false, }))
     }, [serviceName])
 
     useEffect(() => {
-        setError(   (prev) => ( { ...prev, desc: false, } )  )
+        setError((prev) => ({ ...prev, desc: false, }))
     }, [serviceDescription])
-    
+
     useEffect(() => {
-        setError(   (prev) => ( { ...prev, imgUrl: false, } )  )
+        setError((prev) => ({ ...prev, imgUrl: false, }))
     }, [serviceImg.url])
 
     useEffect(() => {
-        setError(   (prev) => ( { ...prev, price: false, } )  )
+        setError((prev) => ({ ...prev, price: false, }))
     }, [priceList.price])
 
     const setValidateValue = (value, field) => {
@@ -58,22 +58,23 @@ function Service({confirmPopup, closePopup, data, index}) {
         setError((prev) => ({ ...prev, [field]: false, }));
     }
 
-    const checkValidation = ()=>{
+    const checkValidation = () => {
         let errorCount = 0;
         setError(defaultErrorState);
-        for(const key in validateData)  {
-            if(!validateData[key]) {
-                setError(   (prev) => ( { ...prev, [key]: 'このフィールドは必須です！'} )  );
+        for (const key in validateData) {
+            if (!validateData[key]) {
+                setError((prev) => ({ ...prev, [key]: 'このフィールドは必須です！' }));
+                console.log(key);
                 errorCount++;
             }
         }
-        if(errorCount==0){
+        if (errorCount == 0) {
             sendData();
         }
     }
     ////////
 
-    
+
 
     const handleUpLoadImg = (e) => {
         const file = e.target.files[0];
@@ -100,8 +101,8 @@ function Service({confirmPopup, closePopup, data, index}) {
     const upLoadImage = () => {
         document.querySelector(".Img-input").click()
     }
-    
-    const addMoreTime = () =>{
+
+    const addMoreTime = () => {
         let arr = [...priceList];
         arr.push(defaultPriceDuration);
         setPriceList(arr);
@@ -116,7 +117,7 @@ function Service({confirmPopup, closePopup, data, index}) {
     const sendData = () => {
         let data = {
             serviceImg,
-            serviceName, 
+            serviceName,
             serviceDescription,
             priceList,
         }
@@ -144,13 +145,13 @@ function Service({confirmPopup, closePopup, data, index}) {
                                     }
                                 </div>
                                 <input type='text' value={serviceName}
-                                    className='Input-text' 
-                                    placeholder='名前を入力してください' 
+                                    className='Input-text'
+                                    placeholder='名前を入力してください'
                                     onChange={(e) => {
                                         setName(e.target.value)
                                         setValidateValue(e.target.value, 'name')
                                     }}
-                                    />
+                                />
 
                                 <div className='col-title'>
                                     説明<span>*</span>
@@ -160,10 +161,10 @@ function Service({confirmPopup, closePopup, data, index}) {
                                     }
                                 </div>
                                 <textarea value={serviceDescription}
-                                    type='text' 
-                                    className=' Input-text big-input' 
-                                    placeholder='説明を入力してください' 
-                                    style={{ minHeight: '274px' }} 
+                                    type='text'
+                                    className=' Input-text big-input'
+                                    placeholder='説明を入力してください'
+                                    style={{ minHeight: '274px' }}
                                     onChange={(e) => {
                                         setDescription(e.target.value)
                                         setValidateValue(e.target.value, 'desc')
@@ -178,11 +179,11 @@ function Service({confirmPopup, closePopup, data, index}) {
                                         <span className='error'>{error.imgUrl}</span> :
                                         <></>
                                     }
-                                    <input 
-                                        type="file" className='Img-input' 
-                                        onChange={(e)=>{
+                                    <input
+                                        type="file" className='Img-input'
+                                        onChange={(e) => {
                                             handleUpLoadImg(e)
-                                            setValidateValue(e.target.value,'imgUrl')
+                                            setValidateValue(e.target.value, 'imgUrl')
                                         }} hidden />
                                 </div>
 
@@ -206,51 +207,51 @@ function Service({confirmPopup, closePopup, data, index}) {
                                     }
                                 </div>
                                 <div className='time-money-list col'>
-                                { 
-                                    priceList.map((item, index) => {
-                                        return (
-                                            <div className={`time-money-item row row${index}`} key={`servicenumber${index}`}>
-                                                <select className='time-select' defaultValue={60} 
-                                                    value={item.duration}
-                                                    onChange={(e) => changeDuration(index, e.target.value)} 
-                                                    required>
-                                                    <option value={60}>60分</option>
-                                                    <option value={90}>90分</option>
-                                                    <option value={120}>120分</option>
-                                                </select>
-                                                <div className='row' style={{alignItems: 'center', gap: '2px'}}>
-                                                    <input 
-                                                        type='number' className='Input-text' placeholder='130000' 
-                                                        value={item.price}
-                                                        onChange={(e) => {
-                                                            changePrice(index, e.target.value)
-                                                            setValidateValue(e.target.value, 'price')
-                                                        }}
-                                                    />VND
+                                    {
+                                        priceList.map((item, index) => {
+                                            return (
+                                                <div className={`time-money-item row row${index}`} key={`servicenumber${index}`}>
+                                                    <select className='time-select' defaultValue={60}
+                                                        value={item.duration}
+                                                        onChange={(e) => changeDuration(index, e.target.value)}
+                                                        required>
+                                                        <option value={60}>60分</option>
+                                                        <option value={90}>90分</option>
+                                                        <option value={120}>120分</option>
+                                                    </select>
+                                                    <div className='row' style={{ alignItems: 'center', gap: '2px' }}>
+                                                        <input
+                                                            type='number' className='Input-text' placeholder='130000'
+                                                            value={item.price}
+                                                            onChange={(e) => {
+                                                                changePrice(index, e.target.value)
+                                                                setValidateValue(e.target.value, 'price')
+                                                            }}
+                                                        />VND
+                                                    </div>
+                                                    {priceList.length === 1 && index === 0 ? <></> :
+                                                        <button
+                                                            type='button'
+                                                            className=' black btn-delete-time' onClick={() => deleteTime(index)}>-</button>
+                                                    }
                                                 </div>
-                                                { priceList.length === 1 && index === 0 ? <></> :
-                                                    <button 
-                                                    type='button' 
-                                                    className=' black btn-delete-time' onClick={() => deleteTime(index)}>-</button>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                                            )
+                                        })
+                                    }
                                 </div>
                                 {
-                                    priceList.length < 3 ? 
-                                    <button type='button' className=' black btn-more-time' onClick={addMoreTime}>+</button> : <></>
+                                    priceList.length < 3 ?
+                                        <button type='button' className=' black btn-more-time' onClick={addMoreTime}>+</button> : <></>
                                 }
                             </div>
                         </div>
-                    </div>
-                    <div className="btn">
-                        <div className="space-between">
-                            <button type='button' onClick={()=>{
-                                checkValidation();
-                            }} className='green btn-add'>保存する</button>
-                            <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
+                        <div className="btn">
+                            <div className="space-between">
+                                <button type='button' onClick={() => {
+                                    checkValidation();
+                                }} className='green btn-add'>保存する</button>
+                                <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
+                            </div>
                         </div>
                     </div>
                 </div>

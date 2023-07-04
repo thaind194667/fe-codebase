@@ -7,7 +7,7 @@ import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 import dayjs from 'dayjs'
 
-const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
+const Staff_Popup = ({ confirmPopup, closePopup, data, index }) => {
 
   const DefaultStaffSex = '1'
   const DefaulJLPT = 2
@@ -20,34 +20,91 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
   const [avatar, setAvatar] = useState(data ? data.image : '')
   const [jlptImage, setJlptImage] = useState(data ? data.certificateImage : '')
 
+  //validation
+  const defaultErrorState = {
+    name: '',
+    dob: '',
+    avatar_img: '',
+    home_town: '',
+    jlpt_img: '',
+  }
+  const [validateData, setValidateData] = useState({
+    // name: data ? data.name : '',
+    // dob: data ? data.DOB : '',
+    // avatar_img: data ? data.image :'',
+    // home_town: data ? data.hometown : '',
+    // jlpt_img: data ? data.certificateImage : '',
+    name: staffName,
+    dob: birthday,
+    home_town: hometown,
+    avatar_img: avatar,
+    jlpt_img: jlptImage,
+  })
 
-  // useEffect(() => {
-  //   return () => {
-  //     avatar && URL.revokeObjectURL(avatar.url);
-  //   }
-  // }, [avatar])
+  const [error, setError] = useState(defaultErrorState);
 
-  // useEffect(() => {
-  //   return () => {
-  //     jlptImage && URL.revokeObjectURL(jlptImage.url);
-  //   }
-  // }, [jlptImage])
+  const setValidateValue = (value, field) => {
+    setValidateData((prev) => ({
+      ...prev,
+      [field]: value,
+    })
+    );
+    setError((prev) => ({ ...prev, [field]: false, }));
+  }
 
+  useEffect(() => {
+    setError((prev) => ({ ...prev, name: false, }))
+  }, [staffName])
+
+  useEffect(() => {
+    setError((prev) => ({ ...prev, dob: false, }))
+  }, [birthday])
+
+  useEffect(() => {
+    setError((prev) => ({ ...prev, avatar_img: false, }))
+  }, [avatar])
+
+  useEffect(() => {
+    setError((prev) => ({ ...prev, home_town: false, }))
+  }, [hometown])
+
+  useEffect(() => {
+    setError((prev) => ({ ...prev, jlpt_img: false, }))
+  }, [jlptImage])
+
+  const checkValidation = () => {
+    let errorCount = 0;
+    setError(defaultErrorState);
+    for (const key in validateData) {
+      if (!validateData[key]) {
+        setError((prev) => ({ ...prev, [key]: 'このフィールドは必須です！' }));
+        errorCount++;
+      }
+    }
+    if (errorCount == 0) {
+      handleSubmit();
+    }
+  }
+
+  ///
 
   const handleUpLoadImg = (e) => {
     const file = e.target.files[0];
     file.url = (URL.createObjectURL(file));
     setAvatar(file);
+    setValidateValue(file, 'avatar_img');
   }
 
   const handleUpLoadJLPTImg = (e) => {
     const file = e.target.files[0];
     file.url = (URL.createObjectURL(file));
     setJlptImage(file);
+    setValidateValue(file, 'jlpt_img');
   }
 
   const upLoadAvatarInput = () => {
     document.querySelector(".avatar-input").click()
+
   }
 
   const upLoadJlptImageInput = () => {
@@ -56,7 +113,7 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
 
   const handleSubmit = () => {
     const staffInfor = {
-      name : staffName,
+      name: staffName,
       DOB: birthday,
       gender: staffSex,
       jlpt: jlpt,
@@ -70,7 +127,7 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
   }
 
   return (
-    
+
     <div className="staff-popup-overlay">
       <div className="popup">
         <div className="content">
@@ -99,14 +156,26 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                     </span>
                   }
                 </div>
+                {error.avatar_img ?
+                  <span className='error'>{error.avatar_img}</span> :
+                  <></>
+                }
               </div>
               <div className=' form-col col'>
                 <div className='form-input'>
                   <div className='form-title'>
-                    名前
+                    名前 <span>*</span>
+                    {error.name ?
+                      <span className='error'>{error.name}</span> :
+                      <></>
+                    }
                   </div>
-                  <input type='text'  id = 'staff_name' className='txt-input' value={staffName}
-                  placeholder='氏名を入力してください' onChange={(e)=>setStaffName(e.target.value )}/>
+                  <input type='text' id='staff_name' className='txt-input' value={staffName}
+                    placeholder='氏名を入力してください'
+                    onChange={(e) => {
+                      setStaffName(e.target.value)
+                      setValidateValue(e.target.value, 'name')
+                    }} />
                 </div>
                 <div className='row'>
                   <div className='w-200'>
@@ -116,25 +185,29 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                       </div>
                       <div className='form-radio'>
                         {/* {console.log(data.gender)} */}
-                        <input type='radio' id='man' name='sex' 
+                        <input type='radio' id='man' name='sex'
                           // value={ data ? data.gender : 1} 
                           value={1}
                           checked={staffSex === '1'}
-                          onChange={(e)=>setStaffSex(e.target.value)} 
-                          />
+                          onChange={(e) => setStaffSex(e.target.value)}
+                        />
                         <label htmlFor='man'>男性</label>
-                        <input type='radio' id='womman' name='sex' 
+                        <input type='radio' id='womman' name='sex'
                           // value={ data ? !data.gender : 0} 
                           value={0}
                           checked={staffSex === '0'}
-                          onChange={(e)=>setStaffSex(e.target.value)} />
+                          onChange={(e) => setStaffSex(e.target.value)} />
                         <label htmlFor='womman'>女性</label>
                       </div>
                     </div>
                   </div>
                   <div className='form-input col'>
                     <div className='form-title'>
-                      生年月日
+                      生年月日 <span>*</span>
+                      {error.dob ?
+                        <span className='error'>{error.dob}</span> :
+                        <></>
+                      }
                     </div>
 
                     <DatePicker
@@ -145,6 +218,7 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                       // value={data ? data.DOB : ''}
                       onChange={(value, dateString) => {
                         setBirthDay(dateString)
+                        setValidateValue(dateString, 'dob')
                       }}
                     />
                   </div>
@@ -157,9 +231,9 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                   <div className='w-80 mgr-30'>
                     <div className='form-input'>
                       <div className='form-title'>
-                        JLPT
+                        JLPT <span>*</span>
                       </div>
-                      <select className='txt-input' value={jlpt} onChange={(e)=>setJlpt(e.target.value)} required>
+                      <select className='txt-input' value={jlpt} onChange={(e) => setJlpt(e.target.value)} required>
                         <option value={1}>N1</option>
                         <option value={2}>N2</option>
                         <option value={3}>N3</option>
@@ -170,11 +244,19 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
                   </div>
                   <div className='form-input'>
                     <div className='form-title'>
-                      ホームタウン
+                      ホームタウン <span>*</span>
+                      {error.home_town ?
+                        <span className='error'>{error.home_town}</span> :
+                        <></>
+                      }
                     </div>
-                    <input type='text' id='input-hometown' className='txt-input' 
-                    value={hometown}
-                    placeholder='ベトナム、ハイフォン市' onChange={(e)=>(setHometown(e.target.value))}/>
+                    <input type='text' id='input-hometown' className='txt-input'
+                      value={hometown}
+                      placeholder='ベトナム、ハイフォン市' onChange={(e) => {
+                        (setHometown(e.target.value))
+                        setValidateValue(e.target.value, 'home_town')
+                      }
+                      } />
                   </div>
                 </div>
               </div>
@@ -185,6 +267,10 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
 
                   <div className='form-title'>
                     証明書のイメージ <span>*</span>
+                    {error.jlpt_img ?
+                      <span className='error'>{error.jlpt_img}</span> :
+                      <></>
+                    }
                   </div>
                   <input type="file" className='jlpt-input' onChange={handleUpLoadJLPTImg} hidden />
                   <div className='img-input center-item'>
@@ -206,14 +292,14 @@ const Staff_Popup = ({confirmPopup, closePopup, data, index}) => {
           </div>
           <div className="btn">
             <div className="space-between">
-              <button type='button' onClick={handleSubmit} className='green btn-add'>保存する</button>
+              <button type='button' onClick={checkValidation} className='green btn-add'>保存する</button>
               <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
   )
 }
 

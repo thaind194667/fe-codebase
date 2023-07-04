@@ -90,7 +90,6 @@ export default function ShopRegister() {
 
     useEffect(() => {
         setError(   (prev) => ( { ...prev, staffList: false, } )  )
-        console.log('staffList', staffList);
     }, [staffList])
 
     useEffect(() => {
@@ -168,7 +167,7 @@ export default function ShopRegister() {
             setError(   (prev) => ( { ...prev, staffList: 'スタッフは少なくとも１人が含まれています！', } )  )
             errorCount++;
         }
-        if(!imgList.length) {
+        if(!imgList['url'].length) {
             setError(   (prev) => ( { ...prev, imgList: '画像ギャラリーは少なくとも1つが含まれています！', } )  )
             errorCount++;
         }
@@ -391,9 +390,8 @@ export default function ShopRegister() {
                         <div className="staff-list row">
                         {
                             staffList.map((item, index) => {
-                                console.log('111');
                                 return (
-                                    <StaffCard edit key={`staff${item}`}
+                                    <StaffCard edit key={`staff${index}`}
                                         data={item}
                                         openEditStaff={() => setEditStaff(index)} 
                                         deleteStaff={() => deleteStaff(index)} 
