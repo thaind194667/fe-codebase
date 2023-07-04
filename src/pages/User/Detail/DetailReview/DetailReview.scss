@@ -1,11 +1,14 @@
 
 .review-list {
+    margin-top: 10px;
     max-width: 100%;
     gap: 30px;
-
+    
     .review-list-info {
-        min-width: 50vw;
+        // min-width: 50vw;
+        width: 100%;
         overflow-x: scroll;
-        gap: 30px;
+        // gap: 10px;
+        justify-content: space-between;
     }
 }

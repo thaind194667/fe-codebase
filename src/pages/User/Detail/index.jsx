@@ -11,6 +11,7 @@ import { apiURL, publicURL, scrollToSection, headersWithToken } from "@/hooks/ho
 import StaffCard from "@/components/StaffCard";
 import LoadingPage from "@/pages/Loading";
 import { toast } from 'react-toastify'
+import Pagination from "../../../layouts/Pagination";
 
 export default function Details() {
 
@@ -30,6 +31,7 @@ export default function Details() {
   const [imgList, setImgList] = useState([]);
 
   const [curCommentPage, setCommentPage] = useState(1);
+  const [commentCount, setCommentCount] = useState(0);
 
   const [serviceList, setServiceList] = useState([]);
   const [ratingList, setRatingList] = useState([]);
@@ -58,6 +60,7 @@ const closeWaitToast = () => {
     axios.get(`${apiURL}/massage-facilities/detail/${id}`).then((res) => {
       console.log(res.data[0]);
       setData(res.data[0]);
+      setCommentCount(res.data[0].review_count);
     });
     // setData(parlorList[id]);
   };
@@ -130,7 +133,23 @@ const closeWaitToast = () => {
     console.log(pageData.staffList);
   }, [pageData]);
 
-  const submitReview = () => {
+  useEffect(() => {
+    getComment();
+  }, [curCommentPage])
+
+  const changeCommentPage = (index) => {
+    setCommentPage(index);
+  }
+
+  const getComment = () => {
+    axios.get(`${apiURL}/ratings/index/${id}/${curCommentPage}`,{
+      headers: headersWithToken,
+    })
+    .then((res) => {
+      console.log(res.data.ratingList);
+      setRatingList(res.data.ratingList)  
+    })
+    .catch(error => console.error(error))
   }
 
   return pageData ? (
@@ -281,68 +300,81 @@ const closeWaitToast = () => {
 
         <div className="parlor-reviews col" ref={section4}>
           <div className="title"> ユーザーの評価 </div>
-          <div className="new-review col">
-            <div className="user-info row">
-              <div className="user-avatar">
-                <img
-                  src={
-                    userInfo.avatar
-                      ? `${publicURL}${userInfo.avatar}`
-                      : "/avatar-default.jpg"
+          {
+            userInfo.userID ? 
+            <div className="new-review col">
+              <div className="user-info row">
+                <div className="user-avatar">
+                  <img
+                    src={
+                      userInfo.avatar
+                        ? `${publicURL}${userInfo.avatar}`
+                        : "/avatar-default.jpg"
+                    }
+                  ></img>
+                </div>
+
+                <div className="user-name row" style={{alignItems: 'center'}}>{userInfo.username}</div>
+                <div className="user-rating row">
+                  {
+                    [...Array(5)].map((star, index) => {
+                      // let status = "add";
+                      index += 1;
+                      return ( //status === "add" ? 
+                        <button
+                          type="button"
+                          key={index}
+                          className={index <= (hover || rating) ? "on" : "off"}
+                          onClick={() => setRating(index)}
+                          onMouseEnter={() => setHover(index)}
+                          onMouseLeave={() => setHover(rating)}
+                        >
+                          {index <= (hover || rating) ? (
+                            <SvgIcon
+                              // onClick={rating}
+                              className={`${status}star num${index}`}
+                              key={"starnumber" + index}
+                              name="comment-star"
+                            />
+                          ) : (
+                            <SvgIcon
+                              className={`${status}star num${index}`}
+                              name="comment-star-disabled"
+                              key={"starnumber" + index}
+                            />
+                          )}
+                          {/* <span className="star">&#9733;</span> */}
+                        </button>
+                      ) 
+                    })
                   }
-                ></img>
+                </div>
+              </div>
+              <div className="user-comment">
+                <textarea
+                  name="comment"
+                  className={`comment-field`}
+                  id={`comment`}
+                  placeholder="ここにあなたの気持ちを説明してください"
+                  value={userComment}
+                  onInput={(e) => setComment(e.target.value)}
+                ></textarea>
               </div>
 
-              <div className="user-name row" style={{alignItems: 'center'}}>{userInfo.username}</div>
-              <div className="user-rating row">
-                {
-                  [...Array(5)].map((star, index) => {
-                    // let status = "add";
-                    index += 1;
-                    return ( //status === "add" ? 
-                      <button
-                        type="button"
-                        key={index}
-                        className={index <= (hover || rating) ? "on" : "off"}
-                        onClick={() => setRating(index)}
-                        onMouseEnter={() => setHover(index)}
-                        onMouseLeave={() => setHover(rating)}
-                      >
-                        {index <= (hover || rating) ? (
-                          <SvgIcon
-                            // onClick={rating}
-                            className={`${status}star num${index}`}
-                            key={"starnumber" + index}
-                            name="comment-star"
-                          />
-                        ) : (
-                          <SvgIcon
-                            className={`${status}star num${index}`}
-                            name="comment-star-disabled"
-                            key={"starnumber" + index}
-                          />
-                        )}
-                        {/* <span className="star">&#9733;</span> */}
-                      </button>
-                    ) 
-                  })
-                }
-              </div>
-            </div>
-            <div className="user-comment">
-              <textarea
-                name="comment"
-                className={`comment-field`}
-                id={`comment`}
-                placeholder="ここにあなたの気持ちを説明してください"
-                value={userComment}
-                onInput={(e) => setComment(e.target.value)}
-              ></textarea>
-            </div>
-
-            <button className="submit-rating orange" onClick={postNewComment}>レビューを送る</button>
-          </div>
-          {ratingList ? <DetailReview data={ratingList} /> : <></>}
+              <button className="submit-rating orange" onClick={postNewComment}>レビューを送る</button>
+            </div> : <></>
+          }
+          {ratingList ? (
+            <>
+              <DetailReview data={ratingList} />
+              <Pagination 
+                maxItem={commentCount}
+                itemPerPage={3}
+                currentPage={curCommentPage}
+                changePage={changeCommentPage}
+              />
+            </>
+          ) : <></>}
         </div>
       </div>
     </div>

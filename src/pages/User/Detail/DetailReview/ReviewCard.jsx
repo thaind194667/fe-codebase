@@ -24,9 +24,9 @@ export default function ReviewCard({ data, status, submitReview }) {
     return (
         <div className={`review-info col ${status}`}>
             <div className="user-info row">
-                <div className="user-avatar"><img  src={data.avatarImageUrl ? `${publicURL}${data.avatarImageUrl}` : '/avatar-default.jpg'}></img></div>
+                <div className="user-avatar"><img  src={data.userAvatarUrl ? `${publicURL}${data.userAvatarUrl}` : '/avatar-default.jpg'}></img></div>
 
-                <div className="user-name">{data.username}</div>
+                <div className="user-name">{data.userName}</div>
             </div>
             <div className="user-rating row">
                 {
