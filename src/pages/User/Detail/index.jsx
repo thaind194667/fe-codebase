@@ -11,7 +11,8 @@ import { apiURL, publicURL, scrollToSection, headersWithToken } from "@/hooks/ho
 import StaffCard from "@/components/StaffCard";
 import LoadingPage from "@/pages/Loading";
 import { toast } from 'react-toastify'
-import Pagination from "../../../layouts/Pagination";
+import Pagination from "@/layouts/Pagination";
+import Error from "@/pages/Error";
 
 export default function Details() {
 
@@ -26,7 +27,7 @@ export default function Details() {
   const { id } = useParams();
 
   const [parlorData, setparlorData] = useState({});
-  const [pageData, setData] = useState({});
+  const [pageData, setData] = useState("default");
 
   const [imgList, setImgList] = useState([]);
 
@@ -56,11 +57,21 @@ const closeWaitToast = () => {
     toast.dismiss(nowToast);
 }
 
-  const getDetails = async () => {
-    axios.get(`${apiURL}/massage-facilities/detail/${id}`).then((res) => {
+  const getDetails = () => {
+    // ${
+    //   localStorage.getItem("role") === 'admin' ? 
+    //   // "massage-facilities"
+    //   "admin" 
+    //   : "massage-facilities"
+    // }
+    axios.get(`${apiURL}/massage-facilities/detail/${id}`, {
+      headers: headersWithToken,
+    })
+    .then((res) => {
       console.log(res.data[0]);
       setData(res.data[0]);
-      setCommentCount(res.data[0].review_count);
+      if(res.data[0])
+        setCommentCount(res.data[0].review_count);
     });
     // setData(parlorList[id]);
   };
@@ -120,9 +131,11 @@ const closeWaitToast = () => {
   }, []);
 
   useEffect(() => {
-    setServiceList(pageData.serviceList);
-    setRatingList(pageData.ratingList);
-    console.log(pageData.staffList);
+    if(pageData) {
+      setServiceList(pageData.serviceList);
+      setRatingList(pageData.ratingList);
+      console.log(pageData.staffList);
+    }
   }, [pageData]);
 
   useEffect(() => {
@@ -147,7 +160,10 @@ const closeWaitToast = () => {
     .catch(error => console.error(error))
   }
 
-  return pageData ? (
+  return pageData === "default" ?
+    <LoadingPage /> :
+    pageData ?
+   (
     <div className="page col">
       <Header />
 
@@ -373,7 +389,5 @@ const closeWaitToast = () => {
         </div>
       </div>
     </div>
-  ) : (
-    <LoadingPage />
-  );
+  ) : <Error />
 }

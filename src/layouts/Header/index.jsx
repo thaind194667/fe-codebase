@@ -93,10 +93,10 @@ export default function Header() {
                     }}>システムアドミン</button> 
                     { openAdminTab ? 
                         <div className="admin-dropdown-panel col">
-                            {/* <div className="admin-dropdown-item">
-                                プロファイル
-                            </div> */}
-                            {/* <hr /> */}
+                            <div className="admin-dropdown-item" onClick={() => navigate('/search')}>
+                                マッサージ店を探す
+                            </div>
+                            <hr />
                             <button className='green logout-btn' onClick={logout}>ログアウト</button>
                         </div> 
                         : <></>}

@@ -6,7 +6,7 @@ import ReactSlider from "react-slider";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/layouts/Header";
-import { apiURL, publicURL } from "@/hooks/hooks";
+import { apiURL, publicURL, headersWithToken } from "@/hooks/hooks";
 import axios from 'axios';
 import LoadingPage from "@/pages/Loading";
 
@@ -56,14 +56,27 @@ export default function Search() {
       if(searchServiceList[i].check) arr.push(searchServiceList[i].name);
     if(arr.length) apiParams.serviceList = arr;
     console.log(apiParams);
-    
-    axios.post(`${apiURL}/massage-facilities/filter`, apiParams)
+
+    // if(localStorage.getItem('role') === "admin") {
+    //   axios.post(`${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}/filter`, apiParams, {
+    //     headers: headersWithToken,
+    //   })
+    // }
+    // else {
+      // axios.post(`${apiURL}/massage-facilities/filter`, apiParams, {
+    axios.post(
+      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}/filter`, 
+      apiParams, {
+      headers: headersWithToken,
+    })
     .then((result) => {
       console.log(result);
       setRes(result.data.result);
       setCurrentPage(1);
     })
     .catch((err) => console.error(err))
+
+    // }
   }
 
   const confirmSearch = () => {
@@ -82,26 +95,65 @@ export default function Search() {
 
   const getSearchResult = async () => {
 
-    axios.get(`${apiURL}/massage-facilities/`)
+    // if(localStorage.getItem('role') === "admin") {
+    //   axios.post(`${apiURL}/admin/filter`, {}, {
+    //     headers: headersWithToken,
+    //   })
+    //   .then((result) => {
+    //     console.log(result.data);
+    //     setRes(result.data.result);
+    //     setCurrentPage(1);
+    //     const serviceListArr = result.data.serviceList.map((item) => {
+    //       return {
+    //         name: item.serviceName,
+    //         check: false,
+    //       }
+    //     })
+    //     setService(serviceListArr);
+    //     minPrice = 0;
+    //     maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
+    //     setPrice([minPrice, maxPrice]);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   })
+    // }
+    // else 
+    // {
+    axios.get(
+      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}/`, {
+      headers: headersWithToken,
+    })
     .then((result) => {
       console.log(result.data);
       setRes(result.data.result);
       setCurrentPage(1);
-      const serviceListArr = result.data.serviceList.map((item) => {
+      let serviceListArr;
+      // if(typeof result.data.serviceList === "array")
+      serviceListArr = result.data.serviceList.map((item) => {
         return {
-          name: item.serviceName,
+          name: item,
           check: false,
         }
       })
+      // else if(typeof result.data.serviceList === "object")
+      //   serviceListArr = Object.entries(result.data.serviceList).map(([key, item]) => {
+      //     console.log(item);
+      //     return {
+      //       name: item.serviceName,
+      //       check: false,
+      //     }
+      //   })
       setService(serviceListArr);
       minPrice = 0;
       maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
+      console.log(maxPrice);
       setPrice([minPrice, maxPrice]);
     })
     .catch((error) => {
       console.error(error);
     })
-
+    // }
   };
 
   const fetchData = async () => {

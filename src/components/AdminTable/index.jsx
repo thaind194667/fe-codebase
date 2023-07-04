@@ -185,9 +185,10 @@ export default function AdminTable({
                                                 action("deactive", {
                                                     facilityID: item.facilityID
                                                 }) : 
+                                                item.status !== 2 ?
                                                 action("deny", {
                                                     requestID: item.requestID 
-                                                }) 
+                                                }) : {}
                                             }
                                             className={"action-btn" + (item.status === 2 ? " disabled" : "")} 
                                             name="X-mark" 

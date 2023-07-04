@@ -1,4 +1,4 @@
-const publicURL = "https://phplaravel-1045046-3669555.cloudwaysapps.com/"
+const publicURL = "http://localhost:8000/"
 const apiURL = publicURL + "api"
 
 const headersWithToken = {

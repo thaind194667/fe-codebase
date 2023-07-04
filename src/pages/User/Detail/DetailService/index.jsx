@@ -95,10 +95,10 @@ export default function DetailsService({
                     })}
                     </tbody>
                 </table>
-                {edit ? <></> :
+                {/* {edit ? <></> :
                     <button className="schedule-service black">今予約する</button>
 
-                }
+                } */}
             </div>
         </div>
     );
