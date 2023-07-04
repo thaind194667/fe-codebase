@@ -167,7 +167,7 @@ export default function ShopRegister() {
             setError(   (prev) => ( { ...prev, staffList: 'スタッフは少なくとも１人が含まれています！', } )  )
             errorCount++;
         }
-        if(!imgList['url'].length) {
+        if(!imgList['files'].length) {
             setError(   (prev) => ( { ...prev, imgList: '画像ギャラリーは少なくとも1つが含まれています！', } )  )
             errorCount++;
         }
