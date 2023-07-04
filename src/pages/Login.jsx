@@ -133,7 +133,7 @@ export default function Login() {
                         <label htmlFor="pass-input" className="form-lable">パスワード</label>
                         <div className="spec">
                             <input  //type={type}  pattern=".{6,18}"
-                                type="password"
+                                type={type}
                                 id="pass-input" className="spec-input" name="password"  placeholder="********"
                                 title="パスワードの長さは6~18文字であります！" value={pwd} onChange={(e) => setPwd(e.target.value)}
                                 onInput={() => setError("")}
