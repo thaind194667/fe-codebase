@@ -1,6 +1,6 @@
 const publicURL = 
                 // "http://localhost:8000/"
-                "https://vapor-ap-southeast-1-assets-1688825259.s3.ap-southeast-1.amazonaws.com/4fe2a50b-b3c0-49c8-80c7-d20ce223ac0a/"
+                ""
 const apiURL = "https://yap36pcaypqwdyhfs5dku222bi0yeokj.lambda-url.ap-southeast-1.on.aws/" + "api"
 
 const headersWithToken = {
