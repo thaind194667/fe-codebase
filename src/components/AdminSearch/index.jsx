@@ -13,6 +13,13 @@ const AdminSearch = ({ pageTitle, tableName, setSearch }) => {
     setInputValue("")
   }, [tableName])
 
+  const keyDownHandler = (e) => {
+    if(e.key === "Enter") {
+      setSearch(inputValue);
+    }
+    else return;
+  }
+
   return (
     <div className='adm-search-content'>
       <div className='page-title' > {pageTitle}</div>
@@ -24,6 +31,7 @@ const AdminSearch = ({ pageTitle, tableName, setSearch }) => {
           placeholder="マッサージ店の名前を入力してください"
           value={inputValue}
           onInput={(e) => setInputValue(e.target.value)}
+          onKeyDown={keyDownHandler}
         />
       </div>
     </div>

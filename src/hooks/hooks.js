@@ -1,4 +1,4 @@
-const publicURL = "http://localhost:8000/"
+const publicURL = "https://yap36pcaypqwdyhfs5dku222bi0yeokj.lambda-url.ap-southeast-1.on.aws/"
 const apiURL = publicURL + "api"
 
 const headersWithToken = {
