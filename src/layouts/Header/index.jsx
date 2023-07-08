@@ -43,7 +43,8 @@ export default function Header() {
     }
 
     useEffect(() => {
-        getUserData();
+        if( localStorage.getItem('accessToken'))
+            getUserData();
     }, [])
 
     const logout = () => {

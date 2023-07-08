@@ -1,12 +1,13 @@
 import './SvgIcon.scss'
 
-export default function SvgIcon({src, width, height, name, type, alt, className, round, backgroundColor, padding, onClick}) {
+export default function SvgIcon({src, width, height, name, type, alt, className, round, backgroundColor, padding, onClick, title}) {
     
     const url = src ? src : `/${name}.${type ? type : 'svg'}`;
 
     return (
         <div className={`svg-icon${className ? ' ' + className : ''}${round ? ' round' : ''}`} 
             onClick={onClick}
+            title={title}
             style={{
                     width, 
                     height,

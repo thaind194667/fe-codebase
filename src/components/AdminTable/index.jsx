@@ -3,6 +3,8 @@ import SvgIcon from "@/components/SvgIcon"
 
 import {useState, useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+// import Switch from "react-switch";
+import { Switch } from '@mui/material';
 
 
 const ASCENDING = 1;    /// tăng dần
@@ -28,7 +30,7 @@ export default function AdminTable({
         facilityName: "マッサージ店詳細",
         createdDate: "作成日",
         status: "スターテス",
-        action: "アクション",
+        action: type === "request" ? "アクション" : "削除　",
     }
 
     const [sortParam, setSortParam] = useState({
@@ -152,7 +154,15 @@ export default function AdminTable({
                                 <td>
                                     {
                                         type === "request" ? 
-                                        requestStatusArray[item.status] : shopStatusArray[item.isActive]
+                                        requestStatusArray[item.status] : <div style={{display: 'flex', alignContent: 'center'}}>
+                                        <Switch 
+                                            title={item.isActive ? "無効化" : "活性化"}
+                                            checked={item.isActive} 
+                                            onChange={() => item.isActive ? 
+                                                action("deactive", {facilityID: item.facilityID}) 
+                                                : action("active", {facilityID: item.facilityID}) }
+                                                />
+                                        </div>
                                     }
                                 </td>
                                 <td>
@@ -161,16 +171,18 @@ export default function AdminTable({
                                         style={{alignItems: 'center', justifyContent: 'center', gap: '5px'}}
                                     >
                                     {
-                                        item.status !== 1 || !item.isActive ?
+                                        item.status !== 1?
                                         <SvgIcon onClick={() => 
-                                                item.status !== 1 ? 
+                                                // item.status !== 1 ? 
                                                 action("accept", {
                                                     requestID: item.requestID,
-                                                }) :
-                                                action("active", {
-                                                    facilityID : item.facilityID 
-                                                })
+                                                }) 
+                                                // :
+                                                // action("active", {
+                                                //     facilityID : item.facilityID 
+                                                // })
                                             }
+                                            title="承認"
                                             className={"action-btn" }//+ (item.status !== "承認待ち" ? " disabled" : "")} 
                                             name="Check-mark" 
                                             width="35px" height="35px" round={true} 
@@ -179,17 +191,18 @@ export default function AdminTable({
                                     }
 
                                     {
-                                        item.status !== 1 || item.isActive ?
+                                        item.status !== 1 ?
                                         <SvgIcon onClick={() => 
-                                                item.isActive ? 
-                                                action("deactive", {
-                                                    facilityID: item.facilityID
-                                                }) : 
+                                                // item.isActive ? 
+                                                // action("deactive", {
+                                                //     facilityID: item.facilityID
+                                                // }) : 
                                                 item.status !== 2 ?
                                                 action("deny", {
                                                     requestID: item.requestID 
                                                 }) : {}
                                             }
+                                            title="拒否"
                                             className={"action-btn" + (item.status === 2 ? " disabled" : "")} 
                                             name="X-mark" 
                                             width="35px" height="35px" round={true} 
@@ -205,6 +218,7 @@ export default function AdminTable({
                                                     facilityID :item.facilityID 
                                                 })
                                             }
+                                            title="削除"
                                             className={"action-btn" }//+ (item.status === "承認待ち" ? " disabled" : "")} 
                                             name="delete-icon" 
                                             width="35px" height="35px" round={true}
