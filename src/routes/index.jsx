@@ -11,6 +11,7 @@ import Login from '@/pages/Login'
 import HomePage from '@/pages/HomePage'
 import Search from '@/pages/User/Search'
 import Detail from '@/pages/User/Detail'
+import Test from '@/pages/Test'
 // import Register from '@/pages/Register'
 
 let type = localStorage.getItem("role");
@@ -45,6 +46,7 @@ const Router = () => {
         }
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/test' element={<Test />} />
       </Routes>
     </BrowserRouter>
   )
