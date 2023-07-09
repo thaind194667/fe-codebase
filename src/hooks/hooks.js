@@ -3,7 +3,7 @@ import cors from 'cors';
 const publicURL = 
                 // "http://localhost:8000/"
                 ""
-const apiURL = "https://c69a-2402-800-617f-2239-4848-964d-4132-c473.ngrok-free.app/" + "api"
+const apiURL = "https://rraqdwongf72vlviym7iquvfxq0vmnpe.lambda-url.ap-southeast-1.on.aws/" + "api"
 
 const headersWithToken = {
     accept: 'application/json',
