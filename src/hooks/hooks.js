@@ -1,7 +1,7 @@
 const publicURL = 
                 // "http://localhost:8000/"
                 ""
-const apiURL = "https://rraqdwongf72vlviym7iquvfxq0vmnpe.lambda-url.ap-southeast-1.on.aws/" + "api"
+const apiURL = "https://dry-dawn-29479-ac33aa1a4e62.herokuapp.com/" + "api"
 
 const headersWithToken = {
     "Access-Control-Allow-Origin": "*",
