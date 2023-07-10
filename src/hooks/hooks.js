@@ -3,7 +3,7 @@ import cors from 'cors';
 const publicURL = 
                 // "http://localhost:8000/"
                 ""
-const apiURL = "https://c889-2402-800-617f-2239-4848-964d-4132-c473.ngrok-free.app/" + "api"
+const apiURL = "https://vast-brook-13536-6e10f1e34a46.herokuapp.com/" + "api"
 
 const headersWithToken = {
     accept: 'application/json',
