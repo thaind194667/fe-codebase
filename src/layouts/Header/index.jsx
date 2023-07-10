@@ -131,10 +131,10 @@ export default function Header() {
                                 {
                                     localStorage.getItem('role') === 'user' ?
                                     <div className="user-dropdown-item" onClick={()=>navigate("/my-shop")}>
-                                        マッサージ部屋をリクエスト
+                                        マッサージ店をリクエスト
                                     </div> : 
                                     <div className="user-dropdown-item">
-                                        私のマッサージ部屋
+                                        私のマッサージ店
                                     </div> 
                                 }
                                 <hr />

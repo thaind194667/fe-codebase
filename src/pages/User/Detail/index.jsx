@@ -50,7 +50,7 @@ export default function Details() {
   const [userComment, setComment] = useState("")
 
   const toastWaiting = () => {
-    nowToast = toast("Processing ....", {
+    nowToast = toast("処理中 ....", {
         autoClose: false,
     });
   }

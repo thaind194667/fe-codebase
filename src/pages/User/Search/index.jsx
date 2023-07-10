@@ -121,7 +121,7 @@ export default function Search() {
     // else 
     // {
     axios.get(
-      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}/`, {
+      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}`, {
       headers: headersWithToken,
     })
     .then((result) => {
@@ -357,7 +357,7 @@ export default function Search() {
             <b>
               {" "}
               {name ? `${name}：` : ""}
-              {searchRes ? `${searchRes.length}マッサージ部屋が一致しました` : 'Nothing can be found'}
+              {searchRes ? `${searchRes.length}マッサージ店が一致しました` : 'Nothing can be found'}
             </b>
           </div>
 

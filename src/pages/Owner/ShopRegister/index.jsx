@@ -106,7 +106,7 @@ export default function ShopRegister() {
     }
 
     const toastWaiting = () => {
-        nowToast = toast("Processing ....", {
+        nowToast = toast("処理中 ....", {
             autoClose: false,
         });
     }
@@ -254,7 +254,7 @@ export default function ShopRegister() {
             <Header />
             <div className="page-body-shop-register col">
                 <div className="body-title">
-                    今日、あなたのマッサージ部屋をシステムに表示するために登録しましょう！
+                    今日、あなたのマッサージ店をシステムに表示するために登録しましょう！
                 </div>
 
                 <div className="body-form col">

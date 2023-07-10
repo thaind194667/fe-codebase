@@ -56,8 +56,8 @@ export default function ShopManage() {
             setTableName("リクエスト管理");
         }
         if (location.pathname === "/shop-manage") {
-            setTitle("管理 / マッサージ部屋管理");
-            setTableName("マッサージ部屋管理");
+            setTitle("管理 / マッサージ店管理");
+            setTableName("マッサージ店管理");
         }
     }, [location]);
 
@@ -86,7 +86,7 @@ export default function ShopManage() {
     }
 
     const toastWaiting = () => {
-        nowToast = toast("Processing ....", {
+        nowToast = toast("処理中 ....", {
             autoClose: false,
         });
     }
