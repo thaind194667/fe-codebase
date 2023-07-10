@@ -129,7 +129,7 @@ export default function Details() {
       if(res.data === "ok") {
         toast.success("新しいレビューの追加が成功しました");
         setComment("");
-        setRating(5);
+        setRating(0);
         changeCommentPage(1);
       } 
       console.log(res);
