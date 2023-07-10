@@ -6,10 +6,10 @@ const publicURL =
 const apiURL = "https://vast-brook-13536-6e10f1e34a46.herokuapp.com/" + "api"
 
 const headersWithToken = {
-    accept: 'application/json',
+    // accept: 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     "Content-Type": "multipart/form-data",
-    "ngrok-skip-browser-warning": "69420",
+    // "ngrok-skip-browser-warning": "69420",
     // Origin: window.location.origin,
 }
 
