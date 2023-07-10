@@ -2,7 +2,7 @@ import './Header.scss'
 import SvgIcon from '@/components/SvgIcon'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import {apiURL, publicURL} from '@/hooks/hooks'
+import {apiURL, publicURL, headersWithToken} from '@/hooks/hooks'
 import axios from 'axios';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,15 +22,10 @@ export default function Header() {
     const [userInfo, setUserInfo] = useState({});
 
     const getUserData = () => {
-        // axios.get();
-        const headers = {
-            accept: 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('accessToken')
-        }
 
         //set token in axios header
         axios.get(`${apiURL}/user`, {
-            headers: headers
+            headers: headersWithToken
         })
         .then((res) => { 
             setUserInfo({
@@ -56,14 +51,8 @@ export default function Header() {
         window.location.reload();
     }
 
-    // const openNotification = () => {
-    //     setOpenUser(false);
-    //     setOpenNoti(true);
-    // }
-
     return (
         <div className="page-header row">
-            {/* <div className="toast-container" style={{position: 'fixed'}}> */}
                 <ToastContainer 
                     position="bottom-right"
                     autoClose={5000}
@@ -76,7 +65,6 @@ export default function Header() {
                     pauseOnHover
                     theme="colored"
                 />
-            {/* </div> */}
             <div className='header-title'>
                 <div className='col' onClick={() => navigate('/')}>
                     <p>Seishin</p>
