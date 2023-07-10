@@ -45,7 +45,7 @@ export default function Details() {
     avatar: "",
   });
 
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [userComment, setComment] = useState("")
 
@@ -102,8 +102,15 @@ export default function Details() {
   };
 
   const postNewComment = () => {
+    let valdError = "";
+    if(rating === 0) {
+      valdError += "評価が必須です。\n"
+    }
     if(!userComment) {
-      setError("レビューが必須です！！");
+      valdError += "レビューが必須です。";
+    }
+    if(valdError) {
+      setError(valdError);
       return;
     }
     console.log(rating, userComment, userInfo.userID, id);
