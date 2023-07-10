@@ -121,7 +121,7 @@ export default function Search() {
     // else 
     // {
     axios.get(
-      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}/`, {
+      `${apiURL}/${localStorage.getItem("role") === 'admin' ? "admin" : "massage-facilities"}`, {
       headers: headersWithToken,
     })
     .then((result) => {
