@@ -88,9 +88,9 @@
             }
             .main-img {
                 width: 100%;
-                height: auto;
+                height: 100%;
             }
-            img {
+            img:not(.main-img) {
                 display: flex;
                 width: 100%;
                 height: auto;

@@ -209,7 +209,11 @@ export default function Details() {
           </div>
 
           <div className="parlor-phone">
-            <button className="phone-btn orange"> 電話する </button>
+            <button className="phone-btn black row" style={{justifyContent: 'center', gap: '5px'}}> 
+              {/* <div className="row"> */}
+                <SvgIcon name="phone-icon" width="35px" height="35px" /> 電話する 
+              {/* </div> */}
+            </button>
           </div>
         </div>
         {pageData.imgList ? (
@@ -232,11 +236,12 @@ export default function Details() {
               </div>
 
               <div className="col" style={{ flex: "2" }}>
-                <SvgIcon
+                <img src={`${publicURL}${pageData.image_url}`} alt="main img" className="main-img"/>
+                {/* <SvgIcon
                   src={`${publicURL}${pageData.image_url}`}
                   alt="main img"
                   className="main-img"
-                />
+                /> */}
               </div>
             </div>
             {/* <div className="row" style={{gap: '10px', flex: '1'}}>
