@@ -415,8 +415,8 @@ export default function Search() {
                   </div>
                 );
               })
-            ) : (
-              <div>No result</div>
+            ) : (<></>
+              // <div>No result</div>
             )}
           </div>
 
