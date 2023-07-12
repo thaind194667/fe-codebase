@@ -45,8 +45,8 @@ export default function Search() {
     const apiParams = {
       minRate: rateVal[0] / 10, 
       maxRate: rateVal[1] / 10,
-      minPrice: priceVal[0],
-      maxPrice: priceVal[1],
+      minPrice: priceVal[0] * gap,
+      maxPrice: priceVal[1] * gap,
     }
     let nameVal = document.getElementById("name/address").value;
     if(nameVal) apiParams.input = nameVal
