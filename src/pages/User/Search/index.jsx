@@ -308,8 +308,6 @@ export default function Search() {
                 {
                   priceVal ? 
                   <ReactSlider
-                    // size="big"
-                    thumbClassName=""
                     className="slider"
                     onChange={setRateVal}
                     value={rateVal}
