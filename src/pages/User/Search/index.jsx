@@ -146,7 +146,7 @@ export default function Search() {
       //   })
       setService(serviceListArr);
       minPrice = 0;
-      maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000;
+      maxPrice = Math.ceil(result.data.maxPrice / 10000) * 10000 / gap;
       console.log(maxPrice);
       setPrice([minPrice, maxPrice]);
     })
@@ -327,8 +327,8 @@ export default function Search() {
                   style={{ alignItems: "center", gap: "5px" }}
                 >
                   {priceVal[0] === priceVal[1]
-                    ? `${priceVal[0]}`
-                    : `${priceVal[0]} - ${priceVal[1]}`}
+                    ? `${priceVal[0] * gap}`
+                    : `${priceVal[0] * gap} - ${priceVal[1] * gap}`}
                   {` VND`}
                 </div>
               </div>
@@ -337,9 +337,9 @@ export default function Search() {
                   className="slider"
                   onChange={setPrice}
                   value={priceVal}
-                  min={minPrice.toFixed(1)}
-                  max={maxPrice.toFixed(1)}
-                  step={gap}
+                  min={minPrice}
+                  max={maxPrice}
+                  // step={gap}
                   pearling={true}
                 />
               </div>
