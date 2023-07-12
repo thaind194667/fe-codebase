@@ -7,7 +7,9 @@ import { image } from 'react-icons-kit/fa/image'
 import { close } from 'react-icons-kit/fa/close'
 import dayjs from 'dayjs'
 
-const Staff_Popup = ({ confirmPopup, closePopup, data, index }) => {
+const Staff_Popup = ({ confirmPopup, closePopup, data, index, type = "new" }) => {
+
+  console.log(data);
 
   const DefaultStaffSex = '1'
   const DefaulJLPT = 2
@@ -147,7 +149,7 @@ const Staff_Popup = ({ confirmPopup, closePopup, data, index }) => {
                 <div className='avatar center-item'>
                   {avatar ?
                     <div className='img-upload'>
-                      <img src={avatar.url} onClick={upLoadAvatarInput} alt={"アバター"} />
+                      <img src={type === "new" ? `${avatar.url}` : avatar} onClick={upLoadAvatarInput} alt={"アバター"} />
                       <span className='tool-text'>変える</span>
                     </div>
                     :
@@ -276,7 +278,7 @@ const Staff_Popup = ({ confirmPopup, closePopup, data, index }) => {
                   <div className='img-input center-item'>
                     {jlptImage ?
                       <div className='img-upload'>
-                        <img src={jlptImage.url} onClick={upLoadJlptImageInput} alt={"アバター"} />
+                        <img src={type === "new" ? jlptImage.url : jlptImage} onClick={upLoadJlptImageInput} alt={"アバター"} />
                         <span className='tool-text'>変える</span>
                       </div>
                       :
@@ -290,12 +292,17 @@ const Staff_Popup = ({ confirmPopup, closePopup, data, index }) => {
               </div>
             </div>
           </div>
-          <div className="btn">
-            <div className="space-between">
-              <button type='button' onClick={checkValidation} className='green btn-add'>保存する</button>
-              <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
+          {
+          type !== "show"? 
+            <div className="btn">
+              <div className="space-between">
+                <button type='button' onClick={checkValidation} className='green btn-add'>保存する</button>
+                <button type='button' onClick={closePopup} className='red btn-cancel' >キャンセル</button>
+              </div>
             </div>
-          </div>
+            : <></>
+          }
+          
         </div>
       </div>
     </div>

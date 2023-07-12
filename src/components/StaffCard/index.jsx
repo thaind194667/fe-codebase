@@ -6,18 +6,34 @@ import { calendar } from 'react-icons-kit/fa/calendar'
 import { user } from 'react-icons-kit/fa/user'
 import { home } from 'react-icons-kit/fa/home'
 import {publicURL} from '@/hooks/hooks'
+import Staff_Popup from "@/pages/Owner/StaffPopup/Staff_Popup";
 
 const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
 
     // const [canChange, setCanChange] = useState(true)
 
+    const [showJLPT, setShowJLPT] = useState(false);
+
     return (
+    <>
+        {
+            showJLPT ? 
+                <Staff_Popup 
+                    closePopup={ () => setShowJLPT(false) }
+                    data={data}
+                    type="show"
+                /> 
+                : 
+                <></>
+        }
         <div className='col staff-card-element'>
             <div className='staff-card-info col'>
                 <div className='staff-card-avatar' 
                     style={{ 
                         backgroundImage: `url(${edit ? data.image.url : publicURL + data.image})` 
-                }}>
+                    }}
+                    onClick= { edit ? () => {} : () => setShowJLPT(true) }
+                    >
                 </div>
                 <div className='staff-card-name'>
                     <span>{data.name}</span>
@@ -60,6 +76,7 @@ const StaffCard = ({ data, edit, openEditStaff, deleteStaff}) => {
                 }
 
         </div>
+    </>
     )
 }
 
