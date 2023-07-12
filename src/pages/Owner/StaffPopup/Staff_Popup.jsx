@@ -216,7 +216,7 @@ const Staff_Popup = ({ confirmPopup, closePopup, data, index, type = "new" }) =>
                       className='txt-input'
                       placeholder='11/12/2023'
                       format={"DD/MM/YYYY"}
-                      value={birthday ? dayjs(birthday, 'DD/MM/YYYY') : ''}
+                      value={birthday ? dayjs(birthday, 'DD/MM/YYYY') : dayjs(data.dob, 'YYYY/MM/DD')}
                       // value={data ? data.DOB : ''}
                       onChange={(value, dateString) => {
                         setBirthDay(dateString)
